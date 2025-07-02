@@ -2,19 +2,24 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Workshop extends Model
 {
-    protected $table = 'workshop';
+    use HasFactory;
 
     protected $fillable = [
         'workshop_title',
+        'featured_image',
         'workshop_type',
+        'about_workshop',
         'workshop_description',
-        'workshop_duration',
+        'price',
+        'format',
+        'duration_weeks',
+        'time',
+        'skill_gained',
         'target_audience',
-        'number_of_attendees',
-        'workshop_price'
     ];
 }
