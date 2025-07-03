@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mt-5">
+<div>
     <h2 class="mb-4 text-center">Add New Workshop</h2>
 
     <form action="{{ route('admin.workshops.store') }}" method="POST" enctype="multipart/form-data">
