@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WorkshopController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FacilitatorController;
 
 // Public Web Route (Landing page)
 Route::get('/', function () {
@@ -24,6 +25,7 @@ Route::middleware('auth')->group(function () {
 
     // CMS Workshop Management Routes (For Blade views)
     Route::resource('/admin/workshops', WorkshopController::class)->names('admin.workshops');
+    Route::resource('/admin/facilitators', FacilitatorController::class)->names('admin.facilitators');
 });
 
 require __DIR__.'/auth.php';

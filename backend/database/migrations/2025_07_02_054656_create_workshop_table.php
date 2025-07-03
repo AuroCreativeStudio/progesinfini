@@ -24,7 +24,10 @@ return new class extends Migration
         $table->string('time')->nullable();
         $table->text('skill_gained')->nullable();
         $table->text('target_audience')->nullable();
+        
         $table->timestamps();
+
+        
     });
 }
     /**

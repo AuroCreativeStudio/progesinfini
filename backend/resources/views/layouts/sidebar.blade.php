@@ -7,6 +7,7 @@
       <ul class="unstyled list-hover-slide">
         <li><a href="{{ route('dashboard') }}" class="{{ request()->routeIs('dashboard') ? 'is-current' : '' }}">Dashboard</a></li>
         <li><a href="{{ route('admin.workshops.index') }}" class="{{ request()->routeIs('admin.workshops.*') ? 'is-current' : '' }}">Workshops</a></li>
+        <li><a href="{{ route('admin.facilitators.index') }}" class="{{ request()->routeIs('admin.facilitators.*') ? 'is-current' : '' }}">Facilitators</a></li>
       </ul>
     </nav>
   </div>
