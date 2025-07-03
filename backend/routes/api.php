@@ -1,24 +1,17 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use App\Http\Api\WorkshopController;
-use App\Http\Controllers\WorkshopApiController;
+use App\Http\Controllers\WorkshopControllerApi;
+use App\Http\Resources\WorkshopResource;
+use App\Models\Workshop;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
+// All API routes should return JSON (for React frontend)
+
+// Workshop API Routes (Full CRUD)
+Route::apiResource('workshops', WorkshopControllerApi::class);
+
+
+// Fallback route for API 404s
+Route::fallback(function(){
+    return response()->json(['message' => 'Not Found.'], 404);
 });
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
-    Route::apiResource('workshops', WorkshopApiController::class);
-});
-
-require __DIR__.'/auth.php';

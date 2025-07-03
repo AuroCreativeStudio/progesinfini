@@ -4,15 +4,15 @@
 <div class="container mt-5">
     <h2 class="mb-4 text-center">Edit Workshop</h2>
 
-    <form action="{{ route('workshops.update', $workshop->id) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.workshops.update', $workshop->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
-        @include('app.workshops.form-inputs')
+        @include('app.workshop.form-inputs')
 
         <div class="text-center">
             <button type="submit" class="btn btn-success btn-lg">Update Workshop</button>
-            <a href="{{ route('workshops.index') }}" class="btn btn-outline-secondary btn-lg ml-2">Cancel</a>
+            <a href="{{ route('admin.workshops.index') }}" class="btn btn-outline-secondary btn-lg ml-2">Cancel</a>
         </div>
     </form>
 </div>
