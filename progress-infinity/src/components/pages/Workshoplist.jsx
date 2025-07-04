@@ -1,8 +1,6 @@
 import React from 'react'
 import image from '../../assets/workshopmain.jpg';
 import card1 from '../../assets/card1.jpg';
-import card2 from '../../assets/card2.jpg';
-import card3 from '../../assets/card3.jpeg';
 import { Link } from 'react-router-dom';
 import { fetchWorkshop } from '../../services/workshopService';
 import { useEffect, useState } from 'react';
