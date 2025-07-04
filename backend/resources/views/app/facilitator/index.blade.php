@@ -3,7 +3,9 @@
 @section('content')
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h2>Workshop List</h2>
-    <a href="{{ route('admin.facilitators.create') }}" class="btn btn-primary">Add New Workshop</a>
+ <a href="{{ route('admin.facilitators.create') }}" class="btn btn-primary">Add New Workshop</a>
+
+
 </div>
 
 @if(session('success'))
@@ -16,8 +18,7 @@
             <th>Name</th>
             <th>Designation</th>
             <th>Description</th>
-            <th>Contact Phone</th>
-            <th>Contact Email</th>
+           
             <th>Workshop</th>
             <th>Actions</th>
         </tr>
@@ -28,8 +29,7 @@
                 <td>{{ $facilitator->name }}</td>
                 <td>{{ $facilitator->designation }}</td>
                 <td>{{ $facilitator->description }}</td>
-                <td>{{ $facilitator->contact_phone }}</td>
-                <td>{{ $facilitator->contact_email }}</td>
+                
                 <td>{{ $facilitator->workshop->workshop_title ?? 'N/A' }}</td>
                 <td>
                     <a href="{{ route('admin.facilitators.edit', $facilitator->id) }}" class="btn btn-warning btn-sm">Edit</a>

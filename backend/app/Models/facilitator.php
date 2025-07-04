@@ -20,6 +20,18 @@ class Facilitator extends Model
         'contact_phone',
         'contact_email',
         'workshop_id',
+        'about',
+        'short_description',
+        'image',
+        'video',
+        'language', // Should be stored as JSON or comma-separated
+        'gallery',  // Should be stored as JSON or comma-separated
+    ];
+
+    // Specify the casts for certain attributes
+    protected $casts = [
+        'language' => 'array',
+        'gallery' => 'array',
     ];
 
     /**
