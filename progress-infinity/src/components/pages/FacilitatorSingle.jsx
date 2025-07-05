@@ -1,67 +1,86 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 function FacilitatorSingle({ speaker, onClose }) {
   if (!speaker) return null;
 
+  useEffect(() => {
+    // Disable background scroll when modal is open
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, []);
+
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-70 z-50 flex justify-end items-center">
-      <div className="bg-white w-full lg:w-[80%] h-full flex relative">
+    <div className="fixed inset-0 z-50 flex bg-black bg-opacity-70">
+
+      {/* Left Sticky Image Section */}
+      <div className="hidden lg:flex w-[30%] flex-shrink-0 items-start justify-end relative">
+        <div className="sticky top-0 flex items-center justify-center w-64 h-80">
+          <img
+            src={speaker.image}
+            alt={speaker.name}
+            className="object-cover w-full h-full"
+          />
+        </div>
+      </div>
+
+      {/* Right Scrollable Content Section */}
+      <div className="relative flex-1 h-full overflow-y-auto bg-white">
 
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-3xl font-bold text-gray-800 hover:text-black z-10"
+          className="absolute z-10 text-3xl font-bold text-gray-800 top-4 right-4 hover:text-black"
         >
           &times;
         </button>
 
-        {/* Left Sticky Image */}
-        <div className="w-[300px] flex-shrink-0 hidden lg:block sticky top-0 h-full p-8">
-          <img
-            src={speaker.image}
-            alt={speaker.name}
-            className="w-full h-[400px] object-cover shadow-lg"
-          />
-        </div>
+        <div className="p-4 lg:p-12">
+          <h2 className="mb-6 text-[3rem] font-extrabold text-left">{speaker.name}</h2>
 
-        {/* Right Scrollable Content */}
-        <div className="flex-1 overflow-y-auto p-4 lg:p-12 content-left">
-          <h2 className="text-5xl lg:text-6xl font-extrabold mb-6">{speaker.name}</h2>
+          {/* 2 Column Style Content */}
+          <div className="space-y-12">
 
-          <div className="text-xs font-mono text-gray-600 mb-2">
-            {speaker.roleLabel || 'GRAPHIC DESIGN LEGEND'}
+            {/* First Row */}
+            <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+              <div className="font-mono text-left text-[0.9rem] text-gray-600">
+                {speaker.roleLabel || 'GRAPHIC DESIGN LEGEND'}
+              </div>
+              <div className="justify-start space-y-4 text-left text-[1.1rem] text-gray-800 lg:col-span-2">
+                {/* Reserved space if needed */}
+              </div>
+            </div>
+
+            {/* Second Row */}
+            <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+              <div className="font-mono text-left text-[0.9rem] text-gray-600">THE SPEAKER</div>
+              <div className="space-y-4 text-left text-[1.1rem] text-gray-800 lg:col-span-2">
+                {speaker.description && speaker.description.split('\n').map((para, index) => (
+                  <p key={index}>{para}</p>
+                ))}
+              </div>
+            </div>
+
+            {/* Third Row */}
+            <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+              <div className="font-mono text-left text-[0.9rem] text-gray-600"></div>
+              <div className="font-mono text-left text-[1.1rem] text-gray-600 lg:col-span-2">
+                {speaker.short_description}
+              </div>
+            </div>
+
+            {/* Fourth Row */}
+            <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+              <div className="font-mono text-left text-[0.9rem] text-gray-600">THE TALK</div>
+              <div className="space-y-4 text-left text-[1.1rem] text-gray-800 lg:col-span-2">
+                {speaker.about && speaker.about.split('\n').map((para, index) => (
+                  <p key={index}>{para}</p>
+                ))}
+              </div>
+            </div>
+
           </div>
-          <div className="text-xs font-mono text-gray-600 mb-6">THE SPEAKER</div>
-
-          <div className="space-y-4 text-gray-800 text-sm md:text-base leading-relaxed">
-            {speaker.description && speaker.description.split('\n').map((para, index) => (
-              <p key={index}>{para}</p>
-            ))}
-          </div>
-            <div className="text-xs mt-4 font-mono text-gray-600 mb-6">{speaker.short_description}</div>
-
-              <div className="space-y-4 text-gray-800 text-sm md:text-base leading-relaxed">
-            {speaker.about && speaker.about.split('\n').map((para, index) => (
-              <p key={index}>{para}</p>
-            ))}
-          </div>
-
-
-          {/* scroll content  test */}
-           <div className="space-y-4 text-gray-800 text-sm md:text-base leading-relaxed">
-            {speaker.about && speaker.about.split('\n').map((para, index) => (
-              <p key={index}>{para}</p>
-            ))}
-          </div> <div className="space-y-4 text-gray-800 text-sm md:text-base leading-relaxed">
-            {speaker.about && speaker.about.split('\n').map((para, index) => (
-              <p key={index}>{para}</p>
-            ))}
-          </div>
-
-
-          {/* end */}
-
-          
         </div>
 
       </div>
