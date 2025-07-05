@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="d-flex justify-content-between align-items-center mb-3">
+<div class="mb-3 d-flex justify-content-between align-items-center">
     <h2>Workshop List</h2>
  <a href="{{ route('admin.facilitators.create') }}" class="btn btn-primary">Add New Workshop</a>
 
@@ -17,7 +17,7 @@
         <tr>
             <th>Name</th>
             <th>Designation</th>
-            <th>Description</th>
+            {{-- <th>Description</th> --}}
            
             <th>Workshop</th>
             <th>Actions</th>
@@ -28,7 +28,7 @@
             <tr>
                 <td>{{ $facilitator->name }}</td>
                 <td>{{ $facilitator->designation }}</td>
-                <td>{{ $facilitator->description }}</td>
+                {{-- <td>{{ $facilitator->description }}</td> --}}
                 
                 <td>{{ $facilitator->workshop->workshop_title ?? 'N/A' }}</td>
                 <td>

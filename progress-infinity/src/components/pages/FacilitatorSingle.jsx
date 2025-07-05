@@ -1,17 +1,25 @@
 import React, { useEffect } from 'react';
 
 function FacilitatorSingle({ speaker, onClose }) {
-  if (!speaker) return null;
-
+  
   useEffect(() => {
-    document.body.style.overflow = 'hidden';
+    if (speaker) {
+      document.body.style.overflow = 'hidden';
+    }
     return () => {
       document.body.style.overflow = 'auto';
     };
-  }, []);
+  }, [speaker]);
+
+  if (!speaker) return null;
+
+  // Example: Adjust the URL based on your storage setup
+  const videoUrl = speaker.video
+    ? `${import.meta.env.VITE_BACKEND_URL}/storage/${speaker.video}`
+    : null;
 
   return (
-    <div className="fixed inset-0 z-50 flex bg-black bg-opacity-70">
+<div className="fixed inset-0 z-50 flex bg-black bg-opacity-75 backdrop-blur-sm">
 
       {/* Left Sticky Image Section for Large Screens */}
       <div className="hidden lg:flex w-[30%] flex-shrink-0 items-start justify-end relative">
@@ -90,7 +98,25 @@ function FacilitatorSingle({ speaker, onClose }) {
               </div>
             </div>
 
+            {/* Video Section - Placed INSIDE the 2-column content */}
+            {videoUrl && (
+              <div className="mt-6">
+                <video
+                  width="100%"
+                  height="auto"
+                  controls
+                  autoPlay
+                  style={{ maxHeight: 400 }}
+                >
+                  <source src={videoUrl} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            )}
+
+
           </div>
+
         </div>
 
       </div>

@@ -1,20 +1,20 @@
 @csrf
 
 @if(isset($facilitator))
-    <div class="form-group mb-3">
+    <div class="mb-3 form-group">
         <label for="id">ID</label>
         <input type="text" class="form-control" id="id" name="id" value="{{ $facilitator->id }}" readonly>
     </div>
 @endif
 
 <div class="row">
-    <div class="col-md-6 mb-3">
+    <div class="mb-3 col-md-6">
         <label for="name">Full Name <span class="text-danger">*</span></label>
         <input type="text" class="form-control" id="name" name="name"
                value="{{ old('name', $facilitator->name ?? '') }}" required>
         @error('name') <small class="text-danger">{{ $message }}</small> @enderror
     </div>
-    <div class="col-md-6 mb-3">
+    <div class="mb-3 col-md-6">
         <label for="designation">Designation <span class="text-danger">*</span></label>
         <input type="text" class="form-control" id="designation" name="designation"
                value="{{ old('designation', $facilitator->designation ?? '') }}" required>
@@ -61,7 +61,7 @@
     @if(isset($facilitator) && $facilitator->image)
         <div class="mb-2">
             <img src="{{ asset('storage/' . $facilitator->image) }}" alt="Current Image" class="img-thumbnail" style="max-width: 120px;">
-            <div class="form-check mt-2">
+            <div class="mt-2 form-check">
                 <input class="form-check-input" type="checkbox" name="remove_image" id="remove_image">
                 <label class="form-check-label" for="remove_image">Remove current image</label>
             </div>
@@ -72,11 +72,23 @@
 </div>
 
 <div class="mb-3">
-    <label for="video">Video (URL or File)</label>
-    <input type="text" class="form-control" id="video" name="video"
-           value="{{ old('video', $facilitator->video ?? '') }}">
+    <label for="video">Upload Video</label>
+    @if(isset($facilitator) && $facilitator->video)
+        <div class="mb-2">
+            <video width="240" height="160" controls>
+                <source src="{{ asset('storage/' . $facilitator->video) }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="mt-2 form-check">
+                <input class="form-check-input" type="checkbox" name="remove_video" id="remove_video">
+                <label class="form-check-label" for="remove_video">Remove current video</label>
+            </div>
+        </div>
+    @endif
+    <input type="file" class="form-control" id="video" name="video" accept="video/*">
     @error('video') <small class="text-danger">{{ $message }}</small> @enderror
 </div>
+
 
 {{-- <div class="mb-3">
     <label for="gallery">Gallery Images (Select Multiple)</label>
@@ -93,13 +105,13 @@
     @endphp
     
     @if(!empty($galleryImages))
-        <div class="mt-2 d-flex flex-wrap gap-2">
+        <div class="flex-wrap gap-2 mt-2 d-flex">
             @foreach($galleryImages as $index => $img)
                 @if(is_string($img))
                     <div class="position-relative" style="display: inline-block;">
                         <img src="{{ asset('storage/' . $img) }}" class="img-thumbnail" style="max-width: 80px;">
                         <input type="hidden" name="existing_gallery[]" value="{{ $img }}">
-                        <button type="button" class="btn btn-sm btn-danger position-absolute top-0 end-0 p-0" 
+                        <button type="button" class="top-0 p-0 btn btn-sm btn-danger position-absolute end-0" 
                                 style="width: 20px; height: 20px; line-height: 20px;"
                                 onclick="removeGalleryImage(this, '{{ $img }}')">
                             ×
@@ -111,7 +123,7 @@
     @endif
 </div> --}}
 
-<div id="gallery-preview" class="d-flex flex-wrap gap-2 mt-2"></div>
+<div id="gallery-preview" class="flex-wrap gap-2 mt-2 d-flex"></div>
 
 <div class="mb-3">
     <label>Languages</label>

@@ -42,7 +42,7 @@ function FacilitatorList() {
       {/* Background Video Section */}
       <div className="relative w-full h-screen overflow-hidden">
         <video
-          className="absolute top-0 left-0 w-full h-full object-cover"
+          className="absolute top-0 left-0 object-cover w-full h-full"
           autoPlay
           loop
           muted
@@ -53,33 +53,33 @@ function FacilitatorList() {
 
         <div className="absolute inset-0 bg-gradient-to-r from-pink-500/30 via-transparent to-purple-500/30"></div>
 
-        <div className="relative z-10 flex flex-col justify-center h-full px-4 sm:px-8 md:px-20 text-white">
-          <div className="flex flex-wrap justify-between items-center gap-4">
-            <div className="text-sm font-mono">DIGITAL</div>
-            <div className="text-sm font-mono">DESIGN</div>
-            <div className="text-sm font-mono">DAYS</div>
-            <div className="text-sm font-mono">PALERMO</div>
-            <div className="text-sm font-mono">2025</div>
+        <div className="relative z-10 flex flex-col justify-center h-full px-4 text-white sm:px-8 md:px-20">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <div className="font-mono text-sm">DIGITAL</div>
+            <div className="font-mono text-sm">DESIGN</div>
+            <div className="font-mono text-sm">DAYS</div>
+            <div className="font-mono text-sm">PALERMO</div>
+            <div className="font-mono text-sm">2025</div>
           </div>
 
           <div className="mt-6 md:mt-10">
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-extrabold leading-tight">
+            <h1 className="text-5xl font-extrabold leading-tight sm:text-6xl md:text-7xl lg:text-9xl">
               PROGRAM
               <br />
               CONTENT
             </h1>
           </div>
 
-          <p className="mt-4 md:mt-8 max-w-lg text-sm sm:text-base md:text-lg font-light">
+          <p className="max-w-lg mt-4 text-sm font-light md:mt-8 sm:text-base md:text-lg">
             Enjoy inspirational talks by world-renowned creative minds and business visionaries, along with workshops and masterclasses led by industry leaders and renowned experts.
           </p>
         </div>
       </div>
 
       {/* Speakers Section */}
-      <div className="w-full min-h-screen bg-gray-100 p-4 sm:p-6 md:p-8">
+      <div className="w-full min-h-screen p-4 bg-gray-100 sm:p-6 md:p-8">
         {/* Filter Buttons */}
-        <div className="flex flex-wrap gap-2 sm:gap-3 md:gap-4 justify-center mb-8 sm:mb-12">
+        <div className="flex flex-wrap justify-center gap-2 mb-8 sm:gap-3 md:gap-4 sm:mb-12">
           {categories.map((category) => (
             <button
               key={category}
@@ -93,7 +93,7 @@ function FacilitatorList() {
         </div>
 
         {/* Speaker Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 md:gap-8 justify-items-center">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:gap-6 md:gap-8 justify-items-center">
           {/* Empty div for spacing on xl screens */}
           <div className="hidden xl:block"></div>
 
@@ -111,19 +111,19 @@ function FacilitatorList() {
                 <img
                   src={`${BASE_URL}/storage/${speaker.image}`}
                   alt={speaker.name}
-                  className="w-full h-full object-cover filter grayscale hover:grayscale-0 transform hover:scale-110 transition duration-300 ease-in-out"
+                  className="object-cover w-full h-full transition duration-300 ease-in-out transform filter grayscale hover:grayscale-0 hover:scale-110"
                 />
-                <span className="absolute bottom-2 sm:bottom-3 md:bottom-4 right-2 sm:right-3 md:right-4 bg-purple-100 text-purple-900 text-xs font-mono px-2 sm:px-3 md:px-4 py-1 rounded-full">
+                <span className="absolute px-2 py-1 font-mono text-xs text-purple-900 bg-purple-100 rounded-full bottom-2 sm:bottom-3 md:bottom-4 right-2 sm:right-3 md:right-4 sm:px-3 md:px-4">
                   {speaker.roleLabel || 'SPEAKER'}
                 </span>
               </div>
 
-              <h3 className="text-lg sm:text-xl font-bold mb-1 group-hover:text-purple-700 transition duration-300 uppercase">
+              <h3 className="mb-1 text-lg font-bold uppercase transition duration-300 sm:text-xl group-hover:text-purple-700">
                 {speaker.name}
               </h3>
 
-              <p className="text-xs sm:text-sm font-mono mb-1 uppercase">{speaker.designation}</p>
-              <p className="text-xs sm:text-sm font-mono italic uppercase">{speaker.short_description}</p>
+              <p className="mb-1 font-mono text-xs uppercase sm:text-sm">{speaker.designation}</p>
+              <p className="font-mono text-xs italic uppercase sm:text-sm">{speaker.short_description}</p>
             </div>
           ))}
         </div>

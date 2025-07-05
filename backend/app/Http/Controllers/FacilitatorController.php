@@ -24,10 +24,15 @@ class FacilitatorController extends Controller
     public function store(Request $request)
     {
         $validated = $this->validateRequest($request);
-        
+
         // Handle image upload
         if ($request->hasFile('image')) {
             $validated['image'] = $this->uploadImage($request->file('image'));
+        }
+
+        // Handle video upload
+        if ($request->hasFile('video')) {
+            $validated['video'] = $this->uploadVideo($request->file('video'));
         }
 
         // Handle gallery uploads
@@ -63,41 +68,28 @@ class FacilitatorController extends Controller
 
         // Handle image upload
         if ($request->hasFile('image')) {
-            // Delete old image if exists
             if ($facilitator->image) {
                 Storage::disk('public')->delete($facilitator->image);
             }
             $validated['image'] = $this->uploadImage($request->file('image'));
         }
 
-        // Ensure $facilitator->gallery is always an array
-        // $existingGallery = [];
-        // if (is_array($facilitator->gallery)) {
-        //     $existingGallery = $facilitator->gallery;
-        // } elseif (is_string($facilitator->gallery) && !empty($facilitator->gallery)) {
-        //     $decoded = json_decode($facilitator->gallery, true);
-        //     $existingGallery = is_array($decoded) ? $decoded : [];
-        // }
+        // Handle video upload
+        if ($request->hasFile('video')) {
+            if ($facilitator->video) {
+                Storage::disk('public')->delete($facilitator->video);
+            }
+            $validated['video'] = $this->uploadVideo($request->file('video'));
+        }
 
-        // $newGallery = is_array($request->input('existing_gallery')) ? $request->input('existing_gallery') : [];
-
-        // // Handle removed gallery images
-        // $removedImages = is_array($request->input('removed_gallery')) ? $request->input('removed_gallery') : [];
-        // $existingGallery = array_values(array_diff($existingGallery, $removedImages));
-
-        // Handle new gallery uploads
-        // $uploadedGallery = [];
-        // if ($request->hasFile('gallery')) {
-        //     $uploadedGallery = $this->uploadGallery($request->file('gallery'));
-        // }
-
-        // Combine existing and new gallery images
-        // $validated['gallery'] = array_merge($existingGallery, $newGallery, $uploadedGallery);
+        // Handle language array
         $validated['language'] = $request->input('language', []);
 
         // Handle image removal checkbox
         if ($request->has('remove_image')) {
-            Storage::disk('public')->delete($facilitator->image);
+            if ($facilitator->image) {
+                Storage::disk('public')->delete($facilitator->image);
+            }
             $validated['image'] = null;
         }
 
@@ -109,9 +101,14 @@ class FacilitatorController extends Controller
 
     public function destroy(Facilitator $facilitator)
     {
-        // Delete associated files
+        // Delete associated image
         if ($facilitator->image) {
             Storage::disk('public')->delete($facilitator->image);
+        }
+
+        // Delete associated video
+        if ($facilitator->video) {
+            Storage::disk('public')->delete($facilitator->video);
         }
 
         // Delete gallery images
@@ -139,7 +136,7 @@ class FacilitatorController extends Controller
             'workshop_id' => 'required|exists:workshops,id',
             'about' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'video' => 'nullable|string|max:255',
+            'video' => 'nullable|file|mimes:mp4,avi,mov,wmv|max:51200',
             'short_description' => 'nullable|string',
             'language' => 'nullable|array',
             'language.*' => 'string',
@@ -150,6 +147,11 @@ class FacilitatorController extends Controller
     protected function uploadImage($file)
     {
         return $file->store('facilitators', 'public');
+    }
+
+    protected function uploadVideo($file)
+    {
+        return $file->store('facilitators/videos', 'public');
     }
 
     protected function uploadGallery($files)
