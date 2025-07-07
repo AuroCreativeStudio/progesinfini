@@ -88,7 +88,7 @@
 </div>
 
 
-{{-- <div class="mb-3">
+ <div class="mb-3">
     <label for="gallery">Gallery Images (Select Multiple)</label>
     <input type="file" class="form-control" id="gallery" name="gallery[]" multiple accept="image/*" onchange="previewImages(event)">
     @error('gallery.*') <small class="text-danger">{{ $message }}</small> @enderror
@@ -119,7 +119,7 @@
             @endforeach
         </div>
     @endif
-</div> --}}
+</div> 
 
 <div id="gallery-preview" class="flex-wrap gap-2 mt-2 d-flex"></div>
 
