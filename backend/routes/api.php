@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EnquireControllerApi;
 use App\Http\Controllers\WorkshopControllerApi;
 use App\Http\Controllers\FacilitatorControllerApi;
 use App\Http\Resources\WorkshopResource;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 // Workshop API Routes (Full CRUD)
 Route::apiResource('workshops', WorkshopControllerApi::class);
 Route::apiResource('facilitator', FacilitatorControllerApi::class);
+Route::apiResource('enquires', EnquireControllerApi::class);
 
 
 // Fallback route for API 404s

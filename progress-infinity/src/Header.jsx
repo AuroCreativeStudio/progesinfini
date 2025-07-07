@@ -1,157 +1,104 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import logo from './assets/progre infini Logo white-05.png';
+import logo from './assets/colourLogo.png';
+import EnquireForm from './components/pages/EnquireForm';
 
 function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [showForm, setShowForm] = useState(false);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <header className="w-full text-white bg-deep-blue shadow">
-      <nav className="container mx-auto flex items-center justify-between p-4 relative">
-        {/* Logo */}
-        <div className="flex items-center space-x-2">
-          <img
-            src={logo}
-            alt="Progress Infinity Logo"
-            className="h-10 md:h-14 w-48 md:w-72 object-contain"
-          />
-        </div>
+    <>
+      <header className="fixed top-0 left-0 w-full z-30 px-4 sm:px-6 py-3 sm:py-4 bg-white/10 backdrop-blur-lg border-b border-white/30 shadow-lg transition-all duration-500">
+        <nav className="container mx-auto flex flex-col items-center relative transition-all duration-500">
 
-        {/* Navigation Links (Desktop) */}
-        <ul className="hidden md:flex space-x-4 lg:space-x-8 text-lg font-semibold font-rem">
-          <li>
-            <Link
-              to="/workshoplist"
-              className="py-2 border-b-2 border-transparent hover:border-red-500 transition duration-300"
-            >
-              Workshops
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/facilitatorlist"
-              className="py-2 border-b-2 border-transparent hover:border-red-500 transition duration-300"
-            >
-              Facilitators
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/about"
-              className="py-2 border-b-2 border-transparent hover:border-red-500 transition duration-300"
-            >
-              About Us
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/contactus"
-              className="py-2 border-b-2 border-transparent hover:border-red-500 transition duration-300"
-            >
-              Contact
-            </Link>
-          </li>
-        </ul>
+          {/* Navigation Links (Desktop) */}
+          <ul className={`flex items-center justify-center space-x-4 lg:space-x-8 text-lg font-semibold font-rem text-gray-200 transition-all duration-500 ${isScrolled ? 'order-1' : 'order-none'}`}>
+            <li>
+              <Link
+                to="/workshoplist"
+                className="py-2 border-b-2 border-transparent hover:border-red-500 transition duration-300"
+              >
+                Workshops
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/facilitatorlist"
+                className="py-2 border-b-2 border-transparent hover:border-red-500 transition duration-300"
+              >
+                Facilitators
+              </Link>
+            </li>
 
-        {/* Enquire Button (Always Visible) */}
-        <div className="hidden md:block">
-          <Link
-            to="/enquire"
-            className="bg-red-orange hover:bg-orange-600 text-white font-semibold font-rem py-2 px-4 md:py-3 md:px-5 rounded-lg transition duration-300 block text-center"
-          >
-            Enquire
-          </Link>
-        </div>
-
-        {/* Hamburger Menu Button (Mobile) */}
-        <button
-          className="md:hidden focus:outline-none"
-          onClick={toggleMenu}
-          aria-label="Toggle menu"
-        >
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            {isMenuOpen ? (
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M6 18L18 6M6 6l12 12"
-              />
-            ) : (
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6h16M4 12h16M4 18h16"
-              />
+            {/* Logo in Nav Links when Scrolled */}
+            {isScrolled && (
+              <li className="transition-all duration-500">
+                <img
+                  src={logo}
+                  alt="Progress Infinity Logo"
+                  className="h-10 md:h-12 object-contain transition-all duration-500"
+                />
+              </li>
             )}
-          </svg>
-        </button>
 
-        {/* Dropdown Menu (Mobile) */}
-        {isMenuOpen && (
-          <div className="absolute top-full left-0 w-full bg-deep-blue p-4 shadow-lg z-50 md:hidden">
-            <ul className="flex flex-col space-y-4 text-lg font-semibold font-rem">
-              <li>
-                <Link
-                  to="/workshoplist"
-                  className="block py-2 hover:text-orange-500"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Workshops
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/facilitatorlist"
-                  className="block py-2 hover:text-orange-500"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Facilitators
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/about"
-                  className="block py-2 hover:text-orange-500"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/contactus"
-                  className="block py-2 hover:text-orange-500"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Contact
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/enquire"
-                  className="block py-2 bg-red-orange hover:bg-orange-600 text-white font-semibold rounded-lg text-center transition duration-300"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Enquire
-                </Link>
-              </li>
-            </ul>
+            <li>
+              <Link
+                to="/about"
+                className="py-2 border-b-2 border-transparent hover:border-red-500 transition duration-300"
+              >
+                About Us
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/contactus"
+                className="py-2 border-b-2 border-transparent hover:border-red-500 transition duration-300"
+              >
+                Contact
+              </Link>
+            </li>
+          </ul>
+
+          {/* Centered Large Logo (Only when not scrolled) */}
+          {!isScrolled && (
+            <div className="mt-4 transition-all duration-500">
+              <img
+                src={logo}
+                alt="Progress Infinity Logo"
+                className="h-20 md:h-24 object-contain transition-all duration-500"
+              />
+            </div>
+          )}
+
+          {/* Enquire Button (Always Visible) */}
+          <div className="hidden md:block absolute right-4 top-4">
+            <button
+              onClick={() => setShowForm(true)}
+              className="bg-red-orange hover:bg-orange-600 text-white font-semibold font-rem py-2 px-4 md:py-3 md:px-5 rounded-lg transition duration-300 block text-center"
+            >
+              Enquire
+            </button>
           </div>
-        )}
-      </nav>
-    </header>
+        </nav>
+      </header>
+
+      {/* Enquire Form Modal */}
+      {showForm && <EnquireForm onClose={() => setShowForm(false)} />}
+    </>
   );
 }
 

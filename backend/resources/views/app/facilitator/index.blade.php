@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="mb-3 d-flex justify-content-between align-items-center">
-    <h2>Workshop List</h2>
- <a href="{{ route('admin.facilitators.create') }}" class="btn btn-primary">Add New Workshop</a>
+    <h2>Facilitator List</h2>
+ <a href="{{ route('admin.facilitators.create') }}" class="btn btn-primary">Add New Facilitator</a>
 
 
 </div>

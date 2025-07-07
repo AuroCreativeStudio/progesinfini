@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-
+const BASE_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
 function FacilitatorSingle({ speaker, onClose }) {
   
   useEffect(() => {
@@ -13,9 +13,8 @@ function FacilitatorSingle({ speaker, onClose }) {
 
   if (!speaker) return null;
 
-  // Example: Adjust the URL based on your storage setup
   const videoUrl = speaker.video
-    ? `${import.meta.env.VITE_BACKEND_URL}/storage/${speaker.video}`
+    ? `${BASE_URL}/storage/${speaker.video}`
     : null;
 
   return (
@@ -105,7 +104,7 @@ function FacilitatorSingle({ speaker, onClose }) {
                   width="100%"
                   height="auto"
                   controls
-                  autoPlay
+                  // autoPlay
                   style={{ maxHeight: 400 }}
                 >
                   <source src={videoUrl} type="video/mp4" />

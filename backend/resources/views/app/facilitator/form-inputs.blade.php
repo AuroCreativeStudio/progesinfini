@@ -22,8 +22,6 @@
     </div>
 </div>
 
-
-
 <div class="mb-3">
     <label for="workshop_id">Select Workshop <span class="text-danger">*</span></label>
     <select class="form-control" id="workshop_id" name="workshop_id" required>

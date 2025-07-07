@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EnquireController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WorkshopController;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,7 @@ Route::middleware('auth')->group(function () {
     // CMS Workshop Management Routes (For Blade views)
     Route::resource('/admin/workshops', WorkshopController::class)->names('admin.workshops');
     Route::resource('/admin/facilitators', FacilitatorController::class)->names('admin.facilitators');
+    Route::resource('/admin/enquires',  EnquireController::class)->names('admin.enquires');
 });
 
 require __DIR__.'/auth.php';
