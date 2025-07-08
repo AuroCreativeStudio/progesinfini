@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container-fluid" style="margin-top: 56px; margin-left: 250px; width: calc(100% - 250px); padding: 20px; overflow-x: hidden;">
-
+      <h2 class="mb-4 text-center">{{ isset($facilitator) ? 'Edit' : 'Create' }} Facilitator</h2> 
     <form action="{{ isset($facilitator) ? route('admin.facilitators.update', $facilitator->id) : route('admin.facilitators.store') }}" method="POST" enctype="multipart/form-data" class="bg-white p-4 rounded shadow">
         @csrf
         @if(isset($facilitator))

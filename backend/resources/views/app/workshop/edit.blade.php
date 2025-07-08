@@ -10,7 +10,7 @@
 
         @include('app.workshop.form-inputs')
 
-        <div class="text-center">
+        <div class="text-center mt-4">
             <button type="submit" class="btn btn-success btn-lg">Update Workshop</button>
             <a href="{{ route('admin.workshops.index') }}" class="btn btn-outline-secondary btn-lg ml-2">Cancel</a>
         </div>

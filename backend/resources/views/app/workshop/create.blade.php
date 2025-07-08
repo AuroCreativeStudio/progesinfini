@@ -9,7 +9,6 @@
 
         @include('app.workshop.form-inputs')
 
-        {{-- Submit Button --}}
         <div class="text-center mt-4">
             <button type="submit" class="btn btn-primary btn-lg">Create Workshop</button>
             <a href="{{ route('admin.workshops.index') }}" class="btn btn-outline-secondary btn-lg ml-2">Cancel</a>
