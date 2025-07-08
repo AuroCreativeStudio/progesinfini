@@ -13,9 +13,11 @@ function Workshopsingle({ workshop, onClose }) {
     }
   },[workshop]);
 
-   const imageUrl = workshop.featured_image
-    ? `${BASE_URL}/storage/${workshop.featured_image}`
-    : 'https://dummyimage.com/400x300/cccccc/000000&text=No+Image';
+const imageUrl = workshop.featured_image?.startsWith('http')
+  ? workshop.featured_image
+  : `${BASE_URL}/storage/${workshop.featured_image}`;
+
+  console.log(imageUrl);
 
   return (
     <>

@@ -17,6 +17,18 @@ function FacilitatorSingle({ speaker, onClose }) {
     ? `${BASE_URL}/storage/${speaker.video}`
     : null;
 
+let gallery = [{}];
+try {
+  const parsed = JSON.parse(speaker.gallery);
+  if (Array.isArray(parsed)) {
+    gallery = parsed.map(img => `${BASE_URL}/storage/${img}`);
+  }
+} catch (e) {
+  console.error("Failed to parse gallery JSON:", e);
+}
+
+
+
   return (
 <div className="fixed inset-0 z-50 flex bg-black bg-opacity-75 backdrop-blur-sm">
 
@@ -97,21 +109,48 @@ function FacilitatorSingle({ speaker, onClose }) {
               </div>
             </div>
 
-            {/* Video Section - Placed INSIDE the 2-column content */}
-            {videoUrl && (
-              <div className="mt-6">
-                <video
-                  width="100%"
-                  height="auto"
-                  controls
-                  // autoPlay
-                  style={{ maxHeight: 400 }}
-                >
-                  <source src={videoUrl} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              </div>
-            )}
+{/* Video & Gallery Wrapper */}
+<div className="mt-6 max-w-4xl mx-auto">
+
+  {/* Video Section */}
+  {videoUrl && (
+    <div className="mb-10">
+      <video
+        width="100%"
+        height="auto"
+        controls
+        className="w-full max-h-[400px] rounded-md shadow-md"
+      >
+        <source src={videoUrl} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  )}
+
+  {/* Gallery Section */}
+ {/* Gallery Section */}
+{gallery.length > 0 && (
+  <div className="mt-10 max-w-4xl mx-auto">
+    <h3 className="mb-4 font-mono text-lg text-gray-700 uppercase">Gallery</h3>
+
+    <div className="space-y-6">
+      {gallery.map((img, index) => (
+        <img
+          key={index}
+          src={img}
+          alt={`Gallery ${index + 1}`}
+          className="w-full object-cover rounded-lg shadow-sm hover:scale-[1.01] transition-transform duration-300"
+        />
+      ))}
+    </div>
+  </div>
+)}
+
+
+</div>
+
+
+
 
 
           </div>

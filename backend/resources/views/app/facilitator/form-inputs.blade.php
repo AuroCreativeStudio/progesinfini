@@ -95,7 +95,16 @@
 
         <div class="mb-3">
             <label for="gallery">Gallery Images (Select Multiple)</label>
-            <input type="file" class="form-control" id="gallery" name="gallery[]" multiple accept="image/*" onchange="previewImages(event)">
+            <input
+                type="file"
+                class="form-control"
+                id="gallery"
+                name="gallery[]"
+                multiple
+                accept="image/*"
+                onchange="previewImages(event)"
+              >
+              
             @error('gallery.*') <small class="text-danger">{{ $message }}</small> @enderror
 
             @php
@@ -160,35 +169,43 @@
 </div>
 
 <script>
-    function previewImages(event) {
-        const files = event.target.files;
-        const previewContainer = document.getElementById('gallery-preview');
-        previewContainer.innerHTML = '';
+function previewImages(event) {
+    const files = event.target.files;
+    const previewContainer = document.getElementById('gallery-preview');
+    previewContainer.innerHTML = ''; // Clear previous previews if needed
 
-        Array.from(files).forEach(file => {
-            if (file.type.startsWith('image/')) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    const img = document.createElement('img');
-                    img.src = e.target.result;
-                    img.classList.add('img-thumbnail');
-                    img.style.maxWidth = '80px';
-                    previewContainer.appendChild(img);
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-    }
+    Array.from(files).forEach((file) => {
+        if (!file.type.startsWith('image/')) return;
 
-    function removeGalleryImage(button, imagePath) {
-        const container = button.parentElement;
-        const form = container.closest('form');
-        const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = 'removed_gallery[]';
-        input.value = imagePath;
-        form.appendChild(input);
-        container.remove();
-    }
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            const wrapper = document.createElement('div');
+            wrapper.classList.add('position-relative', 'me-2', 'mb-2');
+            wrapper.style.display = 'inline-block';
+
+            const img = document.createElement('img');
+            img.src = e.target.result;
+            img.classList.add('img-thumbnail');
+            img.style.maxWidth = '80px';
+            img.style.maxHeight = '80px';
+
+            wrapper.appendChild(img);
+            previewContainer.appendChild(wrapper);
+        };
+
+        reader.readAsDataURL(file);
+    });
+}
+  function removeGalleryImage(button, imagePath) {
+    const container = button.parentElement;
+    const form = container.closest('form');
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = 'removed_gallery[]';
+    input.value = imagePath;
+    form.appendChild(input);
+    container.remove();
+}
+
 </script>
 @endsection

@@ -21,35 +21,37 @@ class FacilitatorController extends Controller
         return view('app.facilitator.create', compact('workshops'));
     }
 
-    public function store(Request $request)
-    {
-        $validated = $this->validateRequest($request);
+   public function store(Request $request)
+{
+    $validated = $this->validateRequest($request);
 
-        // Handle image upload
-        if ($request->hasFile('image')) {
-            $validated['image'] = $this->uploadImage($request->file('image'));
-        }
-
-        // Handle video upload
-        if ($request->hasFile('video')) {
-            $validated['video'] = $this->uploadVideo($request->file('video'));
-        }
-
-        // Handle gallery uploads
-        if ($request->hasFile('gallery')) {
-            $validated['gallery'] = $this->uploadGallery($request->file('gallery'));
-        } else {
-            $validated['gallery'] = [];
-        }
-
-        // Handle language array
-        $validated['language'] = $request->input('language', []);
-
-        Facilitator::create($validated);
-
-        return redirect()->route('admin.facilitators.index')
-            ->with('success', 'Facilitator created successfully.');
+    // Handle image upload
+    if ($request->hasFile('image')) {
+        $validated['image'] = $this->uploadImage($request->file('image'));
     }
+
+    // Handle video upload
+    if ($request->hasFile('video')) {
+        $validated['video'] = $this->uploadVideo($request->file('video'));
+    }
+
+    // Handle gallery uploads
+    if ($request->hasFile('gallery')) {
+        $galleryPaths = $this->uploadGallery($request->file('gallery'));
+        $validated['gallery'] = json_encode($galleryPaths); // Store as JSON
+    } else {
+        $validated['gallery'] = json_encode([]); // Fix: store as valid JSON
+    }
+
+    // Handle language array
+    $validated['language'] = $request->input('language', []);
+
+    Facilitator::create($validated);
+
+    return redirect()->route('admin.facilitators.index')
+        ->with('success', 'Facilitator created successfully.');
+}
+
 
     public function show(Facilitator $facilitator)
     {
@@ -62,42 +64,60 @@ class FacilitatorController extends Controller
         return view('app.facilitator.edit', compact('facilitator', 'workshops'));
     }
 
-    public function update(Request $request, Facilitator $facilitator)
-    {
-        $validated = $this->validateRequest($request);
+ public function update(Request $request, Facilitator $facilitator)
+{
+    $validated = $this->validateRequest($request);
 
-        // Handle image upload
-        if ($request->hasFile('image')) {
-            if ($facilitator->image) {
-                Storage::disk('public')->delete($facilitator->image);
-            }
-            $validated['image'] = $this->uploadImage($request->file('image'));
+    // Handle image upload
+    if ($request->hasFile('image')) {
+        if ($facilitator->image) {
+            Storage::disk('public')->delete($facilitator->image);
         }
-
-        // Handle video upload
-        if ($request->hasFile('video')) {
-            if ($facilitator->video) {
-                Storage::disk('public')->delete($facilitator->video);
-            }
-            $validated['video'] = $this->uploadVideo($request->file('video'));
-        }
-
-        // Handle language array
-        $validated['language'] = $request->input('language', []);
-
-        // Handle image removal checkbox
-        if ($request->has('remove_image')) {
-            if ($facilitator->image) {
-                Storage::disk('public')->delete($facilitator->image);
-            }
-            $validated['image'] = null;
-        }
-
-        $facilitator->update($validated);
-
-        return redirect()->route('admin.facilitators.index')
-            ->with('success', 'Facilitator updated successfully.');
+        $validated['image'] = $this->uploadImage($request->file('image'));
     }
+
+    // Handle video upload
+    if ($request->hasFile('video')) {
+        if ($facilitator->video) {
+            Storage::disk('public')->delete($facilitator->video);
+        }
+        $validated['video'] = $this->uploadVideo($request->file('video'));
+    }
+
+    // Handle language
+    $validated['language'] = $request->input('language', []);
+
+    // Handle image removal checkbox
+    if ($request->has('remove_image') && $facilitator->image) {
+        Storage::disk('public')->delete($facilitator->image);
+        $validated['image'] = null;
+    }
+
+    // Handle gallery images
+    $existingGallery = $request->input('existing_gallery', []); // From hidden inputs
+    $removedGallery = $request->input('removed_gallery', []);   // From JS removal buttons
+
+    // Remove deleted images
+    foreach ($removedGallery as $imgPath) {
+        Storage::disk('public')->delete($imgPath);
+        $existingGallery = array_filter($existingGallery, fn($item) => $item !== $imgPath);
+    }
+
+    // Handle new uploads
+    $newGalleryPaths = [];
+    if ($request->hasFile('gallery')) {
+        $newGalleryPaths = $this->uploadGallery($request->file('gallery'));
+    }
+
+    // Merge and encode final gallery
+    $validated['gallery'] = json_encode(array_merge($existingGallery, $newGalleryPaths));
+
+    $facilitator->update($validated);
+
+    return redirect()->route('admin.facilitators.index')
+        ->with('success', 'Facilitator updated successfully.');
+}
+
 
     public function destroy(Facilitator $facilitator)
     {
@@ -154,12 +174,13 @@ class FacilitatorController extends Controller
         return $file->store('facilitators/videos', 'public');
     }
 
-    protected function uploadGallery($files)
-    {
-        $paths = [];
-        foreach ($files as $file) {
-            $paths[] = $file->store('facilitators/gallery', 'public');
-        }
-        return $paths;
+protected function uploadGallery($files)
+{
+    $paths = [];
+    foreach ($files as $file) {
+        $paths[] = $file->store('facilitators/gallery', 'public'); // returns path as string
     }
+    return $paths;
+}
+
 }
