@@ -1,4 +1,4 @@
-<header class="header" role="banner">
+<header class="header  border-end position-fixed h-100" role="banner" style=" z-index: 1030;"> 
   {{-- <h1 class="logo">
     <a href="#">CMS</a>
   </h1> --}}
