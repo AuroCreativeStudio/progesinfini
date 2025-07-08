@@ -24,6 +24,7 @@ return new class extends Migration
         $table->string('time')->nullable();
         $table->text('skill_gained')->nullable();
         $table->text('target_audience')->nullable();
+        $table->integer('no_of_attendance')->nullable();
         
         $table->timestamps();
 

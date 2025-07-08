@@ -19,18 +19,26 @@ class WorkshopControllerApi extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        $validatedData = $request->validate([
-            'workshop_title' => 'required|string|max:255',
-            'workshop_type' => 'required|string|max:255',
-            'workshop_description' => 'required|string',
-        ]);
+public function store(Request $request)
+{
+    $validatedData = $request->validate([
+        'workshop_title' => 'required|string|max:255',
+        'workshop_type' => 'required|string|max:255',
+        'workshop_description' => 'required|string',
+        'featured_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048', // validate image
+    ]);
 
-        $workshop = Workshop::create($validatedData);
-
-        return new WorkshopResource($workshop);
+    // Handle file upload
+    if ($request->hasFile('featured_image')) {
+        $path = $request->file('featured_image')->store('workshops', 'public');
+        $validatedData['featured_image'] = $path; // stores e.g. workshops/myimage.jpg
     }
+
+    $workshop = Workshop::create($validatedData);
+
+    return new WorkshopResource($workshop);
+}
+
 
     /**
      * Display the specified resource.

@@ -1,124 +1,193 @@
-import React from 'react'
-import image from '../../assets/workshopmain.jpg';
-import card1 from '../../assets/card1.jpg';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import { fetchWorkshop } from '../../services/workshopService';
-import { useEffect, useState } from 'react';
+import video from '../../assets/download.mp4';
+import Workshopsingle from './Workshopsingle';
+
+const BASE_URL = 'http://127.0.0.1:8000';
 
 function Workshoplist() {
-    const [workshops, setWorkshops] = useState([]);
+  const [workshops, setWorkshops] = useState([]);
+  const [selectedWorkshop, setSelectedWorkshop] = useState(null);
 
-    useEffect(() => {
-        const getWorkshops = async () => {
-            try {
-                // You wrote fetchWorkshops (plural), but your service is fetchWorkshop (singular)
-                const data = await fetchWorkshop(); 
-                setWorkshops(data.data);
-                console.log(data);
-            } catch (error) {
-                console.error('Failed to load workshops:', error);
+  // Filter states
+  const [titleFilter, setTitleFilter] = useState('');
+  const [typeFilter, setTypeFilter] = useState('');
+  const [priceFilter, setPriceFilter] = useState('');
 
-            }
-        };
+  useEffect(() => {
+    const getWorkshops = async () => {
+      try {
+        const data = await fetchWorkshop();
+        setWorkshops(data.data);
+      } catch (error) {
+        console.error('Failed to load workshops:', error);
+      }
+    };
 
-        getWorkshops();
-    }, []);
+    getWorkshops();
+  }, []);
+
+  // Apply filtering logic
+  const filteredWorkshops = workshops.filter((workshop) =>
+    (titleFilter ? workshop.workshop_title === titleFilter : true) &&
+    (typeFilter ? workshop.workshop_type === typeFilter : true) &&
+    (priceFilter ? workshop.price == priceFilter : true)
+  );
 
   return (
     <>
-      {/* Hero Section */}
-      <div className="relative m-0 w-full h-[50vh] md:h-[80vh] bg-black">
-        {/* Background Image */}
-        <img
-          src={image}
-          alt="Learning Background"
-          className="w-full h-full object-cover"
+      {/* Workshop Detail Overlay */}
+      {selectedWorkshop && (
+        <Workshopsingle
+          workshop={{
+            ...selectedWorkshop,
+            featured_image: `${BASE_URL}/storage/${selectedWorkshop.featured_image}`,
+          }}
+          onClose={() => setSelectedWorkshop(null)}
         />
+      )}
 
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-black bg-opacity-50 flex items-end justify-center md:justify-end
-        ">
-          <div className="text-center md:text-right text-white w-full px-4 md:max-w-full md:pr-12 mb-8 md:mb-14">
-            <h1 className="text-2xl md:text-3xl lg:text-5xl font-semibold font-rem mb-44
-            ">
-              Inspiring Discovery<br/>
-               through Creativity
-            </h1>
-            <button className="bg-red-orange hover:bg-orange-600 text-white font-semibold font-rem py-2 px-4 md:py-3 md:px-6 rounded">
-              Register Interest
-            </button>
+      {/* Background Video Section */}
+      <div className="relative w-full h-screen overflow-hidden">
+        <video
+          className="absolute top-0 left-0 object-cover w-full h-full"
+          autoPlay
+          loop
+          muted
+        >
+          <source src={video} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <div className="absolute inset-0 bg-gradient-to-r from-pink-500/30 via-transparent to-purple-500/30"></div>
+
+        <div className="relative z-10 flex flex-col justify-center h-full px-4 text-white sm:px-8 md:px-20">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <div className="font-mono text-sm">DIGITAL</div>
+            <div className="font-mono text-sm">DESIGN</div>
+            <div className="font-mono text-sm">DAYS</div>
+            <div className="font-mono text-sm">PALERMO</div>
+            <div className="font-mono text-sm">2025</div>
           </div>
+          <div className="mt-6 md:mt-10">
+            <h1 className="text-5xl font-extrabold leading-tight sm:text-6xl md:text-7xl lg:text-9xl">
+              WORKSHOP
+              <br />
+              PROGRAM
+            </h1>
+          </div>
+          <p className="max-w-lg mt-4 text-sm font-light md:mt-8 sm:text-base md:text-lg">
+            Join hands-on workshops led by expert facilitators—explore creativity, collaboration, and real-world innovation.
+          </p>
         </div>
       </div>
 
-      {/* Courses Section */}
-      <div className="p-4 md:p-8 lg:p-20">
-        {/* Filter Section */}
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 md:mb-10 gap-4">
-          <div className="flex flex-col md:flex-row md:space-x-4 lg:space-x-8 xl:space-x-32 text-base md:text-lg w-full md:w-auto">
-          
-            <div className="cursor-pointer font-bold text-black font-rem pb-2 md:pb-0">
-              Categories <span className="text-red-orange font-rem">▼</span>
-            </div>
-            <div className="cursor-pointer font-bold text-black">Choose
-              Facilitator <span className="text-red-orange">▼</span>
-            </div>
-          </div>
-          <button className="border bg-red-orange px-4 py-2 md:px-8 lg:px-16 text-base md:text-lg w-full md:w-auto text-white font-medium font-rem rounded-lg
-           hover:bg-orange-50">
-            Search 
-          </button>
-        </div>
+      {/* Filter Section */}
+     
+<div className="w-full bg-white py-6 px-4 sm:px-6 md:px-12 border-b border-gray-300">
+  <div className="grid grid-cols-1 md:grid-cols-6 gap-4 items-end">
 
-        {/* Course Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
-          {workshops.map((workshop) => (
-            <div key={workshop.id} className="border border-lalic rounded-2xl">
-              <div className="relative">
+    {/* Title Filter */}
+    <select
+      value={titleFilter}
+      onChange={(e) => setTitleFilter(e.target.value)}
+      className="border rounded px-3 py-2 w-full text-sm"
+    >
+      <option value="">All Titles</option>
+      {[...new Set(workshops.map(w => w.workshop_title))].map((title, idx) => (
+        <option key={idx} value={title}>{title}</option>
+      ))}
+    </select>
+
+    {/* Type Filter */}
+    <select
+      value={typeFilter}
+      onChange={(e) => setTypeFilter(e.target.value)}
+      className="border rounded px-3 py-2 w-full text-sm"
+    >
+      <option value="">All Types</option>
+      {[...new Set(workshops.map(w => w.workshop_type))].map((type, idx) => (
+        <option key={idx} value={type}>{type}</option>
+      ))}
+    </select>
+
+    {/* Price Filter */}
+    <select
+      value={priceFilter}
+      onChange={(e) => setPriceFilter(e.target.value)}
+      className="border rounded px-3 py-2 w-full text-sm"
+    >
+      <option value="">All Prices</option>
+      {[...new Set(workshops.map(w => w.price))]
+        .sort((a, b) => a - b)
+        .map((price, idx) => (
+          <option key={idx} value={price}>₹{price}</option>
+        ))}
+    </select>
+
+
+
+    {/* Spacer (for better alignment if needed) */}
+    <div className="hidden md:block"></div>
+
+    {/* Reset Button */}
+    <button
+      className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded text-sm w-full"
+      onClick={() => {
+        setTitleFilter('');
+        setTypeFilter('');
+        setPriceFilter('');
+        
+      }}
+    >
+      Reset
+    </button>
+  </div>
+</div>
+
+
+
+      {/* Workshop Cards Section */}
+      <div className="w-full min-h-screen p-4 bg-gray-100 sm:p-6 md:p-8">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:gap-6 md:gap-8 justify-items-center">
+          {/* Optional Spacer for alignment */}
+          <div className="hidden xl:block"></div>
+
+          {filteredWorkshops.map((workshop) => (
+            <div
+              key={workshop.id}
+              onClick={() => setSelectedWorkshop(workshop)}
+              className="group flex flex-col items-center text-center w-full sm:w-[250px] md:w-[300px] mb-8 sm:mb-12 md:mb-16 cursor-pointer"
+            >
+              <div className="relative w-full h-[300px] sm:h-[350px] md:h-[400px] mb-3 sm:mb-4 overflow-hidden">
                 <img
-                  src={card1} // You might want to use a dynamic image source here
-                  alt={workshop.title}
-                  className="w-full h-48 sm:h-52 md:h-60 object-cover rounded-2xl"
+                  src={
+                    workshop.featured_image
+                      ? `${BASE_URL}/storage/${workshop.featured_image}`
+                      : 'https://dummyimage.com/400x300/cccccc/000000&text=No+Image'
+                  }
+                  alt={workshop.workshop_title}
+                  className="object-cover w-full h-full transition duration-300 ease-in-out transform filter grayscale hover:grayscale-0 hover:scale-110"
                 />
-                <div className="absolute top-4 left-0 bg-red-orange rounded-r-xl text-white text-sm md:text-lg font-bold font-rem px-4 md:px-6 py-1">
-                  Starting Soon
-                </div>
+                <span className="absolute px-2 py-1 font-mono text-xs text-purple-900 bg-purple-100 rounded-full bottom-2 right-2 sm:px-3 md:px-4">
+                  {workshop.workshop_type || 'WORKSHOP'}
+                </span>
               </div>
-              <div className="p-3 md:p-4">
-                <h2 className="font-bold font-rem text-xl md:text-2xl text-deep-blue pb-2 mb-2">
-                  {workshop.workshop_title}
-                </h2>
-                <p className="text-deep-blue mb-3 md:mb-4 pb-2">
-                  {workshop.about_workshop}
-                </p>
-                <div className="flex flex-col text-deep-blue mb-2 space-y-2">
-                  <span className="flex items-center space-x-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M9 20H4v-2a3 3 0 015.356-1.857M15 11a4 4 0 10-8 0 4 4 0 008 0z" />
-                    </svg>
-                    <span>{workshop.workshop_type}</span>
-                  </span>
-                  <span className="flex items-center space-x-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span>{workshop.duration_weeks}Week</span>
-                  </span>
-                </div>
-                <Link to={`/workshop/${workshop.id}`}>
-                  <button className="w-full py-3 md:py-4 lg:py-5 mt-3 md:mt-4 rounded-lg bg-indigo-100 text-deep-blue font-bold font-rem border border-lalic text-base md:text-lg">
-                    Learn More
-                  </button>
-                </Link>
-              </div>
+
+              <h3 className="mb-1 text-lg font-bold uppercase transition duration-300 sm:text-xl group-hover:text-purple-700">
+                {workshop.workshop_title}
+              </h3>
+              <p className="mb-1 font-mono text-xs uppercase sm:text-sm">
+                {workshop.duration_weeks} Week(s)
+              </p>
+              <p className="font-mono text-xs italic sm:text-sm line-clamp-2 px-2">
+                {workshop.about_workshop}
+              </p>
             </div>
           ))}
         </div>
       </div>
-
-     
     </>
-  )
+  );
 }
 
-export default Workshoplist
+export default Workshoplist;
