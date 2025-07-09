@@ -25,6 +25,7 @@ class BlogController extends Controller
     public function create()
     {
         return view('app.blogs.create');
+        
     }
 
     /**
@@ -43,7 +44,9 @@ class BlogController extends Controller
             'description3' => 'nullable|string',
             'about' => 'nullable|string',
             'publish_status' => 'boolean',
-
+            'alt_image' => 'required|string|max:255',
+            'meta_keyword' => 'required|string|max:255',
+            'meta_description' => 'required',
             'author_img' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             'feature_img' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             'img_1' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
@@ -75,7 +78,7 @@ class BlogController extends Controller
      */
     public function edit(Blog $blog)
     {
-        return view('admin.blogs.edit', compact('blog'));
+        return view('app.blogs.edit', compact('blog'));
     }
 
     /**
@@ -94,7 +97,9 @@ class BlogController extends Controller
             'description3' => 'nullable|string',
             'about' => 'nullable|string',
             'publish_status' => 'boolean',
-
+            'alt_image' => 'required|string|max:255',
+            'meta_keyword' => 'required|string|max:255',
+            'meta_description' => 'required',
             'author_img' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             'feature_img' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             'img_1' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',

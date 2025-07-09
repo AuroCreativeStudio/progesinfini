@@ -24,5 +24,8 @@ class Blog extends Model
         'feature_img',
         'img_1',
         'img_2',
+        'alt_image',
+        'meta_keyword',
+        'meta_description'
     ];
 }

@@ -1,132 +1,175 @@
-@csrf
 
-<div class="bg-white ml-64 p-6 font-sans min-h-screen">
-    {{-- Title Field --}}
-    <label class="flex justify-between items-start font-headline mb-2">Title</label>
-    <div class="flex justify-between items-center mb-6">
-        <input
-            type="text"
-            name="title"
-            value="{{ old('title', $blog->title ?? '') }}"
-            class="w-3/5 px-4 py-2 text-l font-body font-univers border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-mainCharcoal1"
-        />
-        <div class="flex items-center space-x-3">
-            <button type="submit" class="export-button">
-                {{ isset($blog) ? 'Update' : 'Save' }}
-            </button>
-        </div>
+
+<div class="container-fluid" style="margin-left: 250px; margin-top: 56px; padding: 20px; max-width: calc(100% - 250px); overflow-x: hidden;">
+
+    <div class="mb-4 d-flex justify-content-between align-items-center">
+        <label class="form-label mb-0">Title</label>
+        {{-- <button type="submit" class="btn btn-primary">
+            {{ isset($blog) ? 'Update' : 'Save' }}
+        </button> --}}
     </div>
 
-    {{-- Tabs (you can control visibility in controller or JS later) --}}
-    <div class="flex space-x-6 border-b font-headline border-gray-300 pb-2 mb-4">
-        <span class="pb-1 text-mainCharcoal1 border-b-2 border-mainCharcoal1">Content</span>
-        <span class="pb-1 text-gray-500">Meta</span>
+    <div class="mb-4">
+        <input type="text" name="title" value="{{ old('title', $blog->title ?? '') }}" class="form-control" />
     </div>
 
-    {{-- Description 1 & Image 1 --}}
-    <div class="bg-white p-5 rounded shadow mb-4">
-        <h2 class="text-l font-headline mb-2">Section 1</h2>
-        <textarea
-            name="description_1"
-            rows="4"
-            class="w-full font-body font-univers border border-gray-300 rounded p-3 resize-y focus:outline-none focus:ring-2 focus:ring-mainCharcoal1"
-            placeholder="Enter your first description here...">{{ old('description_1', $blog->description_1 ?? '') }}</textarea>
+    {{-- Tabs (you can toggle with JS if needed) --}}
+    <ul class="nav nav-tabs mb-3">
+        <li class="nav-item">
+            <span class="nav-link active">Content</span>
+        </li>
+        <li class="nav-item">
+            <span class="nav-link disabled text-muted">Meta</span>
+        </li>
+    </ul>
 
-        <label class="block mt-4 font-headline mb-2">Image 1</label>
-        <input type="file" name="img_1" accept="image/*" class="w-full text-sm border border-dashed border-gray-300 p-3 rounded" />
-        @if(!empty($blog->img_1))
-            <img src="{{ asset('storage/' . $blog->img_1) }}" class="w-32 mt-2 rounded shadow" />
-        @endif
-    </div>
-
-    {{-- Description 2 & Image 2 --}}
-    <div class="bg-white p-5 rounded shadow mb-4">
-        <h2 class="text-l font-headline mb-2">Section 2</h2>
-        <textarea
-            name="description_2"
-            rows="4"
-            class="w-full font-body font-univers border border-gray-300 rounded p-3 resize-y focus:outline-none focus:ring-2 focus:ring-mainCharcoal1"
-            placeholder="Enter your second description here...">{{ old('description_2', $blog->description_2 ?? '') }}</textarea>
-
-        <label class="block mt-4 font-headline mb-2">Image 2</label>
-        <input type="file" name="img_2" accept="image/*" class="w-full text-sm border border-dashed border-gray-300 p-3 rounded" />
-        @if(!empty($blog->img_2))
-            <img src="{{ asset('storage/' . $blog->img_2) }}" class="w-32 mt-2 rounded shadow" />
-        @endif
-    </div>
-
-    {{-- Description 3 --}}
-    <div class="bg-white p-5 rounded shadow mb-4">
-        <h2 class="text-l font-headline mb-2">Section 3</h2>
-        <textarea
-            name="description_3"
-            rows="4"
-            class="w-full font-body font-univers border border-gray-300 rounded p-3 resize-y focus:outline-none focus:ring-2 focus:ring-mainCharcoal1"
-            placeholder="Enter your third description here...">{{ old('description_3', $blog->description_3 ?? '') }}</textarea>
-    </div>
-
-    {{-- Featured Image + Alt Text --}}
-    <div class="bg-white p-5 rounded shadow mb-4">
-        <h2 class="text-l font-headline mb-2">Featured Image</h2>
-        <input type="file" name="feature_img" accept="image/*" class="w-full text-sm border border-dashed border-gray-300 p-3 rounded" />
-        @if(!empty($blog->feature_img))
-            <img src="{{ asset('storage/' . $blog->feature_img) }}" class="w-32 mt-2 rounded shadow" />
-        @endif
-
-        <label class="block mt-4 text-sm font-headline mb-1">Alt Text for Images</label>
-        <input
-            type="text"
-            name="alt_text_image"
-            value="{{ old('alt_text_image', $blog->alt_text_image ?? '') }}"
-            class="w-full px-3 py-2 border font-body border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-mainCharcoal1"
-        />
-    </div>
-
-    {{-- Meta Section --}}
-    <div class="bg-white p-5 rounded shadow mb-4">
-        <label class="block text-sm font-headline mb-1">Meta Description</label>
-        <textarea
-            name="meta_description"
-            rows="4"
-            class="w-full px-3 py-2 font-body border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-mainCharcoal1"
-        >{{ old('meta_description', $blog->meta_description ?? '') }}</textarea>
-
-        <label class="block mt-4 text-sm font-headline mb-1">Meta Keywords</label>
-        <input
-            type="text"
-            name="meta_keywords"
-            value="{{ old('meta_keywords', $blog->meta_keywords ?? '') }}"
-            class="w-full px-3 py-2 border font-body border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-mainCharcoal1"
-        />
-        <p class="text-xs text-gray-500 mt-1">Separate keywords with commas</p>
-    </div>
-
-    {{-- Slug + Publish --}}
-    <div class="bg-white p-5 rounded shadow mb-4">
-        <label class="block text-sm font-headline mb-1">Slug</label>
-        <input
-            type="text"
-            name="slug"
-            value="{{ old('slug', $blog->slug ?? '') }}"
-            class="w-full px-3 py-2 mb-2 border font-body border-gray-300 rounded"
-        />
-
-        <label class="block text-sm font-headline mb-1 mt-4">Publish Status</label>
-        <input type="checkbox" name="publish_status" value="1"
-               @if(old('publish_status', $blog->publish_status ?? false)) checked @endif
-        />
-        <span class="ml-2">Publish this blog</span>
-
-        <div class="grid grid-cols-2 gap-3 mt-4">
-            <div>
-                <label class="block text-xs text-gray-500 mb-1 font-headline">Publish Date</label>
-                <input
-                    type="date"
-                    name="date"
-                    value="{{ old('date', isset($blog->date) ? \Carbon\Carbon::parse($blog->date)->format('Y-m-d') : '') }}"
-                    class="w-full px-2 py-1 text-sm border border-gray-300 rounded"
-                />
+    {{-- Section 1 --}}
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Section 1</h5>
+            <div class="mb-3">
+                <textarea name="description1" rows="4" class="form-control" placeholder="Enter your first description here...">{{ old('description1', $blog->description1 ?? '') }}</textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Image 1</label>
+                <input type="file" name="img_1" class="form-control" />
+                @if(!empty($blog->img_1))
+                    <img src="{{ asset('storage/' . $blog->img_1) }}" class="img-thumbnail mt-2" style="max-width: 150px;" />
+                @endif
             </div>
         </div>
     </div>
+
+    {{-- Section 2 --}}
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Section 2</h5>
+            <div class="mb-3">
+                <textarea name="description2" rows="4" class="form-control" placeholder="Enter your second description here...">{{ old('description2', $blog->description2 ?? '') }}</textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Image 2</label>
+                <input type="file" name="img_2" class="form-control" />
+                @if(!empty($blog->img_2))
+                    <img src="{{ asset('storage/' . $blog->img_2) }}" class="img-thumbnail mt-2" style="max-width: 150px;" />
+                @endif
+            </div>
+        </div>
+    </div>
+
+    {{-- Section 3 --}}
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Section 3</h5>
+            <div class="mb-3">
+                <textarea name="description3" rows="4" class="form-control" placeholder="Enter your third description here...">{{ old('description3', $blog->description3 ?? '') }}</textarea>
+            </div>
+        </div>
+    </div>
+
+    {{-- Featured Image --}}
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Featured Image</h5>
+            <div class="mb-3">
+                <input type="file" name="feature_img" class="form-control" />
+                @if(!empty($blog->feature_img))
+                    <img src="{{ asset('storage/' . $blog->feature_img) }}" class="img-thumbnail mt-2" style="max-width: 150px;" />
+                @endif
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Alt Text for Image</label>
+                <input type="text" name="alt_image" value="{{ old('alt_image', $blog->alt_image ?? '') }}" class="form-control" />
+            </div>
+        </div>
+    </div>
+
+    {{-- Meta Section --}}
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Meta Information</h5>
+            <div class="mb-3">
+                <label class="form-label">Meta Description</label>
+                <textarea name="meta_description" rows="4" class="form-control">{{ old('meta_description', $blog->meta_description ?? '') }}</textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Meta Keywords</label>
+                <input type="text" name="meta_keyword" value="{{ old('meta_keyword', $blog->meta_keyword ?? '') }}" class="form-control" />
+                <div class="form-text">Separate keywords with commas</div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Slug + Publish --}}
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Publishing</h5>
+            <div class="mb-3">
+                <label class="form-label">Slug</label>
+                <input type="text" name="slug" value="{{ old('slug', $blog->slug ?? '') }}" class="form-control" />
+            </div>
+
+            <!-- Hidden field to always send false if unchecked -->
+<input type="hidden" name="publish_status" value="0">
+
+<!-- Actual toggle checkbox -->
+<div class="form-check form-switch mb-3">
+    <input type="checkbox" name="publish_status" value="1" class="form-check-input" id="publishSwitch"
+        @if(old('publish_status', $blog->publish_status ?? false)) checked @endif>
+    <label class="form-check-label" for="publishSwitch">Publish this blog</label>
 </div>
+
+
+            <div class="mb-3">
+                <label class="form-label">Publish Date</label>
+                <input type="date" name="date" value="{{ old('date', isset($blog->date) ? \Carbon\Carbon::parse($blog->date)->format('Y-m-d') : '') }}" class="form-control" />
+            </div>
+            {{-- Author --}}
+<div class="mb-4">
+    <label class="form-label">Author</label>
+    <input type="text" name="author" value="{{ old('author', $blog->author ?? '') }}" class="form-control" required />
+</div>
+
+{{-- Short Description --}}
+<div class="mb-4">
+    <label class="form-label">Short Description</label>
+    <textarea name="short_description" class="form-control">{{ old('short_description', $blog->short_description ?? '') }}</textarea>
+</div>
+
+{{-- About --}}
+<div class="mb-4">
+    <label class="form-label">About</label>
+    <textarea name="about" class="form-control">{{ old('about', $blog->about ?? '') }}</textarea>
+</div>
+
+{{-- Author Image --}}
+<div class="mb-4">
+    <label class="form-label">Author Image</label>
+    <input type="file" name="author_img" class="form-control" />
+    @if(!empty($blog->author_img))
+        <img src="{{ asset('storage/' . $blog->author_img) }}" class="img-thumbnail mt-2" style="max-width: 150px;" />
+    @endif
+</div>
+
+        </div>
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const titleInput = document.querySelector('input[name="title"]');
+        const slugInput = document.querySelector('input[name="slug"]');
+
+        if (titleInput && slugInput) {
+            titleInput.addEventListener('input', function () {
+                let slug = titleInput.value
+                    .toLowerCase()
+                    .replace(/[^a-z0-9\s-]/g, '') // Remove non-alphanumeric
+                    .replace(/\s+/g, '-')         // Replace spaces with -
+                    .replace(/-+/g, '-')          // Collapse multiple -
+                    .replace(/^-+|-+$/g, '');     // Trim - from ends
+
+                slugInput.value = slug;
+            });
+        }
+    });
+</script>

@@ -10,6 +10,7 @@ import Header from './Header.jsx';
 import Footer from './Footer.jsx';
 import FacilitatorSingle from './components/pages/FacilitatorSingle.jsx';
 import BlogList from './components/pages/BlogList.jsx';
+import BlogSingle from './components/pages/BlogSingle.jsx';
 
 function App() {
   return (
@@ -25,6 +26,8 @@ function App() {
           <Route path="/facilitatorlist" element={<FacilitatorList />} />
           <Route path="/facilitatorsingle" element={<FacilitatorSingle/>} />
           <Route path="/blogs" element={<BlogList/>} />
+          <Route path="/blogs/:slug" element={<BlogSingle />} />
+
         </Routes>
       </div>
       <Footer />

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogControllerApi;
 use App\Http\Controllers\ContactControllerApi;
 use App\Http\Controllers\EnquireControllerApi;
 use App\Http\Controllers\WorkshopControllerApi;
@@ -15,6 +16,7 @@ Route::apiResource('workshops', WorkshopControllerApi::class);
 Route::apiResource('facilitator', FacilitatorControllerApi::class);
 Route::apiResource('enquires', EnquireControllerApi::class);
 Route::apiResource('contacts', ContactControllerApi::class);
+Route::apiResource('blogs', BlogControllerApi::class);
 
 // Fallback route for API 404s
 Route::fallback(function(){
