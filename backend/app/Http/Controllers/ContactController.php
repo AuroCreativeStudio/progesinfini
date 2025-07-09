@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Contact;
 use Illuminate\Http\Request;
+use App\Mail\ContactSubmitted;
+use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
     // List all contacts with pagination
     public function index()
     {
-        $contacts = Contact::paginate(10); // ✅ Use pagination
+        $contacts = Contact::paginate(10); 
         return view('app.contact.index', compact('contacts'));
     }
 
@@ -24,8 +26,8 @@ class ContactController extends Controller
             'message' => 'nullable|string',
         ]);
 
-        Contact::create($validated);
-
+        $contact = Contact::create($validated);
+Mail::to('auroanimate8@gmail.com')->send(new ContactSubmitted($contact));
         return redirect()->back()->with('success', 'Contact submitted successfully!');
     }
 

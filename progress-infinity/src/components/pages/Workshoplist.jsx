@@ -48,7 +48,8 @@ function Workshoplist() {
       )}
 
       {/* Background Video Section */}
-      <div className="relative w-full h-screen overflow-hidden">
+      <div className="relative w-full h-[700px] overflow-hidden">
+
         <video
           className="absolute top-0 left-0 object-cover w-full h-full"
           autoPlay
@@ -184,6 +185,28 @@ function Workshoplist() {
               </p>
             </div>
           ))}
+        </div>
+        <div className="w-full md:w-5/6 lg:w-3/4 mx-auto mb-8 md:mb-12 py-8 md:py-12 px-4 md:px-8 bg-transparent">
+          <div className="flex flex-col items-center text-center space-y-3 md:space-y-4">
+        
+            {/* Title */}
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-black">
+              Get in Touch with Us
+            </h2>
+        
+            {/* Input + Button */}
+            <div className="mt-4 md:mt-6 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-2xl flex">
+              <input
+                type="email"
+                placeholder="Your Email here"
+                className="w-full border border-gray-400 px-4 py-3 text-sm md:text-base focus:outline-none bg-white text-black"
+              />
+              <button className="bg-black text-white px-4 md:px-6 py-3 text-sm md:text-base font-medium hover:bg-gray-800 transition">
+                Subscribe
+              </button>
+            </div>
+        
+          </div>
         </div>
       </div>
     </>

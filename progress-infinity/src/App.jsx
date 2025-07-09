@@ -9,6 +9,7 @@ import FacilitatorList from './components/pages/FacilitatorList.jsx';
 import Header from './Header.jsx';
 import Footer from './Footer.jsx';
 import FacilitatorSingle from './components/pages/FacilitatorSingle.jsx';
+import BlogList from './components/pages/BlogList.jsx';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/workshopsingle" element={<Workshopsingle />} />
           <Route path="/facilitatorlist" element={<FacilitatorList />} />
           <Route path="/facilitatorsingle" element={<FacilitatorSingle/>} />
+          <Route path="/blogs" element={<BlogList/>} />
         </Routes>
       </div>
       <Footer />
