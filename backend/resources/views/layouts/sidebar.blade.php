@@ -30,6 +30,11 @@
             <i class="fas fa-envelope me-2"></i> Contact Form
           </a>
         </li>
+                <li>
+          <a href="{{ route('admin.blogs.index') }}" class="{{ request()->routeIs('admin.blogs.*') ? 'is-current' : '' }}">
+            <i class="fas fa-envelope me-2"></i> Blogs
+          </a>
+        </li>
       </ul>
     </nav>
   </div>

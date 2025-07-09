@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\EnquireController;
 use App\Http\Controllers\ProfileController;
@@ -30,6 +31,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('/admin/facilitators', FacilitatorController::class)->names('admin.facilitators');
     Route::resource('/admin/enquires',  EnquireController::class)->names('admin.enquires');
     Route::resource('/admin/contacts', ContactController::class)->names('admin.contacts');
+    Route::resource('/admin/blogs', BlogController::class)->names('admin.blogs');
+
 });
 
 require __DIR__.'/auth.php';
