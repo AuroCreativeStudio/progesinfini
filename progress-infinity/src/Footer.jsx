@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from './assets/colourLogo.png';
-
+import footer from './assets/footer.png';
 function Footer() {
   return (
     <>
@@ -30,16 +30,10 @@ function Footer() {
 </div> */}
 
 
-   <footer
-  className="text-white px-4 py-8"
+<footer
+  className="w-full bg-cover bg-center bg-no-repeat text-white px-4 py-8"
   style={{
-    backgroundImage: `radial-gradient(
-      circle at center,
-rgb(96, 151, 245) 0%,       /* light blue center */
-rgb(43, 78, 155) 35%,      /* vibrant mid blue */
-rgb(17, 40, 102) 60%,      /* deeper blue bottom ring */
-rgb(23, 25, 46) 90%       /* dark navy edges */
-    )`
+    backgroundImage: `url(${footer})`,
   }}
 >
   <div className="max-w-7xl mx-auto">
@@ -53,7 +47,6 @@ rgb(23, 25, 46) 90%       /* dark navy edges */
 
     {/* Contact + Social + Links */}
     <div className="mt-8 flex flex-col md:flex-row md:justify-between text-sm md:text-base space-y-8 md:space-y-0">
-
       {/* Contact Info */}
       <div className="text-center md:text-left space-y-1 text-gray-200">
         <p>+91 9894768081</p>
@@ -92,6 +85,7 @@ rgb(23, 25, 46) 90%       /* dark navy edges */
     </div>
   </div>
 </footer>
+
 
 
     </>
