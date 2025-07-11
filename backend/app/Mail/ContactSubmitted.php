@@ -18,7 +18,7 @@ class ContactSubmitted extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(Contact $contact)
+public function __construct(Contact $contact)
     {
         $this->contact = $contact;
     }

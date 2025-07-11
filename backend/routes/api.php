@@ -7,7 +7,9 @@ use App\Http\Controllers\WorkshopControllerApi;
 use App\Http\Controllers\FacilitatorControllerApi;
 use App\Http\Resources\WorkshopResource;
 use App\Models\Workshop;
+use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
+
 
 // All API routes should return JSON (for React frontend)
 
@@ -17,7 +19,7 @@ Route::apiResource('facilitator', FacilitatorControllerApi::class);
 Route::apiResource('enquires', EnquireControllerApi::class);
 Route::apiResource('contacts', ContactControllerApi::class);
 Route::apiResource('blogs', BlogControllerApi::class);
-
+Route::post('/contacts', [ContactController::class, 'store']);
 // Fallback route for API 404s
 Route::fallback(function(){
     return response()->json(['message' => 'Not Found.'], 404);

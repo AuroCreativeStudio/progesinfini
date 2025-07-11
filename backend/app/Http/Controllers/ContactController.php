@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Contact;
 use Illuminate\Http\Request;
-use App\Mail\ContactSubmitted;
 use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
@@ -19,16 +18,17 @@ class ContactController extends Controller
     // Store a new contact
     public function store(Request $request)
     {
+        // Validate the request
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'phoneno' => 'nullable|string|max:20',
-            'message' => 'nullable|string',
+            'message' => 'required|string',
         ]);
 
-        $contact = Contact::create($validated);
-Mail::to('auroanimate8@gmail.com')->send(new ContactSubmitted($contact));
-        return redirect()->back()->with('success', 'Contact submitted successfully!');
+        // Send email to admin
+
+        return response()->json(['message' => 'Contact form submitted successfully.']);
     }
 
     // Delete a contact
