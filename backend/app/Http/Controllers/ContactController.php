@@ -32,11 +32,14 @@ class ContactController extends Controller
     }
 
     // Delete a contact
-    public function destroy($id)
-    {
-        $contact = Contact::findOrFail($id);
-        $contact->delete();
+  public function destroy($id)
+{
+    $contact = Contact::findOrFail($id);
+    
+    
+    $contact->delete(); 
 
-        return redirect()->back()->with('success', 'Contact deleted successfully!');
-    }
+    return redirect()->back()->with('success', 'Contact deleted successfully!');
+}
+
 }

@@ -29,7 +29,7 @@ class ContactControllerApi extends Controller
         ]);
 
         $contact = Contact::create($validated);
-        Mail::to('auroanimate5@gmail.com')->send(new ContactSubmitted($contact));
+        Mail::to('auroanimate8@gmail.com')->send(new ContactSubmitted($contact));
         return response()->json([
             'success' => true,
             'message' => 'Contact submitted successfully!',

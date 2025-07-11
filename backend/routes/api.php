@@ -20,7 +20,6 @@ Route::apiResource('enquires', EnquireControllerApi::class);
 Route::apiResource('contacts', ContactControllerApi::class);
 Route::apiResource('blogs', BlogControllerApi::class);
 Route::post('/contacts', [ContactController::class, 'store']);
-// Fallback route for API 404s
 Route::fallback(function(){
     return response()->json(['message' => 'Not Found.'], 404);
 });

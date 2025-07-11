@@ -1,0 +1,71 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  font-family: sans-serif;
+  overflow: hidden;
+}
+
+.grid-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  position: relative;
+  text-align: center;
+}
+
+.top-left {
+  background: linear-gradient(to bottom right, #778eba, #ea2b30);
+}
+
+.top-right,
+.bottom-left {
+  background-color: #ffffff;
+}
+
+.bottom-right {
+  background: linear-gradient(to top left, #778eba, #ea2b30);
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.title span {
+  font-weight: 800;
+}
+
+.quote {
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #444;
+  max-width: 300px;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+}
+
+/* Center Glassy Circle */
+.center-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60vmin;
+  height: 60vmin;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  background: rgba(231, 118, 12, 0.15);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  z-index: 1;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+}
