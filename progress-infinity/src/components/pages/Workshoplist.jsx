@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { fetchWorkshop } from '../../services/workshopService';
 import video from '../../assets/download.mp4';
 import Workshopsingle from './Workshopsingle';
+import { postNewsletter } from '../../services/newsletterService';
 
 const BASE_URL = 'http://127.0.0.1:8000';
 
@@ -33,6 +34,30 @@ function Workshoplist() {
     (typeFilter ? workshop.workshop_type === typeFilter : true) &&
     (priceFilter ? workshop.price == priceFilter : true)
   );
+
+const [formEmail, setFormEmail] = useState("");
+const [subscribeMessage, setSubscribeMessage] = useState("");
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  if (!formEmail) {
+    setSubscribeMessage("Please enter an email.");
+    return;
+  }
+
+  try {
+    await postNewsletter({ email: formEmail });
+    setSubscribeMessage("Subscribed successfully!");
+    setFormEmail(""); // clear input
+  } catch (error) {
+    if (error.response?.data?.errors?.email) {
+      setSubscribeMessage(error.response.data.errors.email[0]);
+    } else {
+      setSubscribeMessage("Subscription failed. Try again.");
+    }
+  }
+};
+
 
   return (
     <>
@@ -186,28 +211,40 @@ function Workshoplist() {
             </div>
           ))}
         </div>
-        <div className="w-full md:w-5/6 lg:w-3/4 mx-auto mb-8 md:mb-12 py-8 md:py-12 px-4 md:px-8 bg-transparent">
-          <div className="flex flex-col items-center text-center space-y-3 md:space-y-4">
+
+        {/* newsletter */}
         
-            {/* Title */}
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-black">
-              Get in Touch with Us
-            </h2>
-        
-            {/* Input + Button */}
-            <div className="mt-4 md:mt-6 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-2xl flex">
-              <input
-                type="email"
-                placeholder="Your Email here"
-                className="w-full border border-gray-400 px-4 py-3 text-sm md:text-base focus:outline-none bg-white text-black"
-              />
-              <button className="bg-black text-white px-4 md:px-6 py-3 text-sm md:text-base font-medium hover:bg-gray-800 transition">
-                Subscribe
-              </button>
-            </div>
-        
-          </div>
-        </div>
+     <div className="w-full bg-gray-100 py-10">
+  <div className="max-w-3xl mx-auto flex flex-col items-center text-center px-4">
+    
+    {/* Title */}
+    <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-black mb-4">
+      Get in Touch with Us
+    </h2>
+
+    {/* Form */}
+    <form onSubmit={handleSubmit} className="w-full max-w-xl flex flex-col sm:flex-row gap-3 justify-center">
+      <input
+        type="email"
+        value={formEmail}
+        onChange={(e) => setFormEmail(e.target.value)}
+        placeholder="Your Email here"
+        className="flex-1 border border-gray-400 px-4 py-3 text-sm md:text-base focus:outline-none bg-white text-black"
+      />
+      <button
+        type="submit"
+        className="bg-black text-white px-6 py-3 text-sm md:text-base font-medium hover:bg-gray-800 transition"
+      >
+        Subscribe
+      </button>
+    </form>
+
+    {/* Message */}
+    {subscribeMessage && (
+      <p className="text-sm mt-3 text-red-600">{subscribeMessage}</p>
+    )}
+  </div>
+</div>
       </div>
     </>
   );

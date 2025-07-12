@@ -9,7 +9,7 @@ use App\Http\Resources\WorkshopResource;
 use App\Models\Workshop;
 use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\NewsletterControllerApi;
 
 // All API routes should return JSON (for React frontend)
 
@@ -20,6 +20,8 @@ Route::apiResource('enquires', EnquireControllerApi::class);
 Route::apiResource('contacts', ContactControllerApi::class);
 Route::apiResource('blogs', BlogControllerApi::class);
 Route::post('/contacts', [ContactController::class, 'store']);
+
+Route::post('/newsletters', [NewsletterControllerApi::class, 'store']);
 Route::fallback(function(){
     return response()->json(['message' => 'Not Found.'], 404);
 });

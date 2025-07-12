@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WorkshopController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FacilitatorController;
+use App\Http\Controllers\NewsletterController;
 
 // Public Web Route (Landing page)
 Route::get('/', function () {
@@ -32,6 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/admin/enquires',  EnquireController::class)->names('admin.enquires');
     Route::resource('/admin/contacts', ContactController::class)->names('admin.contacts');
     Route::resource('/admin/blogs', BlogController::class)->names('admin.blogs');
+    Route::resource('/admin/newsletters', NewsletterController::class)->names('admin.newsletters');
 
 });
 
