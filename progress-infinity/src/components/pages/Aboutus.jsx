@@ -12,6 +12,8 @@ import last from '../../assets/aboutlast.png';
 function Aboutus() {
     const [showEnquire, setShowEnquire] = useState(false);
     const [scrollY, setScrollY] = useState(0);
+   const [activeLine, setActiveLine] = useState(0);
+const [lastScrollY, setLastScrollY] = useState(0);
 
 
       useEffect(() => {
@@ -25,6 +27,29 @@ function Aboutus() {
     const fadeDistance = 120;
     return Math.max(1 - (scrollY - base - lineIndex * fadeDistance) / fadeDistance, 0);
   };
+useEffect(() => {
+  const handleScroll = () => {
+    const currentY = window.scrollY;
+    const direction = currentY > lastScrollY ? 'down' : 'up';
+
+    const base = 100; // starting scroll point
+    const distancePerLine = 120;
+    const totalLines = lines.length;
+
+    const index = Math.floor((currentY - base) / distancePerLine);
+
+    if (direction === 'down') {
+      setActiveLine(Math.min(index, totalLines - 1));
+    } else {
+      setActiveLine(Math.max(index, 0));
+    }
+
+    setLastScrollY(currentY);
+  };
+
+  window.addEventListener('scroll', handleScroll);
+  return () => window.removeEventListener('scroll', handleScroll);
+}, [lastScrollY]);
 
   const lines = [
     "Progress Infiniti empowers",
@@ -84,15 +109,18 @@ function Aboutus() {
       style={{ backgroundImage: `url(${about})` }}
     >
       <div className="text-center text-white max-w-xl z-10 space-y-4">
-        {lines.map((line, idx) => (
-          <p
-            key={idx}
-            className="text-2xl md:text-4xl transition-opacity duration-500 ease-in-out"
-            style={{ opacity: getOpacity(idx) }}
-          >
-            {line}
-          </p>
-        ))}
+      {lines.map((line, idx) => (
+  <p
+    key={idx}
+    className={`text-2xl md:text-4xl font-medium transition-all duration-500 ease-in-out ${
+      idx === activeLine ? 'text-white opacity-100' : 'text-white opacity-30'
+    }`}
+  >
+    {line}
+  </p>
+))}
+
+
       </div>
     </section>
 

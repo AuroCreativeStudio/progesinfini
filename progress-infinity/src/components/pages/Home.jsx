@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import spiral from '../../assets/spinner.gif';
 import logo from '../../assets/colourLogo.png';
-// import circle1 from '../../assets/circle1.png';
-// import circle4 from '../../assets/circle4.png';
+import circle1 from '../../assets/circle1.png';
+import circle4 from '../../assets/circle4.png';
 import bgimg from '../../assets/homebg.png';
 import test from '../../assets/test.png';
 
@@ -15,12 +15,14 @@ import home1 from '../../assets/circle1.png';
 import home2 from '../../assets/circle2.png';
 import home3 from '../../assets/circle3.png';
 import home4 from '../../assets/circle4.png';
+import { Menu, X } from 'lucide-react';
 
 function Home() {
   const [isSticky, setIsSticky] = useState(false);
   const [scrollY, setScrollY] = useState(0);
     const [activeIndex, setActiveIndex] = useState(0);
      const [index, setIndex] = useState(0);
+     const [isMenuOpen, setIsMenuOpen] = useState(false);
       const handleNext = () => {
     setIndex((prev) => (prev + 1) % sliderData.length);
   };
@@ -103,14 +105,16 @@ const sliderData = [
           style={introStyle}
           className="w-full h-screen font-rem text-black flex flex-col justify-between bg-white"
         >
-          <div className="flex-grow flex flex-col items-center justify-center px-4 text-center">
-            <blockquote className="text-xl sm:text-2xl md:text-4xl italic font-medium leading-snug">
-              A hero fears nothing<br />
-              complains of nothing<br />
-              and never gives way.
-            </blockquote>
-            <p className="mt-4 text-sm md:text-base font-semibold">- The Mother</p>
-          </div>
+         <div className="flex-grow flex flex-col items-center justify-center px-4 text-center">
+  <div className="inline-block text-left">
+    <blockquote className="text-xl sm:text-2xl md:text-4xl italic font-medium leading-snug">
+      A hero fears nothing<br />
+      complains of nothing<br />
+      and never gives way.
+    </blockquote>
+    <p className="mt-2 text-sm md:text-base font-semibold text-right">- The Mother</p>
+  </div>
+</div>
 
           {/* Footer */}
           <footer className="w-full bg-black text-white">
@@ -150,28 +154,66 @@ const sliderData = [
       )}
 
       {/* Sticky Header */}
-      {isSticky && (
-        <div className="fixed top-0 w-full bg-black text-white py-4 z-50 shadow-md">
-          <div className="max-w-5xl mx-auto flex flex-wrap justify-between items-center px-4 gap-y-4">
-            <Link to="/workshoplist" className="hover:text-red-400 text-sm md:text-base px-2">Workshop</Link>
-            <Link to="/facilitatorlist" className="hover:text-red-400 text-sm md:text-base px-2">Facilitator</Link>
-            <Link to="/" className="px-2">
-              <img src={logo} alt="Logo" className="h-6 md:h-8" />
-            </Link>
-            <Link to="/about" className="hover:text-red-400 text-sm md:text-base px-2">About</Link>
-            <Link to="/contactus" className="hover:text-red-400 text-sm md:text-base px-2">Contact</Link>
-          </div>
-        </div>
-      )}
+    {/* Sticky Responsive Header */}
+{isSticky && (
+  <header className="fixed top-0 w-full bg-black text-white z-50 shadow-md">
+    <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center relative">
+      
+      {/* Left nav links (Desktop) */}
+      <nav className="hidden md:flex space-x-16 text-sm md:text-base">
+        <Link to="/" className="hover:text-red-400">Home</Link>
+        <Link to="/workshoplist" className="hover:text-red-400">Workshop</Link>
+        <Link to="/facilitatorlist" className="hover:text-red-400">Facilitator</Link>
+       
+      </nav>
+
+      {/* Center logo (Always visible) */}
+      <div className="absolute left-1/2 transform -translate-x-1/2">
+        <Link to="/">
+          <img src={logo} alt="Logo" className="h-6 md:h-8" />
+        </Link>
+      </div>
+
+      {/* Right nav links (Desktop) */}
+      <nav className="hidden md:flex space-x-16 text-sm md:text-base">
+        <Link to="/about" className="hover:text-red-400">About</Link>
+        <Link to="/contactus" className="hover:text-red-400">Contact</Link>
+         <Link to="/blogs" className='hover:text-red-400'>Blogs</Link>
+      </nav>
+
+      {/* Mobile Burger Menu Button */}
+      <button
+        className="md:hidden ml-auto"
+        onClick={() => setIsMenuOpen(!isMenuOpen)}
+        aria-label="Toggle Menu"
+      >
+        {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+      </button>
+    </div>
+
+    {/* Mobile Dropdown Menu */}
+    {isMenuOpen && (
+      <div className="md:hidden bg-black border-t border-gray-700">
+        <nav className="flex flex-col px-4 py-4 space-y-2 text-sm">
+          <Link to="/workshoplist" onClick={() => setIsMenuOpen(false)} className="hover:text-red-400">Workshop</Link>
+          <Link to="/facilitatorlist" onClick={() => setIsMenuOpen(false)} className="hover:text-red-400">Facilitator</Link>
+          <Link to="/about" onClick={() => setIsMenuOpen(false)} className="hover:text-red-400">About</Link>
+          <Link to="/contactus" onClick={() => setIsMenuOpen(false)} className="hover:text-red-400">Contact</Link>
+        </nav>
+      </div>
+    )}
+  </header>
+)}
+
 
       {/* Circle Image Grid */}
      
-{/* {isSticky && (
+{isSticky && (
   <div className="hidden lg:block absolute top-[380px] left-[49%] transform -translate-x-1/2 w-[800px] h-[800px] border-4 border-black rounded-full -z-10"></div>
-)} */}
+)}
 
 
-      {/* <div className={`w-full ${isSticky ? 'pt-2' : ''}`}>
+      <div className={`w-full ${isSticky ? 'pt-2' : ''}`}>
         <section className="w-full overflow-hidden">
           <div className="grid grid-cols-1 md:grid-cols-2 w-full">
           <div className="w-full relative">
@@ -193,12 +235,12 @@ const sliderData = [
             </div>
           </div>
         </section>
-      </div> */}
+      </div>
 
 
 
 
-       <div className="grid-container">
+       {/* <div className="grid-container">
       <div className="grid-item top-left">
         <div className="content">
           <div className="title">Tapasya of <span>Love</span></div>
@@ -227,9 +269,9 @@ const sliderData = [
         </div>
       </div>
 
-      {/* Glassy Center Circle */}
+      
       <div className="center-circle"></div>
-    </div>
+    </div> */}
 
       {/* Workshop Overview Section */}
       <div

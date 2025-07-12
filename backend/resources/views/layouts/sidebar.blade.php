@@ -10,39 +10,42 @@
             <i class="fas fa-tachometer-alt me-2"></i> Dashboard
           </a>
         </li>
-       
+        
         <li>
           <a href="{{ route('admin.enquires.index') }}" class="{{ request()->routeIs('admin.enquires.*') ? 'is-current' : '' }}">
-            <i class="fas fa-file-alt me-2"></i> Enquires Form
+            <i class="fas fa-file-signature me-2"></i> Enquiry Form
           </a>
         </li>
+
         <li>
           <a href="{{ route('admin.contacts.index') }}" class="{{ request()->routeIs('admin.contacts.*') ? 'is-current' : '' }}">
-            <i class="fas fa-envelope me-2"></i> Contact Form
+            <i class="fas fa-address-book me-2"></i> Contact Form
           </a>
         </li>
-            <li>
+
+        <li>
           <a href="{{ route('admin.newsletters.index') }}" class="{{ request()->routeIs('admin.newsletters.*') ? 'is-current' : '' }}">
-            <i class="fas fa-envelope me-2"></i> Newsletter
+            <i class="fas fa-newspaper me-2"></i> Newsletter
           </a>
         </li>
-           
-         <li>
+
+        <li>
           <a href="{{ route('admin.workshops.index') }}" class="{{ request()->routeIs('admin.workshops.*') ? 'is-current' : '' }}">
             <i class="fas fa-chalkboard-teacher me-2"></i> Workshops
           </a>
         </li>
+
         <li>
           <a href="{{ route('admin.facilitators.index') }}" class="{{ request()->routeIs('admin.facilitators.*') ? 'is-current' : '' }}">
-            <i class="fas fa-users me-2"></i> Facilitators
+            <i class="fas fa-user-friends me-2"></i> Facilitators
           </a>
         </li>
-             <li>
+
+        <li>
           <a href="{{ route('admin.blogs.index') }}" class="{{ request()->routeIs('admin.blogs.*') ? 'is-current' : '' }}">
-            <i class="fas fa-envelope me-2"></i> Blogs
+            <i class="fas fa-blog me-2"></i> Blogs
           </a>
         </li>
-      
       </ul>
     </nav>
   </div>
