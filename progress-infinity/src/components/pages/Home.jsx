@@ -130,7 +130,7 @@ const sliderData = [
                   </Link>
                 </div>
                 <div className="flex flex-col items-center">
-                  <img src={spiral} alt="Spiral Logo" className="w-24 h-24 object-contain" />
+                  <img src={spiral} alt="Spiral Logo" className="w-44 h-44 object-contain" />
                 </div>
                 <div className="text-center md:text-right">
                   <p className="text-purple-500 font-semibold tracking-wide">Progress Infini</p>
@@ -214,27 +214,54 @@ const sliderData = [
 
 
       <div className={`w-full ${isSticky ? 'pt-2' : ''}`}>
-        <section className="w-full overflow-hidden">
-          <div className="grid grid-cols-1 md:grid-cols-2 w-full">
-          <div className="w-full relative">
- 
-  <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-10">
-    <div className="px-4 py-2 rounded-full backdrop-blur-md bg-white/30 border border-white/40 shadow-md text-black text-sm font-semibold">
-      Your Top Text
+       <section className="w-full overflow-hidden">
+  <div className="grid grid-cols-1 md:grid-cols-2 w-full">
+    {/* Image with overlayed text */}
+    <div className="w-full relative">
+      <img src={circle1} alt="Circle 1" className="w-full object-contain" />
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-center space-y-2 px-4">
+        <h3 className="text-2xl md:text-4xl font-bold">Tapasya of Love </h3>
+        <p className="text-base md:text-lg">
+          “To pursue an integral education that leads to the supramental realisation, four austerities are necessary, and with them four liberations.”
+        </p>
+      </div>
     </div>
+
+    {/* Content in empty div (right side) */}
+    <div className="w-full flex items-center justify-center mb-12 p-6 md:p-12">
+      <div className="text-start">
+        <h3 className="text-2xl md:text-3xl font-semibold text-black mb-4">Tapasya of Knowledge </h3>
+        <p className="text-md md:text-lg text-gray-700 leading-relaxed">
+          “To pursue an integral education that leads to the supramental realisation, four austerities are necessary, and with them four liberations.”
+        </p>
+      </div>
+    </div>
+
+    {/* Optional Empty Div (skip or reuse as needed) */}
+    <div className="w-full flex items-center justify-center mb-12 p-6 md:p-12">
+      <div className="text-start">
+        <h3 className="text-2xl md:text-3xl font-semibold text-black mb-4">Tapasya of Beauty </h3>
+        <p className="text-md md:text-lg text-gray-700 leading-relaxed">
+          “To pursue an integral education that leads to the supramental realisation, four austerities are necessary, and with them four liberations.”
+        </p>
+      </div>
+    </div>
+
+
+    {/* Second image block */}
+   <div className="w-full relative">
+  <img src={circle4} alt="Circle 4" className="w-full object-contain" />
+  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-center px-4 space-y-2">
+    <h3 className="text-2xl md:text-4xl font-bold">Tapasya of Power </h3>
+    <p className="text-sm md:text-lg max-w-md">
+      “To pursue an integral education that leads to the supramental realisation, four austerities are necessary, and with them four liberations.”
+    </p>
   </div>
-
-
-  <img src={circle1} alt="Circle 1" className="w-full object-contain" />
 </div>
 
-            <div className="w-full"></div>
-            <div className="w-full"></div>
-            <div className="w-full">
-              <img src={circle4} alt="Circle 4" className="w-full object-contain" />
-            </div>
-          </div>
-        </section>
+  </div>
+</section>
+
       </div>
 
 

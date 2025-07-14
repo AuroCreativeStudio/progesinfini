@@ -11,6 +11,8 @@ import Footer from './Footer.jsx';
 import FacilitatorSingle from './components/pages/FacilitatorSingle.jsx';
 import BlogList from './components/pages/BlogList.jsx';
 import BlogSingle from './components/pages/BlogSingle.jsx';
+import BecomePartner from './components/pages/BecomePartner.jsx';
+import Retreat from './components/pages/Retreat.jsx';
 
 function App() {
   const location = useLocation();
@@ -31,6 +33,8 @@ function App() {
           <Route path="/facilitatorsingle" element={<FacilitatorSingle />} />
           <Route path="/blogs" element={<BlogList />} />
           <Route path="/blogs/:slug" element={<BlogSingle />} />
+          <Route path="become-a-partner" element={<BecomePartner/>} />
+          <Route path="retreat" element={<Retreat/>} />
         </Routes>
       </div>
 
