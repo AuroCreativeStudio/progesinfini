@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { fetchFacilitator } from '../../services/facilitatorService';
 import video from '../../assets/download.mp4';
 import FacilitatorSingle from './FacilitatorSingle';
-import { postNewsletter } from '../../services/newsletterService';
+// import { postNewsletter } from '../../services/newsletterService';
+import { useNavigate } from 'react-router-dom';
+
 
 const BASE_URL = 'http://127.0.0.1:8000';
 
@@ -10,8 +12,10 @@ function FacilitatorList() {
   const [facilitators, setFacilitators] = useState([]);
   const [activeCategory, setActiveCategory] = useState('SPEAKERS');
   const [selectedIndex, setSelectedIndex] = useState(null);
-  const [formEmail, setFormEmail] = useState("");
-  const [subscribeMessage, setSubscribeMessage] = useState("");
+  // const [formEmail, setFormEmail] = useState("");
+  // const [subscribeMessage, setSubscribeMessage] = useState("");
+  const navigate = useNavigate();
+
 
   const categories = [
     'SPEAKERS',
@@ -33,25 +37,25 @@ function FacilitatorList() {
     getFacilitators();
   }, []);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!formEmail) {
-      setSubscribeMessage("Please enter an email.");
-      return;
-    }
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   if (!formEmail) {
+  //     setSubscribeMessage("Please enter an email.");
+  //     return;
+  //   }
 
-    try {
-      await postNewsletter({ email: formEmail });
-      setSubscribeMessage("Subscribed successfully!");
-      setFormEmail("");
-    } catch (error) {
-      if (error.response?.data?.errors?.email) {
-        setSubscribeMessage(error.response.data.errors.email[0]);
-      } else {
-        setSubscribeMessage("Subscription failed. Try again.");
-      }
-    }
-  };
+  //   try {
+  //     await postNewsletter({ email: formEmail });
+  //     setSubscribeMessage("Subscribed successfully!");
+  //     setFormEmail("");
+  //   } catch (error) {
+  //     if (error.response?.data?.errors?.email) {
+  //       setSubscribeMessage(error.response.data.errors.email[0]);
+  //     } else {
+  //       setSubscribeMessage("Subscription failed. Try again.");
+  //     }
+  //   }
+  // };
 
   return (
     <>
@@ -106,18 +110,26 @@ function FacilitatorList() {
       {/* Main Content */}
       <div className="w-full min-h-screen p-4 bg-gray-100 sm:p-6 md:p-8">
         {/* Category Filter */}
-        <div className="flex flex-wrap justify-center gap-2 mb-8 sm:gap-3 md:gap-4 sm:mb-12">
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => setActiveCategory(category)}
-              className={`px-3 sm:px-4 md:px-6 py-1 sm:py-2 border rounded-full text-xs sm:text-sm font-mono tracking-wide
-                ${activeCategory === category ? 'border-black text-black' : 'bg-purple-100 text-purple-900'}`}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
+    <div className="flex flex-wrap justify-center gap-2 mb-8 sm:gap-3 md:gap-4 sm:mb-12">
+  {categories.map((category) => (
+    <button
+      key={category}
+      onClick={() => {
+        if (category === 'WORKSHOPS') {
+          navigate('/workshoplist');
+        } else if (category === 'SPEAKERS') {
+          navigate('/facilitatorlist');
+        } else {
+          setActiveCategory(category);
+        }
+      }}
+      className={`px-3 sm:px-4 md:px-6 py-1 sm:py-2 border rounded-full text-xs sm:text-sm font-mono tracking-wide
+        ${activeCategory === category ? 'border-black text-black' : 'bg-purple-100 text-purple-900'}`}
+    >
+      {category}
+    </button>
+  ))}
+</div>
 
         {/* Speaker Cards */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:gap-6 md:gap-8 justify-items-center">
@@ -150,7 +162,7 @@ function FacilitatorList() {
         </div>
 
         {/* Newsletter Form */}
-        <div className="w-full bg-gray-100 py-10 mt-12">
+        {/* <div className="w-full bg-gray-100 py-10 mt-12">
           <div className="max-w-3xl mx-auto flex flex-col items-center text-center px-4">
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-black mb-4">
               Get in Touch with Us
@@ -177,7 +189,7 @@ function FacilitatorList() {
               <p className="text-sm mt-3 text-red-600">{subscribeMessage}</p>
             )}
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );

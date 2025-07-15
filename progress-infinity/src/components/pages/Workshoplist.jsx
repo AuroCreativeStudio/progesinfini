@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { fetchWorkshop } from '../../services/workshopService';
 import video from '../../assets/download.mp4';
 import Workshopsingle from './Workshopsingle';
-import { postNewsletter } from '../../services/newsletterService';
+// import { postNewsletter } from '../../services/newsletterService';
 
 const BASE_URL = 'http://127.0.0.1:8000';
 
@@ -35,28 +35,28 @@ function Workshoplist() {
     (priceFilter ? workshop.price == priceFilter : true)
   );
 
-const [formEmail, setFormEmail] = useState("");
-const [subscribeMessage, setSubscribeMessage] = useState("");
+// const [formEmail, setFormEmail] = useState("");
+// const [subscribeMessage, setSubscribeMessage] = useState("");
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  if (!formEmail) {
-    setSubscribeMessage("Please enter an email.");
-    return;
-  }
+// const handleSubmit = async (e) => {
+//   e.preventDefault();
+//   if (!formEmail) {
+//     setSubscribeMessage("Please enter an email.");
+//     return;
+//   }
 
-  try {
-    await postNewsletter({ email: formEmail });
-    setSubscribeMessage("Subscribed successfully!");
-    setFormEmail(""); // clear input
-  } catch (error) {
-    if (error.response?.data?.errors?.email) {
-      setSubscribeMessage(error.response.data.errors.email[0]);
-    } else {
-      setSubscribeMessage("Subscription failed. Try again.");
-    }
-  }
-};
+//   try {
+//     await postNewsletter({ email: formEmail });
+//     setSubscribeMessage("Subscribed successfully!");
+//     setFormEmail(""); // clear input
+//   } catch (error) {
+//     if (error.response?.data?.errors?.email) {
+//       setSubscribeMessage(error.response.data.errors.email[0]);
+//     } else {
+//       setSubscribeMessage("Subscription failed. Try again.");
+//     }
+//   }
+// };
 
 
   return (
@@ -214,15 +214,14 @@ const handleSubmit = async (e) => {
 
         {/* newsletter */}
         
-     <div className="w-full bg-gray-100 py-10">
+     {/* <div className="w-full bg-gray-100 py-10">
   <div className="max-w-3xl mx-auto flex flex-col items-center text-center px-4">
     
-    {/* Title */}
+
     <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-black mb-4">
       Get in Touch with Us
     </h2>
 
-    {/* Form */}
     <form onSubmit={handleSubmit} className="w-full max-w-xl flex flex-col sm:flex-row gap-3 justify-center">
       <input
         type="email"
@@ -239,12 +238,12 @@ const handleSubmit = async (e) => {
       </button>
     </form>
 
-    {/* Message */}
+  
     {subscribeMessage && (
       <p className="text-sm mt-3 text-red-600">{subscribeMessage}</p>
     )}
   </div>
-</div>
+</div> */}
       </div>
     </>
   );

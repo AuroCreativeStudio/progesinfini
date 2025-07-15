@@ -8,6 +8,7 @@ export default {
     extend: {
             fontFamily: {
             rem: ['"REM"', 'sans-serif'],
+             charm: ['"Charm"', 'cursive'],
       },
       colors:{
         'deep-blue': '#232946',

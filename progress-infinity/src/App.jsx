@@ -33,8 +33,8 @@ function App() {
           <Route path="/facilitatorsingle" element={<FacilitatorSingle />} />
           <Route path="/blogs" element={<BlogList />} />
           <Route path="/blogs/:slug" element={<BlogSingle />} />
-          <Route path="become-a-partner" element={<BecomePartner/>} />
-          <Route path="retreat" element={<Retreat/>} />
+          <Route path="/become-a-partner" element={<BecomePartner/>} />
+          <Route path="/retreat" element={<Retreat/>} />
         </Routes>
       </div>
 

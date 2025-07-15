@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import spiral from '../../assets/spinner.gif';
 import logo from '../../assets/colourLogo.png';
-import circle1 from '../../assets/circle1.png';
-import circle4 from '../../assets/circle4.png';
+// import circle1 from '../../assets/circle1.png';
+// import circle4 from '../../assets/circle4.png';
 import bgimg from '../../assets/homebg.png';
 import test from '../../assets/test.png';
 
@@ -17,12 +17,17 @@ import home3 from '../../assets/circle3.png';
 import home4 from '../../assets/circle4.png';
 import { Menu, X } from 'lucide-react';
 
+import EnquireForm from '../pages/EnquireForm';
+
+
+
 function Home() {
   const [isSticky, setIsSticky] = useState(false);
   const [scrollY, setScrollY] = useState(0);
     const [activeIndex, setActiveIndex] = useState(0);
      const [index, setIndex] = useState(0);
      const [isMenuOpen, setIsMenuOpen] = useState(false);
+     const [showEnquireForm, setShowEnquireForm] = useState(false);
       const handleNext = () => {
     setIndex((prev) => (prev + 1) % sliderData.length);
   };
@@ -107,18 +112,21 @@ const sliderData = [
         >
          <div className="flex-grow flex flex-col items-center justify-center px-4 text-center">
   <div className="inline-block text-left">
-    <blockquote className="text-xl sm:text-2xl md:text-4xl italic font-medium leading-snug">
-      A hero fears nothing<br />
-      complains of nothing<br />
-      and never gives way.
-    </blockquote>
-    <p className="mt-2 text-sm md:text-base font-semibold text-right">- The Mother</p>
-  </div>
+  <blockquote
+    className="text-xl sm:text-2xl md:text-6xl font-charm leading-relaxed md:leading-[1.4] tracking-wide md:tracking-wider"
+  >
+    A hero fears nothing<br />
+    complains of nothing<br />
+    and never gives way.
+  </blockquote>
+  <p className="mt-2 text-md md:text-2xl font-rem font-medium text-right">- The Mother</p>
+</div>
+
 </div>
 
           {/* Footer */}
           <footer className="w-full bg-black text-white">
-            <div className="w-full px-4 md:px-12 py-8 border-b border-gray-800">
+            <div className="w-full px-4 md:px-16 py-10 border-b border-gray-800">
               <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 items-center text-center md:text-left">
                 <div className="text-sm space-y-2">
                   <p>
@@ -130,11 +138,11 @@ const sliderData = [
                   </Link>
                 </div>
                 <div className="flex flex-col items-center">
-                  <img src={spiral} alt="Spiral Logo" className="w-44 h-44 object-contain" />
+                  <img src={spiral} alt="Spiral Logo" className="w-96 h-52 object-contain" />
                 </div>
-                <div className="text-center md:text-right">
+                {/* <div className="text-center md:text-right">
                   <p className="text-purple-500 font-semibold tracking-wide">Progress Infini</p>
-                </div>
+                </div> */}
               </div>
             </div>
 
@@ -212,49 +220,49 @@ const sliderData = [
   <div className="hidden lg:block absolute top-[380px] left-[49%] transform -translate-x-1/2 w-[800px] h-[800px] border-4 border-black rounded-full -z-10"></div>
 )}
 
-
+{/* 
       <div className={`w-full ${isSticky ? 'pt-2' : ''}`}>
        <section className="w-full overflow-hidden">
   <div className="grid grid-cols-1 md:grid-cols-2 w-full">
-    {/* Image with overlayed text */}
+   
     <div className="w-full relative">
       <img src={circle1} alt="Circle 1" className="w-full object-contain" />
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-center space-y-2 px-4">
         <h3 className="text-2xl md:text-4xl font-bold">Tapasya of Love </h3>
         <p className="text-base md:text-lg">
-          “To pursue an integral education that leads to the supramental realisation, four austerities are necessary, and with them four liberations.”
+          “To pursue an integral education that leads to the supramental realisation, four austerities are necessary, and with them four liberations.”
         </p>
       </div>
     </div>
 
-    {/* Content in empty div (right side) */}
+ 
     <div className="w-full flex items-center justify-center mb-12 p-6 md:p-12">
       <div className="text-start">
         <h3 className="text-2xl md:text-3xl font-semibold text-black mb-4">Tapasya of Knowledge </h3>
         <p className="text-md md:text-lg text-gray-700 leading-relaxed">
-          “To pursue an integral education that leads to the supramental realisation, four austerities are necessary, and with them four liberations.”
+          “To pursue an integral education that leads to the supramental realisation, four austerities are necessary, and with them four liberations.”
         </p>
       </div>
     </div>
 
-    {/* Optional Empty Div (skip or reuse as needed) */}
+  
     <div className="w-full flex items-center justify-center mb-12 p-6 md:p-12">
       <div className="text-start">
         <h3 className="text-2xl md:text-3xl font-semibold text-black mb-4">Tapasya of Beauty </h3>
         <p className="text-md md:text-lg text-gray-700 leading-relaxed">
-          “To pursue an integral education that leads to the supramental realisation, four austerities are necessary, and with them four liberations.”
+          “To pursue an integral education that leads to the supramental realisation, four austerities are necessary, and with them four liberations.”
         </p>
       </div>
     </div>
 
 
-    {/* Second image block */}
+  
    <div className="w-full relative">
   <img src={circle4} alt="Circle 4" className="w-full object-contain" />
   <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-center px-4 space-y-2">
     <h3 className="text-2xl md:text-4xl font-bold">Tapasya of Power </h3>
     <p className="text-sm md:text-lg max-w-md">
-      “To pursue an integral education that leads to the supramental realisation, four austerities are necessary, and with them four liberations.”
+      “To pursue an integral education that leads to the supramental realisation, four austerities are necessary, and with them four liberations.”
     </p>
   </div>
 </div>
@@ -262,43 +270,54 @@ const sliderData = [
   </div>
 </section>
 
-      </div>
+      </div> */}
+                                             {/* section 1 code */}
 
-
-
-
-       {/* <div className="grid-container">
+       <div className="grid-container">
       <div className="grid-item top-left">
-        <div className="content">
-          <div className="title">Tapasya of <span>Love</span></div>
+        <div className="content mb-72 font-rem">
+          <div className="title text-white text-4xl font-medium ">Tapasya of <span>Love</span></div>
+           <div className="quote text-white text-lg">
+            "To pursue an integral education that leads to the supramental realisation,
+            four austerities are necessary; and with them four liberations."
+          </div>
         </div>
       </div>
       <div className="grid-item top-right">
-        <div className="content">
-          <div className="title">Tapasya of <span>Knowledge</span></div>
-          <div className="quote">
+        <div className="content mb-72 font-rem">
+          <div className="title text-4xl font-medium">Tapasya of <span>Knowledge</span></div>
+          <div className="quote text-lg">
             "To pursue an integral education that leads to the supramental realisation,
             four austerities are necessary; and with them four liberations."
           </div>
         </div>
       </div>
       <div className="grid-item bottom-left">
-        <div className="content">
-          <div className="title">Tapasya of <span>Beauty</span></div>
+        <div className="content mt-72 font-rem">
+          <div className="title text-4xl font-medium">Tapasya of <span>Beauty</span></div>
+          <div className="quote text-lg">
+            "To pursue an integral education that leads to the supramental realisation,
+            four austerities are necessary; and with them four liberations."
+          </div>
         </div>
       </div>
       <div className="grid-item bottom-right">
-        <div className="content">
-          <div className="title">Tapasya of <span>Power</span></div>
-          <div className="quote">
-            "There is no end to progress and every day one learns to do better what one does."
+       <div className="content mt-72 font-rem">
+          <div className="title text-white text-4xl font-medium ">Tapasya of <span>Power</span></div>
+           <div className="quote text-white text-lg">
+            "To pursue an integral education that leads to the supramental realisation,
+            four austerities are necessary; and with them four liberations."
           </div>
         </div>
       </div>
 
       
       <div className="center-circle"></div>
-    </div> */}
+    </div>
+
+                                             {/* end */}
+
+                                             
 
       {/* Workshop Overview Section */}
       <div
@@ -418,9 +437,12 @@ const sliderData = [
           <p className="text-gray-700 mb-6 max-w-md mx-auto lg:mx-0">
             In a world of potential, many young people face barriers—societal pressure, financial strain, or self-doubt—that make their dreams feel out of reach.
           </p>
-          <button className="bg-[#f04e23] text-white px-6 py-2 font-semibold hover:bg-[#c93e1b] transition">
-            Explore More
-          </button>
+      <Link to="/retreat">
+  <button className="bg-[#f04e23] text-white px-6 py-2 font-semibold hover:bg-[#c93e1b] transition">
+    Explore More
+  </button>
+</Link>
+
         </div>
 
         {/* Right Image with border effect */}
@@ -439,6 +461,16 @@ const sliderData = [
 </div>
 
       </div>
+
+ <button
+  onClick={() => setShowEnquireForm(true)}
+  className="fixed bottom-6 right-6 z-50 bg-red-orange hover:bg-orange-600 text-white font-semibold px-5 py-3 rounded-full shadow-lg transition-all"
+>
+  Enquire
+</button>
+{showEnquireForm && <EnquireForm onClose={() => setShowEnquireForm(false)} />}
+
+
     </>
   );
 }

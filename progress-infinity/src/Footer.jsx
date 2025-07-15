@@ -40,7 +40,7 @@ function Footer() {
     {/* Logo + Quote */}
     <div className="flex flex-col items-center text-center space-y-2">
       <img src={logo} alt="Progress Infinity Logo" className="h-14 md:h-20 w-auto mb-2" />
-      <p className="text-sm md:text-base text-gray-200 max-w-2xl">
+      <p className="text-sm md:text-base text-gray-200 max-w-4xl ">
         There is no end to progress and every day one can learn to do better what one does.
       </p>
     </div>
@@ -64,12 +64,20 @@ function Footer() {
       </div>
 
       {/* Page Links */}
-      <div className="text-center md:text-right space-y-1 text-gray-200">
-        <Link to="/about" className="block hover:underline">About</Link>
-        <Link to="/contactus" className="block hover:underline">Contact Us</Link>
-        <Link to="/workshoplist" className="block hover:underline">Our Workshops</Link>
-        <Link to="/facilitators" className="block hover:underline">Our Facilitators</Link>
-      </div>
+    <div className="text-left text-gray-200">
+  <div className="grid grid-cols-2 gap-4 items-start md:gap-6">
+    <Link to="/about" className="block hover:underline">About</Link>
+    <Link to="/contactus" className="block hover:underline">Contact Us</Link>
+    <Link to="/workshoplist" className="block hover:underline">Our Workshops</Link>
+    <Link to="/facilitators" className="block hover:underline">Our Facilitators</Link>
+    <Link to="/retreat" className="block hover:underline">Retreat</Link>
+    <Link to="/become-a-partner" className="block hover:underline col-span-2 md:col-span-1">
+      Become a Partner
+    </Link>
+  </div>
+</div>
+
+
     </div>
 
     {/* Divider */}
