@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { postEnquireForm } from '../../services/enquireService';
-import image from '../../assets/spinner.gif';
+import image from '../../assets/enquire.png';
 
 const EnquireForm = ({ onClose }) => {
   const [formData, setFormData] = useState({
@@ -36,13 +36,14 @@ const EnquireForm = ({ onClose }) => {
       <div className="bg-white rounded-xl shadow-xl flex flex-col md:flex-row max-w-5xl w-full overflow-hidden">
         
         {/* Left Image */}
-        <div className="w-full md:w-1/2 h-[300px] md:h-auto">
-          <img
-            src={image}
-            alt="Form Illustration"
-            className="w-full h-full object-cover"
-          />
-        </div>
+      <div className="w-full md:w-2/3 h-[200px] md:h-auto m-4">
+  <img
+    src={image}
+    alt="Form Illustration"
+    className="w-full h-full object-cover"
+  />
+</div>
+
 
         {/* Right Form */}
         <div className="w-full md:w-1/2 p-6 md:p-10 relative">

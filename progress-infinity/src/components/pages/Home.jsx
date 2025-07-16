@@ -4,8 +4,9 @@ import spiral from '../../assets/spinner.gif';
 import logo from '../../assets/colourLogo.png';
 // import circle1 from '../../assets/circle1.png';
 // import circle4 from '../../assets/circle4.png';
-import bgimg from '../../assets/homebg.png';
+import bgimg from '../../assets/homebg1.png';
 import test from '../../assets/test.png';
+import demo from '../../assets/demo.png';
 
 import retraits from '../../assets/retraits.png';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
@@ -13,8 +14,8 @@ import './Home.css';
 import home from '../../assets/testimg.png';
 import home1 from '../../assets/circle1.png';
 import home2 from '../../assets/circle2.png';
-import home3 from '../../assets/circle3.png';
-import home4 from '../../assets/circle4.png';
+import line from '../../assets/line.jpeg';
+
 import { Menu, X } from 'lucide-react';
 
 import EnquireForm from '../pages/EnquireForm';
@@ -47,25 +48,25 @@ function Home() {
     title: 'Integral Education',
     description:
       'In a world of potential, many young people face barriers—societal pressure, financial strain, or self-doubt—that make their dreams...',
-    image: home1,
+    image: demo,
   },
   {
     title: 'Creative Expression',
     description:
       'Workshops that cultivate imagination and originality across art, drama, and storytelling.',
-    image: home2,
+    image: home,
   },
   {
     title: 'Emotional Intelligence',
     description:
       'Helping youth navigate emotions and relationships through awareness-based practices.',
-    image: home3,
+    image: demo,
   },
   {
     title: 'Collaboration & Community',
     description:
       'Building collective responsibility, empathy, and teamwork through group experiences.',
-    image: home4,
+    image: home,
   },
 ];
 
@@ -162,7 +163,7 @@ const sliderData = [
       )}
 
       {/* Sticky Header */}
-    {/* Sticky Responsive Header */}
+    
 {isSticky && (
   <header className="fixed top-0 w-full bg-black text-white z-50 shadow-md">
     <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center relative">
@@ -320,57 +321,186 @@ const sliderData = [
                                              
 
       {/* Workshop Overview Section */}
-      <div
-        className="w-full bg-cover bg-center bg-no-repeat text-white"
-        style={{
-          backgroundImage: `url(${bgimg})`,
-        }}
-      >
-        <div className="max-w-7xl mx-auto px-4 py-20 flex flex-col gap-16">
-          <h1 className="text-lg sm:text-xl md:text-2xl text-center max-w-4xl mx-auto leading-relaxed">
-            Our workshops go beyond conventional subjects to offer immersive experiences that nurture creativity,
-            curiosity, collaboration, and self-growth. Whether you're exploring the world of robotics, theatre,
-            interpersonal awareness, or expressive movement—each program is designed to awaken potential in all
-            dimensions of being.
-          </h1>
+<div
+  className="flex flex-col items-center gap-[150px] px-[100px] py-[200px] relative bg-cover bg-center"
+  style={{ backgroundImage: `url(${bgimg})` }}
+>
 
-          <div className="grid grid-cols-1 mt-20 md:grid-cols-2 gap-8 items-center">
-      {/* Left Image (changes based on hover) */}
-      <div className="relative w-full">
+      <div className="flex items-center justify-center gap-2.5 p-2.5 relative self-stretch w-full flex-[0_0_auto]">
+        <p className="relative flex-1 mt-[-1.00px] [font-family:'REM-Regular',Helvetica] font-normal text-white text-2xl text-center tracking-[0] leading-[normal]">
+          Our workshops go beyond conventional subjects to offer immersive
+          experiences that nurture creativity, curiosity, collaboration, and
+          self-growth. Whether you&#39;re exploring the world of robotics,
+          engaging in deep listening through theatre, building interpersonal
+          awareness, or diving into the expressive power of movement and
+          colour—each program is designed to awaken potential in all dimensions
+          of being. These sessions are more than just skill-building—they are
+          spaces for reflection, experimentation, and transformation.
+        </p>
+      </div>
+
+      <div className="flex flex-wrap min-w-[700px] items-center justify-center gap-[200px_200px] relative self-stretch w-full flex-[0_0_auto]">
         <img
-          src={cardData[activeIndex].image}
-          alt="Artwork"
-          className="rounded shadow-lg w-full max-w-md mx-auto transition-all duration-300"
+          className="relative w-[543px] h-[900px]"
+          alt="Image"
+          src={test}
         />
-      </div>
 
-      {/* Right List Cards */}
-      <div className="space-y-4">
-        {cardData.map((card, i) => (
-          <div
-            key={i}
-            className="group relative bg-gradient-to-r from-orange-600/80 to-transparent hover:from-orange-600 transition-colors duration-300 px-6 py-4 cursor-pointer shadow-md flex items-center"
-            onMouseEnter={() => setActiveIndex(i)}
-          >
-            <div className="flex-grow">
-              <h3 className="text-white text-lg font-semibold">{card.title}</h3>
-              <p className="text-white text-sm">{card.description}</p>
+        <div className="flex flex-col items-start  relative flex-1 grow text-left font-rem">
+          <div className="flex flex-col items-center gap-[30px] pt-5 pb-0 px-5 relative self-stretch w-full flex-[0_0_auto] bg-[#f0542b66]">
+            <div className="flex items-center justify-center gap-[50px] relative self-stretch w-full flex-[0_0_auto]">
+              <div className="flex flex-col items-start justify-center gap-5 relative flex-1 grow">
+                <div className="relative self-stretch mt-[-1.00px] [font-family:'REM-Regular',Helvetica] font-normal text-white text-4xl tracking-[0] leading-[normal]">
+                  Integral Education
+                </div>
+
+                <p className="relative self-stretch [font-family:'REM-Regular',Helvetica] font-normal text-white text-2xl tracking-[0] leading-[normal]">
+                  In a world of potential, many young people face
+                  barriers—societal pressure, financial strain, or
+                  self-doubt—that make their dreams.
+                </p>
+              </div>
+
+              <ArrowRight
+                className="!relative !w-12 !h-12"
+                color="white"
+                opacity="0.5"
+              />
             </div>
 
-            <div className="ml-4 text-white group-hover:translate-x-1 transition-transform">
-              <ArrowRight size={20} />
-            </div>
+            <img
+              className="relative self-stretch w-full h-px object-cover"
+              alt="Line"
+              src={line}
+            />
           </div>
-        ))}
 
-        <button className="mt-6 bg-[#f04e23] hover:bg-[#c93e1b] text-white font-bold px-6 py-2 text-sm">
-          Explore More
-        </button>
-      </div>
-    </div>
+          <div className="flex flex-col items-center gap-[30px] pt-5 pb-0 px-5 relative self-stretch w-full flex-[0_0_auto]">
+            <div className="flex items-center justify-center gap-[50px] relative self-stretch w-full flex-[0_0_auto]">
+              <div className="flex flex-col items-start justify-center gap-5 relative flex-1 grow">
+                <div className="relative self-stretch mt-[-1.00px] [font-family:'REM-Regular',Helvetica] font-normal text-white text-4xl tracking-[0] leading-[normal]">
+                  Integral Education
+                </div>
+
+                <p className="relative self-stretch [font-family:'REM-Regular',Helvetica] font-normal text-white text-2xl tracking-[0] leading-[normal]">
+                  In a world of potential, many young people face
+                  barriers—societal pressure, financial strain, or
+                  self-doubt—that make their dreams.
+                </p>
+              </div>
+
+              <ArrowRight
+                className="!relative !w-12 !h-12"
+                color="white"
+                opacity="0.5"
+              />
+            </div>
+
+            <img
+              className="relative self-stretch w-full h-px object-cover"
+              alt="Line"
+              src={line}
+            />
+          </div>
+
+          <div className="flex flex-col items-center gap-[30px] pt-5 pb-0 px-5 relative self-stretch w-full flex-[0_0_auto]">
+            <div className="flex items-center justify-center gap-[50px] relative self-stretch w-full flex-[0_0_auto]">
+              <div className="flex flex-col items-start justify-center gap-5 relative flex-1 grow">
+                <div className="relative self-stretch mt-[-1.00px] [font-family:'REM-Regular',Helvetica] font-normal text-white text-4xl tracking-[0] leading-[normal]">
+                  Integral Education
+                </div>
+
+                <p className="relative self-stretch [font-family:'REM-Regular',Helvetica] font-normal text-white text-2xl tracking-[0] leading-[normal]">
+                  In a world of potential, many young people face
+                  barriers—societal pressure, financial strain, or
+                  self-doubt—that make their dreams.
+                </p>
+              </div>
+
+              <ArrowRight
+                className="!relative !w-12 !h-12"
+                color="white"
+                opacity="0.5"
+              />
+            </div>
+
+            <img
+              className="relative self-stretch w-full h-px object-cover"
+              alt="Line"
+              src={line}
+            />
+          </div>
+
+          <div className="flex flex-col items-center gap-[30px] pt-5 pb-0 px-5 relative self-stretch w-full flex-[0_0_auto]">
+            <div className="flex items-center justify-center gap-[50px] relative self-stretch w-full flex-[0_0_auto]">
+              <div className="flex flex-col items-start justify-center gap-5 relative flex-1 grow">
+                <div className="relative self-stretch mt-[-1.00px] [font-family:'REM-Regular',Helvetica] font-normal text-white text-4xl tracking-[0] leading-[normal]">
+                  Integral Education
+                </div>
+
+                <p className="relative self-stretch [font-family:'REM-Regular',Helvetica] font-normal text-white text-2xl tracking-[0] leading-[normal]">
+                  In a world of potential, many young people face
+                  barriers—societal pressure, financial strain, or
+                  self-doubt—that make their dreams.
+                </p>
+              </div>
+
+              <ArrowRight
+                className="!relative !w-12 !h-12"
+                color="white"
+                opacity="0.5"
+              />
+            </div>
+
+            <img
+              className="relative self-stretch w-full h-px object-cover"
+              alt="Line"
+              src={line}
+            />
+          </div>
+
+          <div className="flex flex-col items-center gap-[30px] pt-5 pb-0 px-5 relative self-stretch w-full flex-[0_0_auto]">
+            <div className="flex items-center justify-center gap-[50px] relative self-stretch w-full flex-[0_0_auto]">
+              <div className="flex flex-col items-start justify-center gap-5 relative flex-1 grow">
+                <div className="relative self-stretch mt-[-1.00px] [font-family:'REM-Regular',Helvetica] font-normal text-white text-4xl tracking-[0] leading-[normal]">
+                  Integral Education
+                </div>
+
+                <p className="relative self-stretch [font-family:'REM-Regular',Helvetica] font-normal text-white text-2xl tracking-[0] leading-[normal]">
+                  In a world of potential, many young people face
+                  barriers—societal pressure, financial strain, or
+                  self-doubt—that make their dreams.
+                </p>
+              </div>
+
+              <ArrowRight
+                className="!relative !w-12 !h-12"
+                color="white"
+                opacity="0.5"
+              />
+            </div>
+
+            <img
+              className="relative self-stretch w-full h-px object-cover"
+              alt="Line"
+              src={line}
+            />
+          </div>
+
+          <div className="inline-flex font-rem flex-col items-start gap-2.5 pt-[30px] pb-0 px-5 relative flex-[0_0_auto]">
+            <div className="inline-flex items-center justify-center gap-2.5 px-5 py-2.5 relative flex-[0_0_auto] bg-[#f0542b]">
+              <div className="relative w-fit mt-[-1.00px] [font-family:'REM-Bold',Helvetica] font-bold text-black text-2xl tracking-[0] leading-[normal]">
+                Enquire More
+              </div>
+            </div>
           </div>
         </div>
-   
+      </div>
+    </div>
+
+
+
+
 
       {/* Horizontal Scroll Section */}
      <div className="relative flex items-center justify-center h-screen text-white overflow-hidden">
@@ -386,27 +516,27 @@ const sliderData = [
   {/* Left Arrow */}
   <button
     onClick={handlePrev}
-    className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 text-black hover:scale-110 transition"
+    className="absolute left-[-70px]  top-1/2 transform -translate-y-1/2 z-10 text-black hover:scale-110 transition"
   >
-    <ArrowLeft size={24} />
+    <ArrowLeft size={50} />
   </button>
 
   {/* Image with sharp border */}
   <div className="relative flex justify-center items-center">
     <div className="relative">
-      <div className="absolute -top-4 -right-4 w-full h-full bg-[#f04e23] border-4 border-[#f04e23] -z-10"></div>
+      <div className="absolute -top-6 -right-6 w-full h-full bg-[#f04e23] border-4 border-[#f04e23] -z-10"></div>
 
       <img
         src={sliderData[index].image}
         alt="Decorated room"
-        className="max-w-md object-cover"
+        className="w-[750px] object-cover h-[724px]"
       />
     </div>
   </div>
 
   {/* Text Content */}
-  <div className="relative z-10 px-6 text-center md:text-left">
-    <p className="text-sm leading-relaxed mb-6">
+  <div className="relative z-10 ml-12 px-6 text-center md:text-left">
+    <p className="text-xl leading-relaxed mb-6">
       {sliderData[index].text}
     </p>
     <button className="bg-[#f04e23] text-black px-6 py-2 font-semibold hover:bg-white transition">
@@ -417,9 +547,9 @@ const sliderData = [
   {/* Right Arrow */}
   <button
     onClick={handleNext}
-    className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 text-white hover:scale-110 transition"
+    className="absolute right-[-50px] top-1/2 transform -translate-y-1/2 z-10 text-white hover:scale-110 transition"
   >
-    <ArrowRight size={24} />
+    <ArrowRight size={50} />
   </button>
 
   {/* Center Divider */}
@@ -433,8 +563,8 @@ const sliderData = [
       <div className="w-full px-4 mx-auto sm:px-6 md:px-12 py-12 flex flex-col lg:flex-row items-center justify-between gap-10">
         {/* Left Text */}
         <div className="lg:w-1/2 w-full text-center lg:text-left">
-          <h2 className="text-2xl sm:text-3xl font-semibold mb-4">Retreats</h2>
-          <p className="text-gray-700 mb-6 max-w-md mx-auto lg:mx-0">
+          <h2 className="text-4xl sm:text-3xl font-rem mb-4">Retreats</h2>
+          <p className="text-gray-700 mb-6 max-w-md mx-auto font-rem text-lg lg:mx-0">
             In a world of potential, many young people face barriers—societal pressure, financial strain, or self-doubt—that make their dreams feel out of reach.
           </p>
       <Link to="/retreat">
@@ -446,19 +576,20 @@ const sliderData = [
         </div>
 
         {/* Right Image with border effect */}
-<div className="relative flex justify-center px-4 sm:px-0">
-  <div className="relative w-full max-w-2xl sm:max-w-sm md:max-w-md">
+<div className="relative w-full px-4 sm:px-0">
+  <div className="relative w-full">
     {/* Border background fill and sharp border */}
-    <div className="absolute -top-3 -left-3 w-full h-full bg-[#f04e23] border-t-4 border-l-4 border-[#f04e23] -z-10"></div>
+    <div className="absolute -top-6 -left-6 w-full h-full bg-[#f04e23] border-t-4 border-l-4 border-[#f04e23] -z-10"></div>
 
-    {/* Image with sharp edges */}
+    {/* Full-width Image */}
     <img
       src={retraits}
       alt="Retreat"
-      className="w-full object-cover"
+      className="w-full h-[817px] object-cover"
     />
   </div>
 </div>
+
 
       </div>
 
