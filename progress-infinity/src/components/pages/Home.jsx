@@ -7,16 +7,17 @@ import logo from '../../assets/colourLogo.png';
 import bgimg from '../../assets/homebg1.png';
 import test from '../../assets/test.png';
 import demo from '../../assets/demo.png';
-
+import bg from '../../assets/new.png';
 import retraits from '../../assets/retraits.png';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import './Home.css';
 import home from '../../assets/testimg.png';
 import home1 from '../../assets/circle1.png';
 import home2 from '../../assets/circle2.png';
-import line from '../../assets/line.jpeg';
-
+import line from '../../assets/line.jpeg';  
 import { Menu, X } from 'lucide-react';
+
+
 
 import EnquireForm from '../pages/EnquireForm';
 
@@ -25,10 +26,11 @@ import EnquireForm from '../pages/EnquireForm';
 function Home() {
   const [isSticky, setIsSticky] = useState(false);
   const [scrollY, setScrollY] = useState(0);
-    const [activeIndex, setActiveIndex] = useState(0);
+    // const [activeIndex, setActiveIndex] = useState(0);
      const [index, setIndex] = useState(0);
      const [isMenuOpen, setIsMenuOpen] = useState(false);
      const [showEnquireForm, setShowEnquireForm] = useState(false);
+     const [hoveredIndex, setHoveredIndex] = useState(null);
       const handleNext = () => {
     setIndex((prev) => (prev + 1) % sliderData.length);
   };
@@ -84,6 +86,36 @@ const sliderData = [
     text: 'Helping youth navigate emotions and relationships through awareness-based practices.',
   },
 ];
+
+// const tapasyaData = [
+//   {
+//     title: "Love",
+//     quote: "",
+//     textColor: "text-white",
+//     position: "items-start",
+//   },
+//   {
+//     title: "Knowledge",
+//     quote:
+//       "To pursue an integral education that leads to the supramental realisation, four austerities are necessary, and with them four liberations.",
+//     textColor: "text-black",
+//     position: "items-start",
+//   },
+//   {
+//     title: "Beauty",
+//     quote: "",
+//     textColor: "text-black",
+//     position: "justify-end items-start",
+//   },
+//   {
+//     title: "Power",
+//     quote:
+//       "There is no end to progress and every day one can learn to do better what one does.",
+//     textColor: "text-white",
+//     position: "justify-end items-start",
+//   },
+// ];
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -166,28 +198,27 @@ const sliderData = [
     
 {isSticky && (
   <header className="fixed top-0 w-full bg-black text-white z-50 shadow-md">
-    <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center relative">
+    <div className="max-w-6xl mx-auto px-6 py-5 md:py-6 flex justify-between items-center relative">
       
       {/* Left nav links (Desktop) */}
-      <nav className="hidden md:flex space-x-16 text-sm md:text-base">
+      <nav className="hidden md:flex space-x-16 text-base md:text-lg font-medium">
         <Link to="/" className="hover:text-red-400">Home</Link>
         <Link to="/workshoplist" className="hover:text-red-400">Workshop</Link>
         <Link to="/facilitatorlist" className="hover:text-red-400">Facilitator</Link>
-       
       </nav>
 
       {/* Center logo (Always visible) */}
       <div className="absolute left-1/2 transform -translate-x-1/2">
         <Link to="/">
-          <img src={logo} alt="Logo" className="h-6 md:h-8" />
+          <img src={logo} alt="Logo" className="h-8 md:h-10" />
         </Link>
       </div>
 
       {/* Right nav links (Desktop) */}
-      <nav className="hidden md:flex space-x-16 text-sm md:text-base">
+      <nav className="hidden md:flex space-x-16 text-base md:text-lg font-medium">
         <Link to="/about" className="hover:text-red-400">About</Link>
         <Link to="/contactus" className="hover:text-red-400">Contact</Link>
-         <Link to="/blogs" className='hover:text-red-400'>Blogs</Link>
+        <Link to="/blogs" className="hover:text-red-400">Blogs</Link>
       </nav>
 
       {/* Mobile Burger Menu Button */}
@@ -196,14 +227,14 @@ const sliderData = [
         onClick={() => setIsMenuOpen(!isMenuOpen)}
         aria-label="Toggle Menu"
       >
-        {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
       </button>
     </div>
 
     {/* Mobile Dropdown Menu */}
     {isMenuOpen && (
       <div className="md:hidden bg-black border-t border-gray-700">
-        <nav className="flex flex-col px-4 py-4 space-y-2 text-sm">
+        <nav className="flex flex-col px-6 py-5 space-y-3 text-base font-medium">
           <Link to="/workshoplist" onClick={() => setIsMenuOpen(false)} className="hover:text-red-400">Workshop</Link>
           <Link to="/facilitatorlist" onClick={() => setIsMenuOpen(false)} className="hover:text-red-400">Facilitator</Link>
           <Link to="/about" onClick={() => setIsMenuOpen(false)} className="hover:text-red-400">About</Link>
@@ -274,7 +305,7 @@ const sliderData = [
       </div> */}
                                              {/* section 1 code */}
 
-       <div className="grid-container">
+       {/* <div className="grid-container">
       <div className="grid-item top-left">
         <div className="content mb-72 font-rem">
           <div className="title text-white text-4xl font-medium ">Tapasya of <span>Love</span></div>
@@ -314,15 +345,121 @@ const sliderData = [
 
       
       <div className="center-circle"></div>
-    </div>
+    </div> */}
 
                                              {/* end */}
+                                              
+                                             {/* anima ai */}
+                                             
+
+
+  {/* <div className="grid grid-cols-1 sm:grid-cols-2 min-h-screen">
+      {tapasyaData.map((item, index) => (
+        <div
+          key={index}
+          className="relative group h-[400px] sm:h-[500px] overflow-hidden"
+        >
+
+          <img
+            src={bg}
+            alt={item.title}
+            className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+          />
+          
+          <img
+            src={item.hoverImage}
+            alt={`${item.title} Hover`}
+            className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+          />
+
+          
+          <div className="relative z-10 p-10 h-full flex flex-col justify-between">
+            <h1
+              className={`text-4xl sm:text-5xl font-rem font-light ${item.textColor}`}
+            >
+              Tapasya of <span className="font-normal">{item.title}</span>
+            </h1>
+            {item.quote && (
+              <p className={`mt-6 text-base sm:text-lg ${item.textColor}`}>
+                “{item.quote}”
+              </p>
+            )}
+          </div>
+        </div>
+      ))}
+    </div> */}
 
                                              
 
+
+                                                       {/* end */}
+
+
+<section
+  className="relative h-[1630px] w-full"
+  style={{
+    backgroundImage: `url(${bg})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+  }}
+>
+  {/* Circle in center */}
+  {/* <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[512px] h-[512px] rounded-full border border-black bg-orange-100 opacity-70 z-10" /> */}
+
+  {/* Top-left */}
+ <div className="absolute top-32 left-32 text-white max-w-2xl z-20 flex flex-col items-start text-left">
+
+    <h2 className="text-4xl ">Tapasya of <span className='font-semibold'>Love</span></h2>
+    <p className="text-lg mt-12">
+      “To pursue an integral education that leads to the <br/>
+       supramental realisation, four austerities are necessary and<br/>
+        with them four liberties.”
+    </p>
+    
+  </div>
+
+  {/* Top-right */}
+ <div className="absolute top-32 right-32 text-black max-w-2xl z-20 flex flex-col items-start text-left">
+  <h2 className="text-4xl">
+    Tapasya of <span className="font-semibold">Knowledge</span>
+  </h2>
+  <p className="text-lg mt-12">
+    “To pursue an integral education that leads to the <br />
+    supramental realisation, four austerities are necessary and <br />
+    with them four liberties.”
+  </p>
+</div>
+
+
+  {/* Bottom-left */}
+  <div className="absolute bottom-32 left-32 text-black max-w-2xl z-20 flex flex-col items-start text-left">
+    <h2 className="text-4xl ">Tapasya of <span className='font-semibold'>Beauty</span></h2>
+     <p className="text-lg mt-12">
+    “To pursue an integral education that leads to the <br />
+    supramental realisation, four austerities are necessary and <br />
+    with them four liberties.”
+  </p>
+  </div>
+
+  {/* Bottom-right */}
+  <div className="absolute bottom-32 right-32 text-white  max-w-2xl z-20 flex flex-col items-start text-left">
+    <h2 className="text-4xl">Tapasya of <span className='font-semibold'>Power</span></h2>
+    <p className="text-lg mt-12">
+    “To pursue an integral education that leads to the <br />
+    supramental realisation, four austerities are necessary and <br />
+    with them four liberties.”
+  </p>
+  </div>
+</section>
+
+
+
+
+                       
+
       {/* Workshop Overview Section */}
 <div
-  className="flex flex-col items-center gap-[150px] px-[100px] py-[200px] relative bg-cover bg-center"
+  className="flex flex-col items-center gap-[150px] px-[100px] py-[200px] relative bg-cover h-[1] bg-center"
   style={{ backgroundImage: `url(${bgimg})` }}
 >
 
@@ -339,157 +476,83 @@ const sliderData = [
         </p>
       </div>
 
-      <div className="flex flex-wrap min-w-[700px] items-center justify-center gap-[200px_200px] relative self-stretch w-full flex-[0_0_auto]">
+       <div className="flex flex-wrap min-w-[700px] items-center justify-center gap-[200px_200px] w-full">
+        {/* Left Image */}
         <img
-          className="relative w-[543px] h-[900px]"
-          alt="Image"
-          src={test}
+          className="w-[543px] h-[900px] object-cover"
+          alt="Workshop"
+          src={hoveredIndex !== null ? cardData[hoveredIndex].image : cardData[0].image}
         />
 
-        <div className="flex flex-col items-start  relative flex-1 grow text-left font-rem">
-          <div className="flex flex-col items-center gap-[30px] pt-5 pb-0 px-5 relative self-stretch w-full flex-[0_0_auto] bg-[#f0542b66]">
-            <div className="flex items-center justify-center gap-[50px] relative self-stretch w-full flex-[0_0_auto]">
-              <div className="flex flex-col items-start justify-center gap-5 relative flex-1 grow">
-                <div className="relative self-stretch mt-[-1.00px] [font-family:'REM-Regular',Helvetica] font-normal text-white text-4xl tracking-[0] leading-[normal]">
-                  Integral Education
+        {/* Right Side Cards */}
+        <div className="flex flex-col gap-[30px] flex-1 text-left">
+          {cardData.map((card, index) => (
+            <div
+              key={index}
+              onMouseEnter={() => setHoveredIndex(index)}
+              onMouseLeave={() => setHoveredIndex(null)}
+              className={`flex flex-col items-center px-5 transition-all duration-300 ${
+                hoveredIndex === index ? "bg-[#f0542b66]" : ""
+              }`}
+            >
+              <div className="flex items-center justify-center w-full">
+                <div className="flex flex-col items-start justify-center gap-5 py-4 flex-1">
+                  <div className="text-white text-2xl font-rem">
+                    {card.title}
+                  </div>
+                  <p className="text-white text-xl font-rem">
+                    {card.description}
+                  </p>
                 </div>
+                <div className="w-10 h-10 flex items-center justify-center relative transition-all duration-300">
+  {hoveredIndex === index ? (
+    // Hovered arrow (e.g., flipped, bold, or different icon)
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth="2"
+      stroke="white"
+      className="w-8 h-8 text-white"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"
+      />
+    </svg>
+  ) : (
+    // Normal arrow
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth="1.5"
+      stroke="white"
+      className="w-10 h-10 text-white opacity-50"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
+      />
+    </svg>
+  )}
+</div>
 
-                <p className="relative self-stretch [font-family:'REM-Regular',Helvetica] font-normal text-white text-2xl tracking-[0] leading-[normal]">
-                  In a world of potential, many young people face
-                  barriers—societal pressure, financial strain, or
-                  self-doubt—that make their dreams.
-                </p>
               </div>
-
-              <ArrowRight
-                className="!relative !w-12 !h-12"
-                color="white"
-                opacity="0.5"
+              <img
+                className="w-full h-px object-cover"
+                alt="Line"
+                src={line}
               />
             </div>
+          ))}
 
-            <img
-              className="relative self-stretch w-full h-px object-cover"
-              alt="Line"
-              src={line}
-            />
-          </div>
-
-          <div className="flex flex-col items-center gap-[30px] pt-5 pb-0 px-5 relative self-stretch w-full flex-[0_0_auto]">
-            <div className="flex items-center justify-center gap-[50px] relative self-stretch w-full flex-[0_0_auto]">
-              <div className="flex flex-col items-start justify-center gap-5 relative flex-1 grow">
-                <div className="relative self-stretch mt-[-1.00px] [font-family:'REM-Regular',Helvetica] font-normal text-white text-4xl tracking-[0] leading-[normal]">
-                  Integral Education
-                </div>
-
-                <p className="relative self-stretch [font-family:'REM-Regular',Helvetica] font-normal text-white text-2xl tracking-[0] leading-[normal]">
-                  In a world of potential, many young people face
-                  barriers—societal pressure, financial strain, or
-                  self-doubt—that make their dreams.
-                </p>
-              </div>
-
-              <ArrowRight
-                className="!relative !w-12 !h-12"
-                color="white"
-                opacity="0.5"
-              />
-            </div>
-
-            <img
-              className="relative self-stretch w-full h-px object-cover"
-              alt="Line"
-              src={line}
-            />
-          </div>
-
-          <div className="flex flex-col items-center gap-[30px] pt-5 pb-0 px-5 relative self-stretch w-full flex-[0_0_auto]">
-            <div className="flex items-center justify-center gap-[50px] relative self-stretch w-full flex-[0_0_auto]">
-              <div className="flex flex-col items-start justify-center gap-5 relative flex-1 grow">
-                <div className="relative self-stretch mt-[-1.00px] [font-family:'REM-Regular',Helvetica] font-normal text-white text-4xl tracking-[0] leading-[normal]">
-                  Integral Education
-                </div>
-
-                <p className="relative self-stretch [font-family:'REM-Regular',Helvetica] font-normal text-white text-2xl tracking-[0] leading-[normal]">
-                  In a world of potential, many young people face
-                  barriers—societal pressure, financial strain, or
-                  self-doubt—that make their dreams.
-                </p>
-              </div>
-
-              <ArrowRight
-                className="!relative !w-12 !h-12"
-                color="white"
-                opacity="0.5"
-              />
-            </div>
-
-            <img
-              className="relative self-stretch w-full h-px object-cover"
-              alt="Line"
-              src={line}
-            />
-          </div>
-
-          <div className="flex flex-col items-center gap-[30px] pt-5 pb-0 px-5 relative self-stretch w-full flex-[0_0_auto]">
-            <div className="flex items-center justify-center gap-[50px] relative self-stretch w-full flex-[0_0_auto]">
-              <div className="flex flex-col items-start justify-center gap-5 relative flex-1 grow">
-                <div className="relative self-stretch mt-[-1.00px] [font-family:'REM-Regular',Helvetica] font-normal text-white text-4xl tracking-[0] leading-[normal]">
-                  Integral Education
-                </div>
-
-                <p className="relative self-stretch [font-family:'REM-Regular',Helvetica] font-normal text-white text-2xl tracking-[0] leading-[normal]">
-                  In a world of potential, many young people face
-                  barriers—societal pressure, financial strain, or
-                  self-doubt—that make their dreams.
-                </p>
-              </div>
-
-              <ArrowRight
-                className="!relative !w-12 !h-12"
-                color="white"
-                opacity="0.5"
-              />
-            </div>
-
-            <img
-              className="relative self-stretch w-full h-px object-cover"
-              alt="Line"
-              src={line}
-            />
-          </div>
-
-          <div className="flex flex-col items-center gap-[30px] pt-5 pb-0 px-5 relative self-stretch w-full flex-[0_0_auto]">
-            <div className="flex items-center justify-center gap-[50px] relative self-stretch w-full flex-[0_0_auto]">
-              <div className="flex flex-col items-start justify-center gap-5 relative flex-1 grow">
-                <div className="relative self-stretch mt-[-1.00px] [font-family:'REM-Regular',Helvetica] font-normal text-white text-4xl tracking-[0] leading-[normal]">
-                  Integral Education
-                </div>
-
-                <p className="relative self-stretch [font-family:'REM-Regular',Helvetica] font-normal text-white text-2xl tracking-[0] leading-[normal]">
-                  In a world of potential, many young people face
-                  barriers—societal pressure, financial strain, or
-                  self-doubt—that make their dreams.
-                </p>
-              </div>
-
-              <ArrowRight
-                className="!relative !w-12 !h-12"
-                color="white"
-                opacity="0.5"
-              />
-            </div>
-
-            <img
-              className="relative self-stretch w-full h-px object-cover"
-              alt="Line"
-              src={line}
-            />
-          </div>
-
-          <div className="inline-flex font-rem flex-col items-start gap-2.5 pt-[30px] pb-0 px-5 relative flex-[0_0_auto]">
-            <div className="inline-flex items-center justify-center gap-2.5 px-5 py-2.5 relative flex-[0_0_auto] bg-[#f0542b]">
-              <div className="relative w-fit mt-[-1.00px] [font-family:'REM-Bold',Helvetica] font-bold text-black text-2xl tracking-[0] leading-[normal]">
+          {/* CTA */}
+          <div className="inline-flex font-rem flex-col items-start gap-2.5 pt-[20px] px-5">
+            <div className="inline-flex items-center justify-center gap-2.5 px-5 py-2.5 bg-[#f0542b]">
+              <div className="text-black text-xl font-bold font-rem">
                 Enquire More
               </div>
             </div>
@@ -497,7 +560,6 @@ const sliderData = [
         </div>
       </div>
     </div>
-
 
 
 
@@ -512,7 +574,8 @@ const sliderData = [
     <div className="bg-black"></div>
   </div>
 
- <div className="relative z-10 max-w-7xl w-full grid grid-cols-1 md:grid-cols-2 items-center px-4">
+<div className="relative z-10 max-w-7xl w-full grid grid-cols-1 md:grid-cols-2 items-center px-4 gap-x-16">
+
   {/* Left Arrow */}
   <button
     onClick={handlePrev}
@@ -529,7 +592,7 @@ const sliderData = [
       <img
         src={sliderData[index].image}
         alt="Decorated room"
-        className="w-[750px] object-cover h-[724px]"
+        className="w-[750px] object-cover h-[px]"
       />
     </div>
   </div>
@@ -560,15 +623,16 @@ const sliderData = [
 
 
       {/* Retreats Section */}
-      <div className="w-full px-4 mx-auto sm:px-6 md:px-12 py-12 flex flex-col lg:flex-row items-center justify-between gap-10">
+      <div className="w-full pl-12 pt-20 mb-12 flex flex-col lg:flex-row items-center justify-between gap-10">
+ 
         {/* Left Text */}
-        <div className="lg:w-1/2 w-full text-center lg:text-left">
-          <h2 className="text-4xl sm:text-3xl font-rem mb-4">Retreats</h2>
-          <p className="text-gray-700 mb-6 max-w-md mx-auto font-rem text-lg lg:mx-0">
+        <div className="lg:w-1/2 w-full  ml-12 text-center lg:text-left">
+          <h2 className="text-3xl lg:text-6xl sm:text-3xl font-rem mb-4">Retreats</h2>
+          <p className="text-gray-700 mb-6 max-w-md  pr-8 lg:text-xl font-rem text-lg lg:mx-0">
             In a world of potential, many young people face barriers—societal pressure, financial strain, or self-doubt—that make their dreams feel out of reach.
           </p>
       <Link to="/retreat">
-  <button className="bg-[#f04e23] text-white px-6 py-2 font-semibold hover:bg-[#c93e1b] transition">
+  <button className="bg-[#f04e23] text-black px-8 py-3 font-semibold text-lg hover:bg-[#c93e1b] transition">
     Explore More
   </button>
 </Link>
@@ -585,7 +649,7 @@ const sliderData = [
     <img
       src={retraits}
       alt="Retreat"
-      className="w-full h-[817px] object-cover"
+      className="w-[1423px] h-[700px] object-cover"
     />
   </div>
 </div>

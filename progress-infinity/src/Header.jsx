@@ -19,12 +19,13 @@ function Header() {
 
   return (
     <>
-      <header className="fixed top-4 left-1/2 transform -translate-x-1/2 z-30 w-[calc(100%-2rem)] sm:w-[calc(100%-4rem)] px-4 sm:px-6 py-4 sm:py-6 
+      <header className="fixed top-4 left-1/2 transform -translate-x-1/2 z-30 w-[calc(100%-2rem)] sm:w-[calc(100%-4rem)] px-4 sm:px-6 py-6 sm:py-8 
         bg-white/10 backdrop-blur-lg border border-white/30 shadow-lg rounded-full transition-all duration-500">
 
         <nav className="max-w-7xl mx-auto gap-4 flex items-center justify-between w-full">
           {/* Left nav (hidden on small) */}
-          <div className="hidden md:flex items-center ml-16 space-x-16 text-[1rem] font-semibold text-black">
+          <div className="hidden md:flex items-center ml-16 space-x-16 text-lg font-semibold text-black">
+
             <Link to="/" className="hover:text-red-500">Home</Link>
             <Link to="/workshoplist" className="hover:text-red-500">Workshops</Link>
             <Link to="/facilitatorlist" className="hover:text-red-500">Facilitators</Link>
@@ -55,7 +56,7 @@ function Header() {
 
       {/* Mobile Dropdown Menu */}
       {menuOpen && (
-        <div className="md:hidden fixed top-[80px] left-4 right-4 z-20 bg-white shadow-xl rounded-xl px-6 py-4 text-black text-base font-semibold space-y-4">
+       <div className="md:hidden fixed top-[90px] left-4 right-4 z-20 bg-white shadow-xl rounded-xl px-6 py-6 text-black text-lg font-semibold space-y-5">
           <Link to="/" onClick={() => setMenuOpen(false)} className="block hover:text-red-500">Home</Link>
           <Link to="/workshoplist" onClick={() => setMenuOpen(false)} className="block hover:text-red-500">Workshops</Link>
           <Link to="/facilitatorlist" onClick={() => setMenuOpen(false)} className="block hover:text-red-500">Facilitators</Link>
