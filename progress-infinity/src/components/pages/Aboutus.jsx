@@ -2,16 +2,19 @@ import React, { useEffect, useState } from 'react';
 import gifImage from '../../assets/spinner.gif';
 import EnquireForm from './EnquireForm';
 import about from '../../assets/aboutbg.png';
-import circle2 from '../../assets/circle2.png';
-import circle3 from '../../assets/circle3.png';
+// import circle2 from '../../assets/circle2.png';
+import ring from '../../assets/ring.png';
 import home from '../../assets/test.png';
 import sample from '../../assets/sample.png';
 import last from '../../assets/about.mp4';
+import section2 from "../../assets/infinity8.png";
+
 
 function Aboutus() {
   const [showEnquire, setShowEnquire] = useState(false);
   const [activeLine, setActiveLine] = useState(0);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [scrollWidth, setScrollWidth] = useState(5);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,6 +40,23 @@ function Aboutus() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
 
+
+  
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = scrollTop / docHeight;
+
+      // Offset: Start at 5%, grow to 100%
+      const adjusted = 5 + scrolled * 95; // 5% base + 95% scroll
+      setScrollWidth(adjusted);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const lines = [
     "Progress Infiniti empowers",
     "college students through",
@@ -57,19 +77,19 @@ function Aboutus() {
 
         {/* Left Content */}
      <div className="md:w-1/2 w-full mb-6 md:mb-0 flex flex-col justify-between h-full">
-  <div className="w-full px-0 sm:px-12 md:px-24 max-w-2xl">
+  <div className="w-full px-0 sm:px-12 md:px-24 max-w-2xl text-left">
     <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl text-light font-rem text-black mb-6 md:mb-10">
       About Us
     </h2>
 
     <div className="text-left ">
-      <p className="text-lg text-medium text-black mb-2 md:mb-4">
+      <p className="text-lg  font-rem font-regular text-black mb-2 md:mb-4">
         Unlock Your Potential. Join a Community<br />
         of Innovators Making Dreams a Reality!
       </p>
       <a
         href="#read-more"
-        className="text-[#F0542b] font-rem font-light inline-block mt-1 md:mt-2"
+        className="text-[#F0542b] font-rem font-regular font-[24px] inline-block mt-1 md:mt-2"
       >
         Read More
       </a>
@@ -95,19 +115,17 @@ function Aboutus() {
         <div className="absolute bottom-12 md:bottom-24 right-4 md:right-12 z-10">
           <button 
             onClick={() => setShowEnquire(true)} 
-            className="bg-red-orange hover:bg-red-500 text-white text-sm sm:text-base md:text-xl font-semibold px-6 sm:px-8 md:px-12 py-1 md:py-2"
+            className="bg-[#f04e23] text-black px-6 py-2 font-semibold hover:bg-black hover:text-white transition"
           >
             Enquire Now
           </button>
         </div>
-
-        {/* Decorative Bottom Border */}
+ <div className="fixed bottom-0 left-0 w-full h-[15px] md:h-[20px] bg-transparant border-t-2 border-[#FF4500] z-50">
         <div
-          className="absolute bottom-0 left-0 w-full h-[15px] md:h-[20px] bg-[#fefcc6] flex"
-          style={{ border: '2px solid #FF4500' }}
-        >
-          <div className="w-1/4 h-full bg-red-orange"></div>
-        </div>
+          className="h-full bg-[#FF4500] transition-all duration-300 ease-linear"
+          style={{ width: `${scrollWidth}%` }}
+        ></div>
+      </div>
       </section>
 
       {/* Section 2: Background Banner Text */}
@@ -119,7 +137,7 @@ function Aboutus() {
           {lines.map((line, idx) => (
             <p
               key={idx}
-              className={`text-lg sm:text-xl md:text-2xl lg:text-4xl font-medium transition-all duration-500 ease-in-out ${
+              className={`text-lg sm:text-xl md:text-2xl lg:text-4xl font-regular font-rem transition-all duration-500 ease-in-out ${
                 idx === activeLine ? 'text-white opacity-100' : 'text-white opacity-30'
               }`}
             >
@@ -131,8 +149,8 @@ function Aboutus() {
 
       {/* Section 3: Two Panel Images & Vision */}
       <section className="w-full bg-[#fefcc6] px-4 sm:px-6 md:px-20 py-8 md:py-16 font-sans relative overflow-hidden">
-        <div className="flex flex-col md:flex-row justify-center gap-4 sm:gap-6 md:gap-1 mb-8 md:mb-16 relative z-10">
-          {/* Left Image with quote */}
+        {/* <div className="flex flex-col md:flex-row justify-center gap-4 sm:gap-6 md:gap-1 mb-8 md:mb-16 relative z-10">
+         
           <div className="relative w-full md:w-1/2">
             <img src={circle3} alt="Left Panel" className="w-full object-cover shadow-md" />
             <p className="absolute font-rem bottom-20 sm:bottom-32 md:bottom-44 left-2 sm:left-4 text-white text-sm sm:text-base md:text-xl font-medium w-[90%] sm:w-[80%]">
@@ -141,7 +159,7 @@ function Aboutus() {
             </p>
           </div>
 
-          {/* Right Image with heading & text */}
+          
           <div className="relative w-full mt-4 sm:mt-6 md:mt-8 md:w-1/2">
             <img src={circle2} alt="Right Panel" className="w-full object-cover shadow-md" />
    <div className="absolute top-4 sm:top-8 md:top-12 left-4 sm:left-8 md:left-16 text-white max-w-2xl font-rem">
@@ -156,11 +174,42 @@ function Aboutus() {
 </div>
 
           </div>
-        </div>
+        </div> */}
+<div
+  style={{ backgroundImage: `url(${section2})` }}
+  className="h-[1180px] w-full bg-cover bg-center flex flex-col md:flex-row"
+>
+{/* Left Side */}
+<div className="w-full md:w-1/2 p-6 md:p-12 flex items-end justify-left h-full">
+  <div className="text-white text-left lg:text-left mx-20 max-w-md mb-10">
+    <p className="text-lg  md:text-xl my-96">
+      "There is no end to <span className="text-black">progress</span> and every day <br />
+      one can learn to do better what one does."
+    </p>
+  </div>
+</div>
 
-        {/* Vision Section */}
-        <div className="flex flex-col md:flex-row items-center gap-6 sm:gap-8 md:gap-10 mt-10 sm:mt-16 md:mt-20 lg:mt-60 relative z-10">
-  {/* Vision Image */}
+
+
+  {/* Right Side */}
+<div className="w-full md:w-1/2 p-6 md:p-12 flex items-start justify-start m-12 ">
+
+  <div className="text-md mx-20 sm:text-lg md:text-xl font-normal leading-relaxed text-white text-left">
+    <h3 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-normal mb-4 sm:mb-8 md:mb-12">
+    Integral Education
+  </h3>
+    Progress Infiniti is inspired by the ideals of integral education — nurturing not just
+    knowledge, but the body, emotions, imagination, and soul. Each experience invites
+    students to explore, express, and evolve as whole individuals.
+  </div>
+</div>
+
+</div>
+
+
+ 
+        <div className="flex flex-col md:flex-row items-center gap-6  sm:gap-8 md:gap-10 mt-10 sm:mt-16 md:mt-20 lg:mt-[-120px] relative z-10">
+
   <div className="w-full md:w-1/2">
     <img src={home} alt="Vision Room" className="w-[750px] h-[724px] object-cover shadow-md" />
   </div>
@@ -168,10 +217,10 @@ function Aboutus() {
   {/* Vision Text - Vertically Centered */}
   <div className="w-full md:w-1/2 flex flex-col font-rem justify-center px-4 sm:px-8 md:px-16 h-full">
     <div className="max-w-lg mx-auto text-left">
-      <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-light text-black mb-6">
+      <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-light text-black mb-6">
         Our Vision
       </h2>
-      <p className="text-xl sm:text-md text-black leading-relaxed font-medium">
+      <p className="sm:text-md text-lg  text-black leading-relaxed font-regular">
         Progress Infiniti is inspired by the ideals of integral education — nurturing not just
         knowledge, but the body, emotions, imagination, and soul. Each experience invites
         students to explore, express, and evolve as whole individuals.
@@ -184,13 +233,19 @@ function Aboutus() {
 
       {/* Section 4: Image + Rich Text */}
       <section className="relative w-full bg-white py-8 md:py-16 px-4 sm:px-6 md:px-20 font-sans">
-        <div className="absolute top-0 left-0 w-[250px] sm:w-[300px] md:w-[350px] h-[500px] sm:h-[600px] md:h-[650px] bg-[#240909] z-0 hidden lg:block"></div>
+        <img
+  src={ring}
+  alt="Ring Decorative"
+  className="absolute top-0 right-0 w-28 sm:w-12 md:w-48 -mt-24 mr-10 z-20"
+/>
+
+        <div className="absolute top-0 left-0 w-[250px] sm:w-[300px] md:w-[350px] h-[500px] sm:h-[600px] md:h-[870px] bg-[#240909] z-0 hidden lg:block"></div>
 
         <div className="relative z-10 flex flex-col md:flex-row mt-10 sm:mt-16 md:mt-20 ml-0 sm:ml-10 md:ml-20 items-start gap-6 sm:gap-8 md:gap-10 mb-10 sm:mb-16 md:mb-20">
           <div className="w-full md:w-5/6">
             <img src={sample} alt="Vision" className="w-full h-auto object-cover shadow-md" />
           </div>
-          <div className="w-full font-rem font-medium md:w-1/2 my-auto md:p-8 lg:p-24 text-start text-xl sm:text-md text-black leading-relaxed space-y-2 sm:space-y-4">
+          <div className="w-full font-rem font-regular md:w-1/2 my-auto md:p-8 lg:p-24 text-start text-lg sm:text-md text-black leading-relaxed space-y-2 sm:space-y-4">
             <p>
               Progress Infiniti is inspired by the ideals of integral education—nurturing not just knowledge,
               but the body, emotions, imagination, and soul. Each experience invites students to explore,
@@ -204,7 +259,7 @@ function Aboutus() {
           </div>
         </div>
 
-        <div className="relative z-10 mx-0 sm:mx-10 md:mx-20 grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 text-lg sm:text-md font-medium font-rem text-start text-black leading-relaxed">
+        <div className="relative z-10 mx-0 sm:mx-10 md:mx-20 grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 text-lg sm:text-md font-regular font-rem text-start text-black leading-relaxed">
           <p>
             Progres Infini is inspired by the ideals of integral education—nurturing not just knowledge,
             but the body, emotions, imagination, and soul. Each experience invites students to explore,
@@ -223,7 +278,7 @@ function Aboutus() {
       </section>
 
       {/* Section 5: Final Image */}
-      <section className="w-full min-h-screen bg-white flex items-center justify-center px-4 sm:px-6 md:px-20 py-8 md:py-16">
+      <section className="w-full min-h-screen bg-white flex items-center justify-end px-4 sm:px-6 md:px-20 py-8 md:py-16">
         <div className="w-full max-w-6xl flex justify-center md:justify-end">
           <video
             src={last}
@@ -231,7 +286,7 @@ function Aboutus() {
             autoPlay
             loop
             muted
-            className="w-full max-w-[1039px] sm:max-w-[1039px] h-auto object-cover shadow-lg"
+            className="w-full max-w-[1039px] sm:max-w-[1039px] h-[800px] object-cover shadow-lg "
           />
         </div>
       </section>

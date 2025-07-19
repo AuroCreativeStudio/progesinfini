@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { fetchBlog } from '../../services/blogService';
 import placeholderImage from '../../assets/workshop.jpg';
 
-const BASE_URL = 'http://localhost:8000';
+const BASE_URL = 'http://192.168.0.102:8000';
 
 function BlogSingle() {
   const { slug } = useParams();

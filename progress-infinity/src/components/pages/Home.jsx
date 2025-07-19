@@ -7,7 +7,7 @@ import logo from '../../assets/colourLogo.png';
 import bgimg from '../../assets/homebg1.png';
 import test from '../../assets/test.png';
 import demo from '../../assets/demo.png';
-import bg from '../../assets/new.png';
+import bg from '../../assets/frame.png';
 import retraits from '../../assets/retraits.png';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import './Home.css';
@@ -16,6 +16,7 @@ import home1 from '../../assets/circle1.png';
 import home2 from '../../assets/circle2.png';
 import line from '../../assets/line.jpeg';  
 import { Menu, X } from 'lucide-react';
+import arrow from '../../assets/down.png';
 
 
 
@@ -71,6 +72,7 @@ function Home() {
     image: home,
   },
 ];
+
 
 const sliderData = [
   {
@@ -146,7 +148,7 @@ const sliderData = [
          <div className="flex-grow flex flex-col items-center justify-center px-4 text-center">
   <div className="inline-block text-left">
   <blockquote
-    className="text-xl sm:text-2xl md:text-6xl font-charm leading-relaxed md:leading-[1.4] tracking-wide md:tracking-wider"
+    className="text-xl sm:text-2xl md:text-6xl font-garamond leading-relaxed md:leading-[1.4] tracking-wide md:tracking-wider"
   >
     A hero fears nothing<br />
     complains of nothing<br />
@@ -157,40 +159,38 @@ const sliderData = [
 
 </div>
 
-          {/* Footer */}
-          <footer className="w-full bg-black text-white">
-            <div className="w-full px-4 md:px-16 py-10 border-b border-gray-800">
-              <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 items-center text-center md:text-left">
-                <div className="text-sm space-y-2">
-                  <p>
-                    Unlock Your Potential. Join a Community<br />
-                    of Innovators Making Dreams a Reality!
-                  </p>
-                  <Link to="/about" className="text-red-400 hover:text-red-300 font-semibold">
-                    Read More
-                  </Link>
-                </div>
-                <div className="flex flex-col items-center">
-                  <img src={spiral} alt="Spiral Logo" className="w-96 h-52 object-contain" />
-                </div>
-                {/* <div className="text-center md:text-right">
-                  <p className="text-purple-500 font-semibold tracking-wide">Progress Infini</p>
-                </div> */}
-              </div>
-            </div>
+        
+         {/* Footer */}
+<footer className="w-full bg-black text-white">
+  <div className="w-full px-4 md:px-16 py-0 border-b border-gray-800">
+    <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 items-center text-center md:text-left">
+   <div className="text-md mb-12 flex flex-col items-center">
+  <p className="text-center mb-6">
+    Unlock Your Potential. Join a Community<br />
+    of Innovators Making Dreams a Reality!
+  </p>
 
-            <div className="w-full py-4 bg-black">
-              <div className="max-w-5xl mx-auto flex flex-wrap justify-between items-center px-4 gap-y-4">
-                <Link to="/workshoplist" className="hover:text-red-400 text-sm md:text-base px-2">Workshop</Link>
-                <Link to="/facilitatorlist" className="hover:text-red-400 text-sm md:text-base px-2">Facilitator</Link>
-                <Link to="/" className="px-2">
-                  <img src={logo} alt="Logo" className="h-6 md:h-8" />
-                </Link>
-                <Link to="/about" className="hover:text-red-400 text-sm md:text-base px-2">About</Link>
-                <Link to="/contactus" className="hover:text-red-400 text-sm md:text-base px-2">Contact</Link>
-              </div>
-            </div>
-          </footer>
+  <div className="flex flex-col items-center">
+    <p className="text-[#f04e23] text-sm mb-6">SCROLL DOWN</p>
+    <a href="#about" className="inline-block animate-bounce">
+      <img
+        src={arrow}
+        alt="Down arrow"
+        className="w-10 h-14 hover:opacity-80 transition duration-300"
+      />
+    </a>
+  </div>
+</div>
+
+
+
+      <div className="flex flex-col items-center">
+        <img src={spiral} alt="Spiral Logo" className="w-96 h-[400px] object-contain" />
+      </div>
+    </div>
+  </div>
+</footer>
+
         </div>
       )}
 
@@ -389,13 +389,10 @@ const sliderData = [
       ))}
     </div> */}
 
-                                             
-
-
                                                        {/* end */}
 
 
-<section
+<section id="about"
   className="relative h-[1630px] w-full"
   style={{
     backgroundImage: `url(${bg})`,
@@ -452,11 +449,6 @@ const sliderData = [
   </div>
 </section>
 
-
-
-
-                       
-
       {/* Workshop Overview Section */}
 <div
   className="flex flex-col items-center gap-[150px] px-[100px] py-[200px] relative bg-cover h-[1] bg-center"
@@ -464,7 +456,7 @@ const sliderData = [
 >
 
       <div className="flex items-center justify-center gap-2.5 p-2.5 relative self-stretch w-full flex-[0_0_auto]">
-        <p className="relative flex-1 mt-[-1.00px] [font-family:'REM-Regular',Helvetica] font-normal text-white text-2xl text-center tracking-[0] leading-[normal]">
+        <p className="relative flex-1 mt-[-1.00px] [font-family:'REM-Regular',Helvetica] font-normal text-white text-2xl text-center tracking-[0] leading-snug">
           Our workshops go beyond conventional subjects to offer immersive
           experiences that nurture creativity, curiosity, collaboration, and
           self-growth. Whether you&#39;re exploring the world of robotics,
@@ -497,10 +489,10 @@ const sliderData = [
             >
               <div className="flex items-center justify-center w-full">
                 <div className="flex flex-col items-start justify-center gap-5 py-4 flex-1">
-                  <div className="text-white text-2xl font-rem">
+                  <div className="text-white text-3xl font-rem">
                     {card.title}
                   </div>
-                  <p className="text-white text-xl font-rem">
+                  <p className="text-white text-xl font-rem font-normal">
                     {card.description}
                   </p>
                 </div>
@@ -551,11 +543,11 @@ const sliderData = [
 
           {/* CTA */}
           <div className="inline-flex font-rem flex-col items-start gap-2.5 pt-[20px] px-5">
-            <div className="inline-flex items-center justify-center gap-2.5 px-5 py-2.5 bg-[#f0542b]">
-              <div className="text-black text-xl font-bold font-rem">
+           
+              <button className="bg-[#f04e23] text-black px-6 py-2 font-semibold hover:bg-white transition">
                 Enquire More
-              </div>
-            </div>
+              </button>
+            
           </div>
         </div>
       </div>
@@ -585,20 +577,24 @@ const sliderData = [
   </button>
 
   {/* Image with sharp border */}
-  <div className="relative flex justify-center items-center">
-    <div className="relative">
-      <div className="absolute -top-6 -right-6 w-full h-full bg-[#f04e23] border-4 border-[#f04e23] -z-10"></div>
+<div className="relative flex justify-center items-center">
+  <div className="relative w-[750px] h-[600px]">
+    {/* Orange background shadow */}
+    <div className="absolute top-[-24px] right-[-24px] w-full h-full bg-[#f04e23] border-4 border-[#f04e23] -z-10"></div>
 
-      <img
-        src={sliderData[index].image}
-        alt="Decorated room"
-        className="w-[750px] object-cover h-[px]"
-      />
-    </div>
+    {/* Image */}
+    <img
+      src={sliderData[index].image}
+      alt="Decorated room"
+      className="w-full h-full object-cover"
+    />
   </div>
+</div>
+
+
 
   {/* Text Content */}
-  <div className="relative z-10 ml-12 px-6 text-center md:text-left">
+  <div className="relative z-10 ml-12 px-6 text-center font-rem md:text-left">
     <p className="text-xl leading-relaxed mb-6">
       {sliderData[index].text}
     </p>
@@ -616,7 +612,7 @@ const sliderData = [
   </button>
 
   {/* Center Divider */}
-  <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-[2px] bg-white/10 transform -translate-x-1/2 z-0" />
+  <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-[2px] transform -translate-x-1/2 z-0" />
 </div>
 
 </div>
@@ -627,12 +623,12 @@ const sliderData = [
  
         {/* Left Text */}
         <div className="lg:w-1/2 w-full  ml-12 text-center lg:text-left">
-          <h2 className="text-3xl lg:text-6xl sm:text-3xl font-rem mb-4">Retreats</h2>
+          <h2 className="text-3xl lg:text-7xl sm:text-3xl font-regular font-rem mb-4">Retreats</h2>
           <p className="text-gray-700 mb-6 max-w-md  pr-8 lg:text-xl font-rem text-lg lg:mx-0">
             In a world of potential, many young people face barriers—societal pressure, financial strain, or self-doubt—that make their dreams feel out of reach.
           </p>
       <Link to="/retreat">
-  <button className="bg-[#f04e23] text-black px-8 py-3 font-semibold text-lg hover:bg-[#c93e1b] transition">
+  <button className="bg-[#f04e23] text-black px-6 py-2 font-semibold hover:bg-black hover:text-white transition">
     Explore More
   </button>
 </Link>
@@ -659,7 +655,7 @@ const sliderData = [
 
  <button
   onClick={() => setShowEnquireForm(true)}
-  className="fixed bottom-6 right-6 z-50 bg-red-orange hover:bg-orange-600 text-white font-semibold px-5 py-3 rounded-full shadow-lg transition-all"
+  className="fixed bottom-6 right-6 z-50 bg-[#f04e23] text-black px-6 py-2 font-semibold hover:bg-white  shadow-lg transition-all"
 >
   Enquire
 </button>

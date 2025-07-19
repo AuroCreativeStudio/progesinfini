@@ -4,7 +4,7 @@ import video from '../../assets/download.mp4';
 import Workshopsingle from './Workshopsingle';
 // import { postNewsletter } from '../../services/newsletterService';
 
-const BASE_URL = 'http://127.0.0.1:8000';
+const BASE_URL = 'http://192.168.0.102:8000';
 
 function Workshoplist() {
   const [workshops, setWorkshops] = useState([]);

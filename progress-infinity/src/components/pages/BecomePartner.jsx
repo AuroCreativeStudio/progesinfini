@@ -13,10 +13,10 @@ function PartnerSection() {
         style={{ backgroundImage: `url(${partnerBg})` }}
       >
         <div className="relative z-10 text-white px-4">
-          <p className="text-sm md:text-base font-medium mb-3">
+          <p className="text-sm md:text-2xl font-medium mb-3">
             Let’s Build What Matters, Together.
           </p>
-          <h2 className="text-3xl md:text-5xl font-bold">
+          <h2 className="text-3xl md:text-8xl font-bold">
             Become a <span className="text-red-600">Partner</span>
           </h2>
         </div>
@@ -28,7 +28,8 @@ function PartnerSection() {
         style={{ backgroundImage: `url(${bgImage})` }}
       >
         <div className="max-w-3xl">
-          <p className="text-black text-base sm:text-lg md:text-2xl leading-snug">
+          <p className="text-black text-base sm:text-lg md:text-5xl leading-snug md:leading-[4.5rem] text-left">
+
             At Progres Infini, we’re not just looking for collaborators — we’re looking for{' '}
             <span className="text-red-600 font-semibold">co-dreamers</span>.<br />
             Our partners are educators, artists, institutions,
@@ -37,8 +38,8 @@ function PartnerSection() {
       </section>
 
       {/* Section 3 - Possibilities */}
-      <section className="w-full bg-white py-16 px-6 md:px-12 text-center font-rem">
-        <h2 className="text-2xl md:text-3xl font-semibold text-black mb-4">
+      <section className="w-full bg-white py-4 px-6 md:px-12 text-center font-rem">
+        <h2 className="text-2xl md:text-4xl font-semibold text-black mb-4">
           Partnerships That Make Space for Possibility
         </h2>
         <p className="text-sm md:text-base text-gray-700 max-w-2xl mx-auto mb-16">

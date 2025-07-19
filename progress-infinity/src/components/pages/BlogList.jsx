@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { fetchBlog } from '../../services/blogService';
 import placeholderImage from '../../assets/blog.png'; 
 import { useNavigate } from 'react-router-dom';
+import blog1 from '../../assets/blog1.png';
+import bgImg from '../../assets/about1.png'; 
 
-const BASE_URL = 'http://localhost:8000'; // Update if different
+const BASE_URL = 'http://192.168.0.102:8000'; 
 
 function BlogList() {
   const [blog, setBlog] = useState([]);
@@ -22,6 +24,7 @@ function BlogList() {
   }, []);
 
   return (
+    <>
     <div className="relative w-full min-h-screen lg:mt-24 bg-white overflow-x-hidden">
       {/* Yellow background on right 1/4 */}
       <div className="absolute top-0 right-0 w-1/4 h-full bg-[#fefcc6] z-0" />
@@ -66,7 +69,7 @@ function BlogList() {
 
       {/* Description */}
       <div className="relative z-10 w-full px-6 md:px-16 py-20 max-w-6xl">
-        <p className="text-gray-800 text-base md:text-3xl leading-relaxed">
+        <p className="text-gray-800 text-base md:text-2xl leading-relaxed text-left">
           Here, we share reflections from facilitators, insights from students, glimpses into our workshops,
           and thoughts that guide us through the journey of integral education.
         </p>
@@ -74,7 +77,7 @@ function BlogList() {
 
       {/* Blog Cards */}
       <div className="relative z-10 w-full px-4 md:px-16 pb-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-24">
           {blog.length === 0 ? (
             <p className="text-gray-600">No blogs available yet.</p>
           ) : (
@@ -89,9 +92,23 @@ function BlogList() {
                   alt={post.title}
                   className="w-full h-auto aspect-square object-cover shadow-md"
                 />
-                <h3 className="font-bold text-lg mt-4">{post.title}</h3>
-                <p className="text-lg mt-1 line-clamp-3">{post.short_description}</p>
-                <p className="text-lg mt-2">
+                <h3 className="font-bold text-lg mt-4">
+               {post.title.charAt(0).toUpperCase() + post.title.slice(1)}
+              </h3>
+
+               <p
+                  className="text-md mt-1 overflow-hidden text-ellipsis"
+                  style={{
+                    display: "-webkit-box",
+                    WebkitLineClamp: 2,
+                    WebkitBoxOrient: "vertical",
+                    overflow: "hidden"
+                  }}
+                >
+                  {post.short_description}
+                </p>
+
+                <p className="text-md mt-2">
                   Author: <span className="font-medium"> {post.author}</span>
                 </p>
                 <p className="text-sm">Date: {post.date}</p>
@@ -107,37 +124,61 @@ function BlogList() {
           )}
         </div>
       </div>
-      
+    </div>
 
-   <div className="w-full flex flex-col md:flex-row bg-[#fefcc6] py-12 px-6 md:px-12 font-sans text-black">
+    
+   <div className="w-full  flex flex-col md:flex-row bg-[#fefcc6] py-12 px-6 md:px-12 font-sans text-black line-height:1.25">
   
   {/* Text Content */}
-  <div className="md:w-1/2 mb-8 md:mb-0 flex flex-col justify-center">
-    <h2 className="text-2xl md:text-5xl font-semibold leading-snug mx-24 text-left">
-      What if <br />
-      <span className="font-semibold text-black md:text-7xl">Learning</span><br />
-      was never a <br />
-      <span className="text-red-600 font-semibold">Straight Line</span>?
-    </h2>
-    <a href="#" className="text-xl text-red-600 font-semibold text-left mx-24 mt-4 underline hover:text-red-800 transition">Read More</a>
-  </div>
+<div className="md:w-1/2 mb-8 md:mb-0 flex flex-col justify-center">
+  <h2 className="text-2xl md:text-6xl font-semibold leading-4.5] mx-24 text-left">
+    What if <br />
+    <span className="font-semibold text-black md:text-8xl">Learning</span><br />
+    was never a <br />
+    <span className="text-red-600 font-semibold">Straight Line</span>?
+    
+  </h2>
+  <a
+    href="#"
+    className="text-xl text-red-600 font-semibold text-left mx-24 mt-4 underline hover:text-red-800 transition"
+  >
+    Read More
+  </a>
+</div>
+
+
 
   {/* Image & Meta */}
-  <div className="md:w-1/2 flex flex-col items-center md:items-end">
-    <img
-      src={placeholderImage}
-      alt="Blog Highlight"
-      className="w-full md:w-[1200px] h-[350px] object-cover shadow-lg"
-    />
-    <div className="flex justify-between w-full text-sm mt-2 text-gray-700 px-1 md:px-0">
-      <span>Author: Maya S.</span>
-      <span>Date: July 1, 2025</span>
-    </div>
+<div className="md:w-1/2 w-full flex flex-col items-center md:items-start">
+  <img
+    src={blog1}
+    alt="Blog Highlight"
+    className="w-full h-[480px] object-cover shadow-lg"
+  />
+  <div className="flex justify-between w-full text-sm mt-2 text-gray-700">
+    <span>Author: Maya S.</span>
+    <span>Date: July 1, 2025</span>
   </div>
+</div>
 
 </div>
 
-    </div>
+
+ <section
+      className="w-full h-screen bg-cover bg-center flex items-center justify-center text-center px-4 md:px-16"
+      style={{ backgroundImage: `url(${bgImg})` }}
+    >
+      <div className=" p-8 md:p-12 rounded-lg">
+        <h2 className="text-2xl mt-0 md:text-8xl font-rem font-semibold text-white mb-4">
+          Stay Curious. Stay Connected.
+        </h2>
+        <p className="text-white text-sm md:text-4xl leading-relaxed mt-16 max-w-6xl mx-auto">
+          We believe that learning doesn’t end when a workshop does — it evolves through reflection, sharing, and real-life moments.
+          This journal is a growing archive of thoughts, ideas, and experiences that shape our journey.
+        </p>
+      </div>
+    </section>
+    </>
   );
 }
 

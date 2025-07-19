@@ -9,6 +9,7 @@ export default {
             fontFamily: {
             rem: ['"REM"', 'sans-serif'],
              charm: ['"Charm"', 'cursive'],
+              garamond: ['"EB Garamond"', 'serif'],
       },
       colors:{
         'deep-blue': '#232946',

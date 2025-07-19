@@ -31,7 +31,7 @@ function Footer() {
 
 
 <footer
-  className="w-full bg-cover bg-center bg-no-repeat text-white px-6 py-12"
+  className="w-full bg-cover bg-center py-6 bg-no-repeat text-white px-6 "
   style={{
     backgroundImage: `url(${footer})`,
   }}
@@ -46,49 +46,51 @@ function Footer() {
     </div>
 
     {/* Contact + Social + Links */}
-    <div className="mt-10 flex flex-col md:flex-row md:justify-between text-base md:text-lg space-y-10 md:space-y-0">
-      {/* Contact Info */}
-      <div className="text-center md:text-left space-y-2 text-gray-200">
-        <p>+91 9894768081</p>
-        <a href="mailto:getcreative@aurocreativestudio.com" className="hover:underline">
-          getcreative@aurocreativestudio.com
-        </a>
-      </div>
+    <div className="mt-10 flex flex-col md:flex-row md:justify-between text-base md:text-sm mx-12 space-y-10 md:space-y-0">
+  {/* Contact Info */}
+  <div className="text-center md:text-left space-y-2 text-gray-200">
+    <p>+91 9894768081</p>
+    <a href="mailto:getcreative@aurocreativestudio.com" className="hover:underline">
+      getcreative@aurocreativestudio.com
+    </a>
+  </div>
 
-      {/* Social Icons */}
-      <div className="flex justify-center items-center space-x-6 text-white text-2xl">
-        <a href="#"><i className="fab fa-linkedin-in hover:text-blue-400"></i></a>
-        <a href="#"><i className="fab fa-x-twitter hover:text-blue-400"></i></a>
-        <a href="#"><i className="fab fa-facebook-f hover:text-blue-400"></i></a>
-        <a href="#"><i className="fab fa-instagram hover:text-blue-400"></i></a>
-      </div>
+  {/* Social Icons */}
+  <div className="flex justify-center items-center space-x-6 text-white text-2xl">
+    <a href="#"><i className="fab fa-linkedin-in hover:text-blue-400"></i></a>
+    <a href="#"><i className="fab fa-x-twitter hover:text-blue-400"></i></a>
+    <a href="#"><i className="fab fa-facebook-f hover:text-blue-400"></i></a>
+    <a href="#"><i className="fab fa-instagram hover:text-blue-400"></i></a>
+  </div>
 
-      {/* Page Links */}
-      <div className="text-left text-gray-200">
-        <div className="grid grid-cols-2 gap-5 md:gap-8">
-          <Link to="/about" className="block hover:underline">About</Link>
-          <Link to="/contactus" className="block hover:underline">Contact Us</Link>
-          <Link to="/workshoplist" className="block hover:underline">Our Workshops</Link>
-          <Link to="/facilitators" className="block hover:underline">Our Facilitators</Link>
-          <Link to="/retreat" className="block hover:underline">Retreat</Link>
-          <Link to="/become-a-partner" className="block hover:underline col-span-2 md:col-span-1">
-            Become a Partner
-          </Link>
-        </div>
-      </div>
-    </div>
+  {/* Page Links */}
+ <div className="text-left text-gray-200  leading-tigh text-sm">
+  <div className="grid grid-cols-2 gap-y-1 gap-x-4">
+    <Link to="/about" className="block hover:underline">About</Link>
+    <Link to="/contactus" className="block hover:underline">Contact Us</Link>
+    <Link to="/workshoplist" className="block hover:underline">Our Workshops</Link>
+    <Link to="/facilitators" className="block hover:underline">Our Facilitators</Link>
+    <Link to="/retreat" className="block hover:underline">Retreat</Link>
+    <Link to="/become-a-partner" className="block hover:underline col-span-2 md:col-span-1">
+      Become a Partner
+    </Link>
+  </div>
+</div>
 
-    {/* Divider */}
-    <div className="border-t border-orange-500 my-8"></div>
+</div>
 
-    {/* Bottom Text */}
-    <div className="text-center text-gray-300 text-sm md:text-base space-y-2 md:space-y-0 md:flex md:justify-center md:space-x-6">
-      <span>© 2023 Progress Infinity</span>
-      <span>•</span>
-      <span>Developed by Auro Creative Studio</span>
-      <span>•</span>
-      <span>Privacy Policy</span>
-    </div>
+{/* Divider */}
+<div className="border-t border-orange-500 my-8"></div>
+
+{/* Bottom Text */}
+<div className="text-center text-gray-300 text-base md:text-sm space-y-2 md:space-y-0 md:flex md:justify-center md:space-x-6">
+  <span>© 2023 Progress Infinity</span>
+  <span>•</span>
+  <span>Developed by Auro Creative Studio</span>
+  <span>•</span>
+  <span>Privacy Policy</span>
+</div>
+
   </div>
 </footer>
 
