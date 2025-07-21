@@ -4,6 +4,7 @@ import { fetchBlog } from '../../services/blogService';
 import placeholderImage from '../../assets/workshop.jpg';
 
 const BASE_URL = 'http://192.168.0.102:8000';
+;
 
 function BlogSingle() {
   const { slug } = useParams();
@@ -36,44 +37,63 @@ function BlogSingle() {
   }
 
   return (
-    <div className="min-h-screen w-full bg-[#fefcc6] pt-28 pb-20 px-4 md:px-8 lg:px-16 font-sans text-black text-left text-rem">
+    <div className="min-h-screen font-rem w-full bg-[#fefcc6] pt-28 pb-20 px-4 md:px-8 lg:px-16  text-black text-left text-rem">
 
-      {/* Intro and Image */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-4 gap-12 items-start">
-        <div className="col-span-1 space-y-5">
-          <h2 className="text-rem md:text-rem font-light leading-snug">
-            What if <br />
-            <span className="font-bold text-black">Learning</span> <br />
-            was never a <br />
-            <span className="text-red-600 font-semibold">Straight Line</span>?
-          </h2>
+{/* Intro and Image */}
+<div className="max-w-8xl mx-auto grid grid-cols-1 lg:grid-cols-6 gap-12 items-start bg-[#fefcc6] p-8 md:p-16">
 
-          <div>
-            <p className="font-semibold mb-1">Snippet:</p>
-            <p>{blog.short_description}</p>
-          </div>
+  {/* Left Column - 2/6 and vertically centered */}
+  <div className="lg:col-span-2 flex flex-col justify-center space-y-6 h-full">
+    {/* Left Column - 2/6 and vertically centered */}
+<div className="lg:col-span-2 flex flex-col justify-center capitalize space-y-6 h-full">
+  {blog.title && (() => {
+    const words = blog.title.trim().split(" ");
+    const lastTwo = words.slice(-2).join(" ");
+    const rest = words.slice(0, -2).join(" ");
 
-          <div className="space-y-1">
-            <p><strong>Author:</strong> {blog.author || 'Unknown'}</p>
-            <p><strong>Date:</strong> {blog.date}</p>
-          </div>
-        </div>
+    return (
+      <h2 className="text-2xl md:text-6xl font-semibold text-left leading-tight">
+        {rest}{" "}
+        <span className="text-[#f04e23] font-semibold">{lastTwo}</span>
+      </h2>
+    );
+  })()}
+</div>
 
-        <div className="col-span-1 lg:col-span-3">
-          <img
-            src={blog.feature_img ? `${BASE_URL}/storage/${blog.feature_img}` : placeholderImage}
-            alt={blog.title}
-            className="w-full h-auto object-cover max-h-[37.5rem]"
-          />
-        </div>
-      </div>
 
-      <div className="text-sm text-right text-gray-700 mt-4 pr-1">
+    {/* <div>
+      <p className="font-semibold mb-1">Snippet:</p>
+      <p className="text-gray-800 text-base">{blog.short_description}</p>
+    </div> */}
+
+    {/* <div className="space-y-1 text-sm text-gray-700">
+      <p><strong>Author:</strong> {blog.author || 'Unknown'}</p>
+      <p><strong>Date:</strong> {blog.date}</p>
+    </div> */}
+  </div>
+
+  {/* Right Column - 4/6 */}
+  <div className="lg:col-span-4 relative">
+    <img
+      src={blog.feature_img ? `${BASE_URL}/storage/${blog.feature_img}` : placeholderImage}
+      alt={blog.title}
+      className="w-full max-w-full h-[700px] object-cover shadow-lg"
+    />
+    <p className="absolute bottom-2 right-4 text-sm text-black">Photo Credit: Conversa</p>
+  </div>
+
+</div>
+
+
+
+
+
+      <div className="text-md text-right text-gray-700 mt-4 pr-1">
         Photo Credit: {blog.photo_credit || 'Converso'}
       </div>
 
       {/* Descriptions */}
-      <div className="mt-16 mx-0 md:mx-12 lg:mx-32 text-black space-y-12">
+      <div className="mt-16 mx-12 md:mx-32 lg:mx-44 text-black space-y-12">
         {blog.description1 && (
           <div>
             <h3 className="text-xl font-semibold mb-2">{blog.section1_title}</h3>
@@ -85,7 +105,7 @@ function BlogSingle() {
           <img
             src={`${BASE_URL}/storage/${blog.img_1}`}
             alt="Section 1"
-            className="w-full object-cover rounded-md shadow-md"
+            className="w-full h-[700px] object-cover shadow-md"
           />
         )}
 
@@ -100,7 +120,7 @@ function BlogSingle() {
           <img
             src={`${BASE_URL}/storage/${blog.img_2}`}
             alt="Section 2"
-            className="w-full object-cover rounded-md shadow-md"
+            className="w-full h-[700px] object-cover  shadow-md"
           />
         )}
 
@@ -113,7 +133,7 @@ function BlogSingle() {
       </div>
 
       {/* Author Section */}
-      <div className="mt-20 mx-0 md:mx-12 lg:mx-32 flex flex-col md:flex-row items-start justify-between gap-8">
+      <div className="mt-20 mx-0 md:mx-12 lg:mx-44 flex flex-col md:flex-row items-start justify-between gap-8">
         <div className="md:w-2/3 italic text-gray-800">
           {blog.about}
         </div>
@@ -123,7 +143,7 @@ function BlogSingle() {
             <img
               src={`${BASE_URL}/storage/${blog.author_img}`}
               alt={blog.author}
-              className="w-32 h-32 object-cover rounded-md mb-2 shadow-md"
+              className="w-32 h-32 object-cover  mb-2 shadow-md"
             />
           )}
           <p className="text-black"><strong>Author:</strong> {blog.author}</p>
@@ -133,10 +153,12 @@ function BlogSingle() {
 
       {/* More Posts Header */}
       <div className="mt-24 mb-10 text-start max-w-7xl mx-auto">
-        <h2 className="text-2xl md:text-3xl font-semibold">Explore more posts</h2>
-        <p className="text-md md:text-lg text-gray-800 mt-1">
-          Discover other thoughts and experiences shaping our journey.
-        </p>
+        <h2 className="text-2xl md:text-3xl font-semibold">Explore more posts <br/>
+     Discover other thoughts and experiences<br/> shaping our journey.
+        </h2>
+      
+     
+        
       </div>
 
       {/* More Blog Cards */}
@@ -152,14 +174,15 @@ function BlogSingle() {
                   alt={post.title}
                   className="w-full h-auto aspect-square object-cover shadow-md"
                 />
-                <h3 className="font-bold text-sm mt-4">{post.title}</h3>
-                <p className="text-sm mt-1 line-clamp-3">{post.short_description}</p>
-                <p className="text-sm mt-2">
+                <h3 className="font-bold text-md mt-4 capitalize">{post.title}</h3>
+
+                <p className="text-md mt-1 line-clamp-2">{post.short_description}</p>
+                <p className="text-md mt-2">
                   Author: <span className="font-medium">{post.author}</span>
                 </p>
-                <p className="text-sm">Date: {post.date}</p>
+                <p className="text-md">Date: {post.date}</p>
                 <p
-                  className="text-red-600 text-sm font-semibold mt-2 cursor-pointer hover:underline"
+                  className="text-red-600 text-md font-semibold mt-2 cursor-pointer hover:underline"
                   onClick={() => navigate(`/blogs/${post.slug}`)}
                 >
                   Read More

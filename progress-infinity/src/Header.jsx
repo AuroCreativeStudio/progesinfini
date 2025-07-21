@@ -33,7 +33,13 @@ function Header() {
 
           {/* Center logo - always visible */}
           <div className="absolute left-1/2 transform -translate-x-1/2">
-            <img src={logo} alt="Progress Infinity Logo" className="h-8 sm:h-10 md:h-12 object-contain" />
+            <Link to="/">
+      <img
+        src={logo}
+        alt="Progress Infinity Logo"
+        className="h-8 sm:h-10 md:h-12 object-contain cursor-pointer"
+      />
+    </Link>
           </div>
 
           {/* Right nav (hidden on small) + hamburger */}

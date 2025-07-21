@@ -39,7 +39,13 @@ function Footer() {
   <div className="max-w-8xl mx-auto">
     {/* Logo + Quote */}
     <div className="flex flex-col items-center text-center space-y-4">
-      <img src={logo} alt="Progress Infinity Logo" className="h-20 md:h-24 w-auto mb-2" />
+      <Link to="/">
+      <img
+        src={logo}
+        alt="Progress Infinity Logo"
+        className="h-20 md:h-24 w-auto mb-2 cursor-pointer"
+      />
+    </Link>
       <p className="text-base md:text-lg text-gray-200 max-w-4xl">
         There is no end to progress and every day one can learn to do better what one does.
       </p>

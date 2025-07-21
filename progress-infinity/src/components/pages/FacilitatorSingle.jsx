@@ -32,7 +32,7 @@ function FacilitatorSingle({ speaker, onClose, onNavigate, prevSpeaker, nextSpea
 
       {/* Left Sticky Image Section */}
       <div className="hidden lg:flex w-[30%] flex-shrink-0 items-start justify-end relative">
-        <div className="sticky top-0 flex items-center justify-center w-64 h-80">
+        <div className="sticky top-0 flex items-center justify-center w-72 h-96">
           <img
             src={speaker.image}
             alt={speaker.name}

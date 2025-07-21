@@ -42,7 +42,7 @@ function PartnerSection() {
         <h2 className="text-2xl md:text-4xl font-semibold text-black mb-4">
           Partnerships That Make Space for Possibility
         </h2>
-        <p className="text-sm md:text-base text-gray-700 max-w-2xl mx-auto mb-16">
+        <p className="text-sm md:text-md text-gray-700 max-w-2xl mx-auto mb-16">
           We believe in collaboration that’s intentional, values-aligned, and human.
           If you’re creating learning experiences, spaces of reflection, or ways of
           thinking differently — we’d love to hear from you.
@@ -51,44 +51,44 @@ function PartnerSection() {
         <div className="flex flex-col md:flex-row items-center justify-center gap-12">
           {/* Left Column */}
           <div className="flex flex-col items-end gap-20 text-right text-black w-full md:w-1/4">
-            <p>Co-host a retreat or workshop</p>
+            <p>Co-host a retreat <br/>or workshop</p>
             <hr className="w-full border-t-2 border-red-400 ml-0" />
-            <p>Build slow, thoughtful learning modules</p>
+            <p>Build slow, thoughtful <br/>learning modules</p>
           </div>
 
           {/* Center Spiral Image */}
-          <div className="w-[220px] md:w-[280px]">
+          <div className="w-[400px] md:w-[500px]">
             <img src={spiral} alt="Spiral Design" className="w-full h-auto mx-auto" />
           </div>
 
           {/* Right Column */}
           <div className="flex flex-col items-start gap-20 text-left text-black w-full md:w-1/4">
-            <p>Facilitate a session within our programs</p>
+            <p>Facilitate a session <br/>within our programs</p>
             <hr className="w-full border-t-2 border-red-400 mr-0" />
-            <p>Offer space, content, or context for future residencies</p>
+            <p>Offer space, content,<br/> or context for future residencies</p>
           </div>
         </div>
       </section>
 
       {/* Section 4 - Register Interest */}
-      <section className="w-full bg-[#FEFCC6] py-12 px-6 md:px-20 font-rem">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-10">
+      <section className="w-full h-[500px] bg-[#FEFCC6] py-12 px-6 md:px-20 font-rem">
+        <div className="flex flex-col md:flex-row items-center mx-[125px] justify-between gap-10">
           {/* Text Content */}
           <div className="text-black max-w-xl text-left">
-            <h3 className="text-xl md:text-2xl font-semibold mb-4">
+            <h3 className="text-xl md:text-4xl font-semibold mb-4">
               Ready to Co-Create?
             </h3>
             <p className="text-sm md:text-base mb-6">
               We’d love to hear what you’re thinking. Tell us a little about yourself, your work,
               and the kind of collaboration you envision.
             </p>
-            <button className="bg-red-500 hover:bg-red-600 text-white text-sm px-4 py-2 rounded-md transition">
+            <button className="bg-[#f04e23] text-black px-6 py-2 font-semibold hover:bg-black text-white transition">
               Register Interest
             </button>
           </div>
 
           {/* Image */}
-          <div className="w-full max-w-[300px]">
+          <div className="w-full max-w-[500px]">
             <img
               src={image}
               alt="Co-Create Visual"
