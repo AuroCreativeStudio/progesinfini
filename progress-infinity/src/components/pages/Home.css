@@ -97,3 +97,40 @@
   );
 }
 
+@media screen and (min-width: 1024px) {
+  .workshop-section {
+    padding: 200px 100px;
+    gap: 150px;
+    background-position: center;
+    background-size: cover;
+  }
+
+  .workshop-section .workshop-image {
+    width: 543px;
+    height: 900px;
+    object-fit: cover;
+  }
+
+  .workshop-section .workshop-card-wrapper {
+    min-width: 700px;
+    gap: 200px;
+  }
+
+  .workshop-section .workshop-card {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .workshop-section .text-block {
+    font-size: 1.5rem;
+    line-height: 1.7;
+  }
+
+  .workshop-section .workshop-title {
+    font-size: 1.875rem; /* text-3xl */
+  }
+
+  .workshop-section .workshop-desc {
+    font-size: 1.25rem; /* text-xl */
+  }
+}

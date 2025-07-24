@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { fetchBlog } from '../../services/blogService';
 import placeholderImage from '../../assets/workshop.jpg';
 
-const BASE_URL = 'http://192.168.0.102:8000';
+const BASE_URL = 'http://127.0.0.1:8000';
 ;
 
 function BlogSingle() {

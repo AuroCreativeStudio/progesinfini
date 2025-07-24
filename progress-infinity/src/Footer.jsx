@@ -94,8 +94,11 @@ function Footer() {
   <span>•</span>
   <span>Developed by Auro Creative Studio</span>
   <span>•</span>
-  <span>Privacy Policy</span>
+  <a href="/privacy-policy" className="hover:underline">
+    Privacy Policy
+  </a>
 </div>
+
 
   </div>
 </footer>

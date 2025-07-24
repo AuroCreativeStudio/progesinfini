@@ -25,7 +25,7 @@ const imageUrl = workshop.featured_image?.startsWith('http')
 
       {/* Left Sticky Image Section for Large Screens */}
       <div className="hidden lg:flex w-[30%] flex-shrink-0 items-start justify-end relative">
-        <div className="sticky top-0 flex items-center justify-center w-64 h-80">
+        <div className="sticky top-0 flex items-center justify-center w-[350px] h-[500px]">
           <img
             src={imageUrl}
             alt={workshop.workshop_title}

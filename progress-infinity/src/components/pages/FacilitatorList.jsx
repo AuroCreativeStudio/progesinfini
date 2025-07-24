@@ -6,7 +6,7 @@ import FacilitatorSingle from './FacilitatorSingle';
 import { useNavigate } from 'react-router-dom';
 
 
-const BASE_URL = 'http://192.168.0.102:8000';
+const BASE_URL = 'http://127.0.0.1:8000';
 
 function FacilitatorList() {
   const [facilitators, setFacilitators] = useState([]);

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-const BASE_URL = import.meta.env.VITE_API_URL || 'http://192.168.0.102:8000';
+const BASE_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
 
 function FacilitatorSingle({ speaker, onClose, onNavigate, prevSpeaker, nextSpeaker }) {
   useEffect(() => {
@@ -32,7 +32,7 @@ function FacilitatorSingle({ speaker, onClose, onNavigate, prevSpeaker, nextSpea
 
       {/* Left Sticky Image Section */}
       <div className="hidden lg:flex w-[30%] flex-shrink-0 items-start justify-end relative">
-        <div className="sticky top-0 flex items-center justify-center w-72 h-96">
+        <div className="sticky top-0 flex items-center justify-center w-[350px] h-[500px]">
           <img
             src={speaker.image}
             alt={speaker.name}
