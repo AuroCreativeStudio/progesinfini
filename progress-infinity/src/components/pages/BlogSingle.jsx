@@ -4,7 +4,6 @@ import { fetchBlog } from '../../services/blogService';
 import placeholderImage from '../../assets/workshop.jpg';
 
 const BASE_URL = 'http://127.0.0.1:8000';
-;
 
 function BlogSingle() {
   const { slug } = useParams();
@@ -37,67 +36,48 @@ function BlogSingle() {
   }
 
   return (
-    <div className="min-h-screen font-rem w-full bg-[#fefcc6] pt-28 pb-20 px-4 md:px-8 lg:px-16  text-black text-left text-rem">
+    <div className="min-h-screen font-rem w-full bg-[#fefcc6] pt-16 pb-20 px-4 md:px-8 lg:px-16 text-black text-left">
 
-{/* Intro and Image */}
-<div className="max-w-8xl mx-auto grid grid-cols-1 lg:grid-cols-6 gap-12 items-start bg-[#fefcc6] p-8 md:p-16">
+      {/* Intro and Image - Adjusted for medium screens */}
+      <div className="max-w-8xl mx-auto grid grid-cols-1 lg:grid-cols-6 gap-6 md:gap-8 lg:gap-12 items-start bg-[#fefcc6] p-4 md:p-8 lg:p-16">
 
-  {/* Left Column - 2/6 and vertically centered */}
-  <div className="lg:col-span-2 flex flex-col justify-center space-y-6 h-full">
-    {/* Left Column - 2/6 and vertically centered */}
-<div className="lg:col-span-2 flex flex-col justify-center capitalize space-y-6 h-full">
-  {blog.title && (() => {
-    const words = blog.title.trim().split(" ");
-    const lastTwo = words.slice(-2).join(" ");
-    const rest = words.slice(0, -2).join(" ");
+        {/* Left Column - Adjusted for medium screens */}
+        <div className="lg:col-span-2 flex flex-col justify-center space-y-4 md:space-y-6 h-full">
+          {blog.title && (() => {
+            const words = blog.title.trim().split(" ");
+            const lastTwo = words.slice(-2).join(" ");
+            const rest = words.slice(0, -2).join(" ");
 
-    return (
-      <h2 className="text-2xl md:text-6xl font-semibold text-left leading-tight">
-        {rest}{" "}
-        <span className="text-[#f04e23] font-semibold">{lastTwo}</span>
-      </h2>
-    );
-  })()}
-</div>
+            return (
+              <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-semibold text-left leading-tight">
+                {rest}{" "}
+                <span className="text-[#f04e23] font-semibold">{lastTwo}</span>
+              </h2>
+            );
+          })()}
+        </div>
 
+        {/* Right Column - Adjusted image height for medium screens */}
+        <div className="lg:col-span-4 relative">
+          <img
+            src={blog.feature_img ? `${BASE_URL}/storage/${blog.feature_img}` : placeholderImage}
+            alt={blog.title}
+            className="w-full max-w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] xl:h-[700px] object-cover shadow-lg"
+          />
+          <p className="absolute bottom-2 right-4 text-xs sm:text-sm text-black">Photo Credit: Conversa</p>
+        </div>
+      </div>
 
-    {/* <div>
-      <p className="font-semibold mb-1">Snippet:</p>
-      <p className="text-gray-800 text-base">{blog.short_description}</p>
-    </div> */}
-
-    {/* <div className="space-y-1 text-sm text-gray-700">
-      <p><strong>Author:</strong> {blog.author || 'Unknown'}</p>
-      <p><strong>Date:</strong> {blog.date}</p>
-    </div> */}
-  </div>
-
-  {/* Right Column - 4/6 */}
-  <div className="lg:col-span-4 relative">
-    <img
-      src={blog.feature_img ? `${BASE_URL}/storage/${blog.feature_img}` : placeholderImage}
-      alt={blog.title}
-      className="w-full max-w-full h-[700px] object-cover shadow-lg"
-    />
-    <p className="absolute bottom-2 right-4 text-sm text-black">Photo Credit: Conversa</p>
-  </div>
-
-</div>
-
-
-
-
-
-      <div className="text-md text-right text-gray-700 mt-4 pr-1">
+      <div className="text-sm md:text-md text-right text-gray-700 mt-2 md:mt-4 pr-2 md:pr-4">
         Photo Credit: {blog.photo_credit || 'Converso'}
       </div>
 
-      {/* Descriptions */}
-      <div className="mt-16 mx-12 md:mx-32 lg:mx-44 text-black space-y-12">
+      {/* Descriptions - Adjusted margins for medium screens */}
+      <div className="mt-8 md:mt-12 lg:mt-16 mx-4 sm:mx-8 md:mx-12 lg:mx-24 xl:mx-44 text-black space-y-8 md:space-y-12">
         {blog.description1 && (
           <div>
-            <h3 className="text-xl font-semibold mb-2">{blog.section1_title}</h3>
-            <p>{blog.description1}</p>
+            <h3 className="text-lg md:text-xl lg:text-2xl font-semibold mb-2">{blog.section1_title}</h3>
+            <p className="text-sm md:text-base">{blog.description1}</p>
           </div>
         )}
 
@@ -105,14 +85,14 @@ function BlogSingle() {
           <img
             src={`${BASE_URL}/storage/${blog.img_1}`}
             alt="Section 1"
-            className="w-full h-[700px] object-cover shadow-md"
+            className="w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] xl:h-[700px] object-cover shadow-md"
           />
         )}
 
         {blog.description2 && (
           <div>
-            <h3 className="text-xl font-semibold mb-2">{blog.section2_title}</h3>
-            <p>{blog.description2}</p>
+            <h3 className="text-lg md:text-xl lg:text-2xl font-semibold mb-2">{blog.section2_title}</h3>
+            <p className="text-sm md:text-base">{blog.description2}</p>
           </div>
         )}
 
@@ -120,50 +100,48 @@ function BlogSingle() {
           <img
             src={`${BASE_URL}/storage/${blog.img_2}`}
             alt="Section 2"
-            className="w-full h-[700px] object-cover  shadow-md"
+            className="w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] xl:h-[700px] object-cover shadow-md"
           />
         )}
 
         {blog.description3 && (
           <div>
-            <h3 className="text-xl font-semibold mb-2">{blog.section3_title}</h3>
-            <p>{blog.description3}</p>
+            <h3 className="text-lg md:text-xl lg:text-2xl font-semibold mb-2">{blog.section3_title}</h3>
+            <p className="text-sm md:text-base">{blog.description3}</p>
           </div>
         )}
       </div>
 
-      {/* Author Section */}
-      <div className="mt-20 mx-0 md:mx-12 lg:mx-44 flex flex-col md:flex-row items-start justify-between gap-8">
-        <div className="md:w-2/3 italic text-gray-800">
+      {/* Author Section - Adjusted for medium screens */}
+      <div className="mt-12 md:mt-20 mx-4 sm:mx-8 md:mx-12 lg:mx-24 xl:mx-44 flex flex-col md:flex-row items-start justify-between gap-6 md:gap-8">
+        <div className="md:w-2/3 italic text-sm md:text-base text-gray-800">
           {blog.about}
         </div>
 
-        <div className="md:w-1/3 flex flex-col items-end text-right">
+        <div className="md:w-1/3 flex flex-col items-end text-right mt-4 md:mt-0">
           {blog.author_img && (
             <img
               src={`${BASE_URL}/storage/${blog.author_img}`}
               alt={blog.author}
-              className="w-32 h-32 object-cover  mb-2 shadow-md"
+              className="w-24 h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 object-cover mb-2 shadow-md"
             />
           )}
-          <p className="text-black"><strong>Author:</strong> {blog.author}</p>
-          <p className="text-black"><strong>Date:</strong> {blog.date}</p>
+          <p className="text-sm md:text-base text-black"><strong>Author:</strong> {blog.author}</p>
+          <p className="text-sm md:text-base text-black"><strong>Date:</strong> {blog.date}</p>
         </div>
       </div>
 
       {/* More Posts Header */}
-      <div className="mt-24 mb-10 text-start max-w-7xl mx-auto">
-        <h2 className="text-2xl md:text-3xl font-semibold">Explore more posts <br/>
-     Discover other thoughts and experiences<br/> shaping our journey.
+      <div className="mt-16 md:mt-24 mb-8 md:mb-10 text-start max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+        <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold">
+          Explore more posts <br className="hidden sm:block"/>
+          Discover other thoughts and experiences<br className="hidden sm:block"/> shaping our journey.
         </h2>
-      
-     
-        
       </div>
 
       {/* More Blog Cards */}
-      <div className="max-w-7xl mx-auto w-full">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 md:px-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {currentCards.length === 0 ? (
             <p className="text-gray-600">No blogs available yet.</p>
           ) : (
@@ -174,15 +152,15 @@ function BlogSingle() {
                   alt={post.title}
                   className="w-full h-auto aspect-square object-cover shadow-md"
                 />
-                <h3 className="font-bold text-md mt-4 capitalize">{post.title}</h3>
+                <h3 className="font-bold text-sm md:text-base lg:text-lg mt-3 md:mt-4 capitalize">{post.title}</h3>
 
-                <p className="text-md mt-1 line-clamp-2">{post.short_description}</p>
-                <p className="text-md mt-2">
+                <p className="text-xs md:text-sm lg:text-base mt-1 line-clamp-2">{post.short_description}</p>
+                <p className="text-xs md:text-sm lg:text-base mt-2">
                   Author: <span className="font-medium">{post.author}</span>
                 </p>
-                <p className="text-md">Date: {post.date}</p>
+                <p className="text-xs md:text-sm lg:text-base">Date: {post.date}</p>
                 <p
-                  className="text-red-600 text-md font-semibold mt-2 cursor-pointer hover:underline"
+                  className="text-red-600 text-xs md:text-sm lg:text-base font-semibold mt-2 cursor-pointer hover:underline"
                   onClick={() => navigate(`/blogs/${post.slug}`)}
                 >
                   Read More
@@ -194,23 +172,23 @@ function BlogSingle() {
 
         {/* Pagination Buttons */}
         {totalPages > 1 && (
-          <div className="flex justify-center items-center mt-12 space-x-6">
+          <div className="flex justify-center items-center mt-8 md:mt-12 space-x-4 md:space-x-6">
             <button
               onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
               disabled={currentPage === 0}
-              className={`text-2xl font-bold ${currentPage === 0 ? 'text-gray-400 cursor-not-allowed' : 'text-black'}`}
+              className={`text-xl md:text-2xl font-bold ${currentPage === 0 ? 'text-gray-400 cursor-not-allowed' : 'text-black'}`}
             >
               ←
             </button>
 
-            <span className="text-sm text-gray-700">
+            <span className="text-xs md:text-sm text-gray-700">
               Page {currentPage + 1} of {totalPages}
             </span>
 
             <button
               onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1))}
               disabled={currentPage === totalPages - 1}
-              className={`text-2xl font-bold ${currentPage === totalPages - 1 ? 'text-gray-400 cursor-not-allowed' : 'text-black'}`}
+              className={`text-xl md:text-2xl font-bold ${currentPage === totalPages - 1 ? 'text-gray-400 cursor-not-allowed' : 'text-black'}`}
             >
               →
             </button>

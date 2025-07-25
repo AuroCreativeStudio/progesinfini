@@ -44,13 +44,13 @@ function FacilitatorSingle({ speaker, onClose, onNavigate, prevSpeaker, nextSpea
       {/* Right Scrollable Content Section */}
       <div className="relative flex-1 h-full overflow-y-auto bg-white">
 
-        {/* Close Button */}
-        <button
-          onClick={onClose}
-          className="absolute z-10 text-3xl font-bold text-gray-800 top-4 right-4 hover:text-black"
-        >
-          &times;
-        </button>
+       {/* Close Button - Sticky/Fixed Version */}
+<button
+  onClick={onClose}
+  className="fixed z-50 text-3xl font-bold text-gray-800 top-4 right-4 hover:text-black hover:scale-110 transition-transform duration-200"
+>
+  &times;
+</button>
 
         <div className="p-4 sm:p-6 lg:p-12">
 

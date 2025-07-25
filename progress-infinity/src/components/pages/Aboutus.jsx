@@ -73,6 +73,7 @@ function Aboutus() {
       {/* Enquire Form Modal */}
       {showEnquire && <EnquireForm onClose={() => setShowEnquire(false)} />}
 
+
               {/* -----------------------------SECTION-1 --------------------------*/}
                            {/*----- Section-1 with All Responsives----- */}
 
@@ -99,7 +100,7 @@ function Aboutus() {
     w-[200px] h-[200px]
     sm:w-[230px] sm:h-[230px]
     md:w-[280px] md:h-[320px]   /* Increased size for tablet */
-    lg:w-[340px] lg:h-[340px]
+    lg:w-[430px] lg:h-[430px]
     sm:p-8 md:p-8
     flex items-center justify-center
   ">
@@ -145,6 +146,7 @@ function Aboutus() {
                                 {/* -------------------- */}
 </section>
 
+
               {/*---------------------------- SECTION-2------------------------------ */}
                        {/* ----------Section-2 with all Responsive---------- */}
     <section
@@ -169,10 +171,9 @@ function Aboutus() {
 
  <section className="w-full bg-[#fefcc6] px-4 sm:px-6 md:px-20 py-8 md:py-16 font-sans relative overflow-hidden">
 
-  {/* Mobile/Tablet Layout (< md) */}
+                                           {/* Mobile/Tablet Layout (< md) */}
 <div className="flex flex-col md:hidden gap-8">
 
-  {/* First Image Block */}
 <div className="relative w-full">
   <img src={circle2} alt="Education Panel 2" className="w-full object-cover shadow-md" />
   <div className="absolute bottom-6 left-4 right-4 text-white font-rem">
@@ -184,7 +185,7 @@ function Aboutus() {
 </div>
 
 
-  {/* Second Image Block */}
+
   <div className="relative w-full">
     <img src={circle2} alt="Education Panel 2" className="w-full object-cover shadow-md" />
     <div className="absolute top-6 left-4 right-4 text-white font-rem">
@@ -201,7 +202,7 @@ function Aboutus() {
 </div>
 
 
-  {/* Desktop & Tablet Layout (≥ md) */}
+                                                {/* Desktop & Tablet Layout (≥ md) */}
 <div
   style={{
   backgroundImage: `url(${section2})`,
@@ -210,9 +211,9 @@ function Aboutus() {
 
   className="hidden md:flex w-full min-h-[900px] bg-cover bg-center relative"
 >
-  {/* Transparent Overlay on Left Half */}
+  
  <div className="absolute top-[60%] left-0 w-1/2 px-4 md:px-6 lg:px-12 transform -translate-y-1/2">
-  <div className="text-white w-full max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl text-center">
+  <div className="text-white w-full max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl text-left">
     <p className="text-sm md:text-base lg:text-md xl:text-lg 2xl:text-xl leading-relaxed">
       "There is no end to <span className="text-black">progress</span> and every day<br />
       one can learn to do better what one does."
@@ -221,7 +222,7 @@ function Aboutus() {
 </div>
 
 
-  {/* Transparent Overlay on Right Half */}
+  
   <div className="absolute top-10 right-0 w-1/2 px-4 md:px-6 lg:px-12 flex justify-center">
     <div className="text-white w-full max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl text-left mt-8 lg:mt-12 xl:mt-16">
       <h3 className="text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl font-normal mb-4 lg:mb-6">
@@ -235,10 +236,7 @@ function Aboutus() {
     </div>
   </div>
 </div>
-
-
-
-{/* Shared Vision Section (All screens) */}
+                                       {/*---------- our vision---------- */}
 
 <div className="flex flex-col md:flex-row items-center gap-6 sm:gap-8 md:gap-6 lg:gap-10 mt-10 sm:mt-16 md:mt-12 lg:-mt-20 xl:-mt-24 2xl:-mt-28 relative z-10">
 
@@ -251,10 +249,9 @@ function Aboutus() {
     />
   </div>
 
-  {/* Text Section */}
   <div className="w-full md:w-1/2 flex flex-col font-rem justify-center sm:px-6 md:px-4 lg:px-8 relative h-full">
     <div className="max-w-lg mx-auto text-center lg:text-left">
-      <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-light text-black mb-4 md:mb-5 lg:mb-6 leading-tight">
+      <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-rem  text-black mb-4 md:mb-5 lg:mb-6 leading-tight">
         Our Vision
       </h2>
       <p className="text-base sm:text-md md:text-[17px] lg:text-lg text-black leading-relaxed font-regular">
@@ -266,13 +263,9 @@ function Aboutus() {
   </div>
 </div>
 
-
 </section>
 
-                              
-                               
-                               
-
+  
                 {/* -----------------------------SECTION-4 ----------------------------- */}
                                 {/* -----Section-4 with All Responsive----- */}
 
@@ -312,9 +305,9 @@ function Aboutus() {
     </div>
   </div>
  
-{/* Only visible on lg, xl, and 2xl screens */}
-<div className="hidden lg:grid relative z-10  grid-cols-2 gap-10 text-left text-lg font-regular font-rem text-black leading-relaxed">
-  {/* Left Column */}
+                          {/*---------- Only visible on lg, xl, and 2xl screens ----------*/}
+<div className="hidden lg:grid relative z-10  grid-cols-2 gap-10 text-left text-md font-regular font-rem text-black leading-relaxed">
+
   <div>
     <p>
       Progress Infiniti is inspired by the ideals of integral education—nurturing not just knowledge,
@@ -325,7 +318,7 @@ function Aboutus() {
     </p>
   </div>
 
-  {/* Right Column */}
+
   <div>
     <p>
       Progress Infiniti is inspired by the ideals of integral education—nurturing not just knowledge,
@@ -340,7 +333,7 @@ function Aboutus() {
 
 </section>
 
-{/* Section ONLY visible on mobile and tablet */}
+                          {/*---------- Section ONLY visible on mobile and tablet ----------*/}
 <section className="block lg:hidden w-full bg-[#fefcc6] py-8 px-4 sm:px-6 md:px-20 font-sans">
   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 text-center md:text-left text-lg sm:text-base font-regular font-rem text-black leading-relaxed">
     <p>

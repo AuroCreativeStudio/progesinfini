@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-const BASE_URL = import.meta.env.VITE_API_URL || 'http://192.168.0.102:8000';
+const BASE_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
 // import image from '../../assets/card2.jpg';
 // import workshopImage from '../../assets/card3.jpeg';
 
@@ -38,12 +38,13 @@ const imageUrl = workshop.featured_image?.startsWith('http')
       <div className="relative flex-1 h-full overflow-y-auto bg-white">
 
         {/* Close Button */}
-        <button
-          onClick={onClose}
-          className="absolute z-10 text-3xl font-bold text-gray-800 top-4 right-4 hover:text-black"
-        >
-          &times;
-        </button>
+       {/* Close Button - Sticky/Fixed Version */}
+<button
+  onClick={onClose}
+  className="fixed z-50 text-3xl font-bold text-gray-800 top-4 right-4 hover:text-black hover:scale-110 transition-transform duration-200"
+>
+  &times;
+</button>
 
         <div className="p-4 sm:p-6 lg:p-12">
 
