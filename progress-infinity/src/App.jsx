@@ -14,18 +14,25 @@ import BlogSingle from './components/pages/BlogSingle.jsx';
 import BecomePartner from './components/pages/BecomePartner.jsx';
 import Retreat from './components/pages/Retreat.jsx';
 import PrivacyPolicy from './components/pages/PrivacyPolicy.jsx';
+import ComingSoon from './components/pages/CommingSoon.jsx';
+import ScrollToTop from './components/pages/ScrollToTop.jsx';
 
 function App() {
   const location = useLocation();
-  const isHome = location.pathname === '/';
+  const path = location.pathname;
+
+  // Hide header on both '/' (ComingSoon) and '/home'
+  const hideHeader = path === '/' || path === '/home';
 
   return (
     <>
-      {!isHome && <Header />}
+      {!hideHeader && <Header />}
+      <ScrollToTop/>
 
-      <div className="min-h-screen">
+      <div className={`${path === '/' ? 'overflow-hidden h-screen' : 'min-h-screen'}`}>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<ComingSoon />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/about" element={<Aboutus />} />
           <Route path="/contactus" element={<Contactus />} />
           <Route path="/workshoplist" element={<Workshoplist />} />
@@ -34,13 +41,14 @@ function App() {
           <Route path="/facilitatorsingle" element={<FacilitatorSingle />} />
           <Route path="/blogs" element={<BlogList />} />
           <Route path="/blogs/:slug" element={<BlogSingle />} />
-          <Route path="/become-a-partner" element={<BecomePartner/>} />
-          <Route path="/retreat" element={<Retreat/>} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy/>}/>
+          <Route path="/become-a-partner" element={<BecomePartner />} />
+          <Route path="/retreat" element={<Retreat />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         </Routes>
       </div>
 
-      <Footer />
+      {/* Footer is shown for all pages except ComingSoon */}
+      {path !== '/' && <Footer />}
     </>
   );
 }

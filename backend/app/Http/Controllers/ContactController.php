@@ -26,7 +26,7 @@ class ContactController extends Controller
         'message' => 'required|string',
     ]);
 
-    $contact = Contact::create($validated); // ✅ Save to DB
+    $contact = Contact::create($validated); 
 
     Mail::to('auroanimate8@gmail.com')->send(new ContactSubmitted($contact)); // ✅ Send mail
 

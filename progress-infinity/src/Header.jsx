@@ -21,14 +21,14 @@ function Header() {
 
           {/* Left nav (visible only above 1272px) */}
           <div className="hidden [@media(min-width:1272px)]:flex items-center ml-16 space-x-16 text-lg font-semibold text-black">
-            <Link to="/" className="hover:text-red-500">Home</Link>
+            <Link to="/home" className="hover:text-red-500">Home</Link>
             <Link to="/workshoplist" className="hover:text-red-500">Workshops</Link>
             <Link to="/facilitatorlist" className="hover:text-red-500">Facilitators</Link>
           </div>
 
           {/* Center logo - always centered */}
           <div className="absolute left-1/2 transform -translate-x-1/2">
-            <Link to="/">
+            <Link to="/home">
               <img
                 src={logo}
                 alt="Progress Infiniti Logo"
@@ -59,7 +59,7 @@ function Header() {
       {/* Mobile Dropdown Menu (for ≤1271px) */}
       {menuOpen && (
         <div className="fixed z-20 top-[90px] left-4 right-4 bg-white shadow-xl rounded-xl px-6 py-6 text-black text-lg font-semibold space-y-5 [@media(min-width:1272px)]:hidden">
-          <Link to="/" onClick={() => setMenuOpen(false)} className="block hover:text-red-500">Home</Link>
+          <Link to="/home" onClick={() => setMenuOpen(false)} className="block hover:text-red-500">Home</Link>
           <Link to="/workshoplist" onClick={() => setMenuOpen(false)} className="block hover:text-red-500">Workshops</Link>
           <Link to="/facilitatorlist" onClick={() => setMenuOpen(false)} className="block hover:text-red-500">Facilitators</Link>
           <Link to="/about" onClick={() => setMenuOpen(false)} className="block hover:text-red-500">About Us</Link>

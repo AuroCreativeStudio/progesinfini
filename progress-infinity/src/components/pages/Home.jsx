@@ -178,7 +178,7 @@ function Home() {
   <div className="max-w-6xl mx-auto px-6 py-5 md:py-6 flex justify-between items-center relative">
     {/* Left nav - shows above 970px */}
     <nav className="hidden lg:flex space-x-12 xl:space-x-16 text-base lg:text-lg font-medium">
-      <Link to="/" className="hover:text-red-400">Home</Link>
+      <Link to="/home" className="hover:text-red-400">Home</Link>
       <Link to="/workshoplist" className="hover:text-red-400">Workshop</Link>
       <Link to="/facilitatorlist" className="hover:text-red-400">Facilitator</Link>
     </nav>
@@ -211,7 +211,7 @@ function Home() {
   {isMenuOpen && (
     <div className="lg:hidden bg-black border-t border-gray-700">
       <nav className="flex flex-col px-6 py-5 space-y-3 text-base font-medium">
-        <Link to="/" onClick={() => setIsMenuOpen(false)} className="hover:text-red-400">Home</Link>
+        <Link to="/home" onClick={() => setIsMenuOpen(false)} className="hover:text-red-400">Home</Link>
         <Link to="/workshoplist" onClick={() => setIsMenuOpen(false)} className="hover:text-red-400">Workshop</Link>
         <Link to="/facilitatorlist" onClick={() => setIsMenuOpen(false)} className="hover:text-red-400">Facilitator</Link>
         <Link to="/about" onClick={() => setIsMenuOpen(false)} className="hover:text-red-400">About</Link>
