@@ -55,9 +55,10 @@ function FacilitatorSingle({ speaker, onClose, onNavigate, prevSpeaker, nextSpea
         <div className="p-4 sm:p-6 lg:p-12">
 
           {/* Name */}
-          <h2 className="mb-6 text-[2.5rem] sm:text-[3rem] font-extrabold text-left">
-            {speaker.name}
-          </h2>
+          <h2 className="mb-6 text-[2.5rem] sm:text-[3rem] font-extrabold text-left uppercase">
+  {speaker.name}
+</h2>
+
 
           {/* Mobile Image */}
           <div className="flex justify-center mb-6 lg:hidden">

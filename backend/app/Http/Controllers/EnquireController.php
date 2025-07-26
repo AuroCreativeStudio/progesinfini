@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Enquire;
+use App\Mail\EnquiryMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class EnquireController extends Controller
 {
     // List all enquiries
     public function index()
     {
-       $enquiries = Enquire::with('workshop')->latest()->paginate(10);
-
+        $enquiries = Enquire::with('workshop')->latest()->paginate(10);
         return view('app.enquire.index', compact('enquiries'));
     }
 
@@ -27,16 +27,18 @@ class EnquireController extends Controller
             'workshop_id' => 'nullable|exists:workshops,id',
         ]);
 
-        Enquire::create($validated);
+        // Store the created enquiry in a variable
+        $enquire = Enquire::create($validated);
+
+        // Use the $enquire variable (singular) to send the email
+        Mail::to('auroanimate8@gmail.com')->send(new EnquiryMail($enquire));
 
         return redirect()->back()->with('success', 'Your enquiry has been submitted successfully.');
     }
 
     public function destroy(Enquire $enquire)
-{
-    $enquire->delete();
-
-    return redirect()->route('admin.enquires.index')->with('success', 'Enquiry deleted successfully.');
-}
-
+    {
+        $enquire->delete();
+        return redirect()->route('admin.enquires.index')->with('success', 'Enquiry deleted successfully.');
+    }
 }

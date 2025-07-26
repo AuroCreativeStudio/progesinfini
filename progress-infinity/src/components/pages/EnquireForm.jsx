@@ -101,7 +101,7 @@ const EnquireForm = ({ onClose }) => {
             </div>
 
             {/* Workshop ID */}
-            <div>
+            {/* <div>
               <label className="block text-sm sm:text-base text-gray-600 mb-1">Workshop ID</label>
               <input
                 type="text"
@@ -111,7 +111,7 @@ const EnquireForm = ({ onClose }) => {
                 className="w-full px-3 py-2 sm:px-4 sm:py-2 border border-orange-400 rounded focus:outline-none focus:ring-2 focus:ring-orange-500"
                 required
               />
-            </div>
+            </div> */}
 
             {/* Message */}
             <div>

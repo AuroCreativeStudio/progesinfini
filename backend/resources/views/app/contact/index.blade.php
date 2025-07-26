@@ -69,8 +69,32 @@
         </table>
     </div>
 
-    <div class="mt-3">
-        {{ $contacts->links() }}
+    <!-- Single Compact Pagination -->
+    <div class="mt-3 d-flex justify-content-center">
+        <style>
+            .pagination {
+                font-size: 0.75rem;
+                flex-wrap: nowrap;
+                margin: 0;
+            }
+            .pagination .page-link {
+                padding: 0.15rem 0.35rem;
+                min-width: 28px;
+                height: 28px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 4px !important;
+            }
+            .pagination .page-item:first-child .page-link,
+            .pagination .page-item:last-child .page-link {
+                min-width: 28px;
+            }
+            .pagination .page-item.active .page-link {
+                font-weight: bold;
+            }
+        </style>
+        {{ $contacts->onEachSide(1)->links() }}
     </div>
 </div>
 @endsection

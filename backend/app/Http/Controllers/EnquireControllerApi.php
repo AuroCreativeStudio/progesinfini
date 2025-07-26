@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Enquire;
+use App\Mail\EnquiryMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class EnquireControllerApi extends Controller
 {
@@ -25,6 +27,8 @@ public function store(Request $request)
     ]);
 
     $enquire = Enquire::create($validated);
+
+    Mail::to('auroanimate8@gmail.com')->send(new EnquiryMail($enquire));
 
     return response()->json([
         'success' => true,
