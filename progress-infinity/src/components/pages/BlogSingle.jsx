@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { fetchBlog } from '../../services/blogService';
 import placeholderImage from '../../assets/workshop.jpg';
+import DOMPurify from 'dompurify';
 
 const BASE_URL = 'http://127.0.0.1:8000';
 
@@ -16,6 +17,14 @@ function BlogSingle() {
   const totalPages = Math.ceil(allBlogs.length / cardsPerPage);
   const startIndex = currentPage * cardsPerPage;
   const currentCards = allBlogs.slice(startIndex, startIndex + cardsPerPage);
+
+  // Sanitize HTML function
+  const createMarkup = (html) => {
+    if (!html) return { __html: '' };
+    return {
+      __html: DOMPurify.sanitize(html)
+    };
+  };
 
   useEffect(() => {
     const getBlog = async () => {
@@ -76,8 +85,15 @@ function BlogSingle() {
       <div className="mt-8 md:mt-12 lg:mt-16 mx-4 sm:mx-8 md:mx-12 lg:mx-24 xl:mx-44 text-black space-y-8 md:space-y-12">
         {blog.description1 && (
           <div>
-            <h3 className="text-lg md:text-xl lg:text-2xl font-semibold mb-2">{blog.section1_title}</h3>
-            <p className="text-sm md:text-base">{blog.description1}</p>
+            {blog.section1_title && (
+              <h3 className="text-lg md:text-xl lg:text-2xl font-semibold mb-2">
+                {blog.section1_title}
+              </h3>
+            )}
+            <div 
+              className="rich-text-content "
+              dangerouslySetInnerHTML={createMarkup(blog.description1)}
+            />
           </div>
         )}
 
@@ -91,8 +107,15 @@ function BlogSingle() {
 
         {blog.description2 && (
           <div>
-            <h3 className="text-lg md:text-xl lg:text-2xl font-semibold mb-2">{blog.section2_title}</h3>
-            <p className="text-sm md:text-base">{blog.description2}</p>
+            {blog.section2_title && (
+              <h3 className="text-lg md:text-xl lg:text-2xl font-semibold mb-2">
+                {blog.section2_title}
+              </h3>
+            )}
+            <div 
+              className="rich-text-content text-sm md:text-base"
+              dangerouslySetInnerHTML={createMarkup(blog.description2)}
+            />
           </div>
         )}
 
@@ -106,8 +129,15 @@ function BlogSingle() {
 
         {blog.description3 && (
           <div>
-            <h3 className="text-lg md:text-xl lg:text-2xl font-semibold mb-2">{blog.section3_title}</h3>
-            <p className="text-sm md:text-base">{blog.description3}</p>
+            {blog.section3_title && (
+              <h3 className="text-lg md:text-xl lg:text-2xl font-semibold mb-2">
+                {blog.section3_title}
+              </h3>
+            )}
+            <div 
+              className="rich-text-content text-sm md:text-base"
+              dangerouslySetInnerHTML={createMarkup(blog.description3)}
+            />
           </div>
         )}
       </div>
@@ -115,7 +145,10 @@ function BlogSingle() {
       {/* Author Section - Adjusted for medium screens */}
       <div className="mt-12 md:mt-20 mx-4 sm:mx-8 md:mx-12 lg:mx-24 xl:mx-44 flex flex-col md:flex-row items-start justify-between gap-6 md:gap-8">
         <div className="md:w-2/3 italic text-sm md:text-base text-gray-800">
-          {blog.about}
+          <div 
+            className="rich-text-content"
+            dangerouslySetInnerHTML={createMarkup(blog.about)}
+          />
         </div>
 
         <div className="md:w-1/3 flex flex-col items-end text-right mt-4 md:mt-0">
@@ -154,7 +187,10 @@ function BlogSingle() {
                 />
                 <h3 className="font-bold text-sm md:text-base lg:text-lg mt-3 md:mt-4 capitalize">{post.title}</h3>
 
-                <p className="text-xs md:text-sm lg:text-base mt-1 line-clamp-2">{post.short_description}</p>
+                <div 
+                  className="text-xs md:text-sm lg:text-base mt-1 line-clamp-2 rich-text-content"
+                  dangerouslySetInnerHTML={createMarkup(post.short_description)}
+                />
                 <p className="text-xs md:text-sm lg:text-base mt-2">
                   Author: <span className="font-medium">{post.author}</span>
                 </p>

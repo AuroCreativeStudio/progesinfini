@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Mail;
-
 use App\Models\Contact;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Content;
+use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
 class ContactSubmitted extends Mailable
@@ -18,9 +19,17 @@ class ContactSubmitted extends Mailable
         $this->contact = $contact;
     }
 
-    public function build()
+    public function envelope(): Envelope
     {
-        return $this->subject('New Contact Form Submission')
-                   ->view('emails.contact-submitted');
+        return new Envelope(
+            subject: 'Contact Submitted',
+        );
+    }
+
+    public function content(): Content
+    {
+        return new Content(
+            view: 'emails.contact-submitted', 
+        );
     }
 }

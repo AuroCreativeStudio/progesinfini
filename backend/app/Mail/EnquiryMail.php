@@ -5,6 +5,8 @@ namespace App\Mail;
 use App\Models\Enquire;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Content;
+use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
 class EnquiryMail extends Mailable
@@ -18,9 +20,18 @@ class EnquiryMail extends Mailable
         $this->enquire = $enquire;
     }
 
-    public function build()
+    public function envelope(): Envelope
     {
-        return $this->subject('New Enquiry Submission')
-                   ->view('emails.enquiry-submitted');
+        return new Envelope(
+            subject:'Enquiry submitted',
+        );
+    }
+
+    public function content():Content
+    {
+        return new Content(
+            view: 'emails.enquiry-submitted',
+        );
+
     }
 }

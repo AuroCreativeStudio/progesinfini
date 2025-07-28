@@ -58,7 +58,7 @@ function Header() {
 
       {/* Mobile Dropdown Menu (for ≤1271px) */}
       {menuOpen && (
-        <div className="fixed z-20 top-[90px] left-4 right-4 bg-white shadow-xl rounded-xl px-6 py-6 text-black text-lg font-semibold space-y-5 [@media(min-width:1272px)]:hidden">
+        <div className="fixed z-50 top-[90px] left-8 right-8 bg-white shadow-xl rounded-xl px-6 py-6 text-black text-lg font-semibold space-y-5 [@media(min-width:1272px)]:hidden">
           <Link to="/home" onClick={() => setMenuOpen(false)} className="block hover:text-red-500">Home</Link>
           <Link to="/workshoplist" onClick={() => setMenuOpen(false)} className="block hover:text-red-500">Workshops</Link>
           <Link to="/facilitatorlist" onClick={() => setMenuOpen(false)} className="block hover:text-red-500">Facilitators</Link>

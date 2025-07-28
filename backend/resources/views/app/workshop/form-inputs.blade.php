@@ -27,14 +27,14 @@
                     <div class="col-md-6">
                         <label for="workshop_type" class="form-label">Workshop Type</label>
                         <input type="text" id="workshop_type" name="workshop_type" class="form-control"
-                            value="{{ old('workshop_type', $workshop->workshop_type ?? '') }}" placeholder="Online / Offline / Hybrid" required>
+                            value="{{ old('workshop_type', $workshop->workshop_type ?? '') }}" placeholder="" required>
                     </div>
 
                     {{-- Format --}}
                     <div class="col-md-6">
                         <label for="format" class="form-label">Format</label>
                         <input type="text" id="format" name="format" class="form-control"
-                            value="{{ old('format', $workshop->format ?? '') }}" placeholder="Ex: Weekend / Weekday" required>
+                            value="{{ old('format', $workshop->format ?? '') }}" placeholder="" required>
                     </div>
 
                     {{-- Price --}}
@@ -117,7 +117,7 @@
         const preview = document.getElementById('image_preview');
         if (input.files && input.files[0]) {
             const reader = new FileReader();
-            reader.onload = function (e) {
+                reader.onload = function (e) {
                 preview.src = e.target.result;
                 preview.style.display = 'block';
             };
