@@ -145,25 +145,29 @@ class FacilitatorController extends Controller
             ->with('success', 'Facilitator deleted successfully.');
     }
 
-    protected function validateRequest(Request $request)
-    {
-        return $request->validate([
-            'name' => 'required|string|max:255',
-            'designation' => 'required|string|max:255',
-            'contact_phone' => 'nullable|string|max:20',
-            'contact_email' => 'nullable|email|max:255',
-            'description' => 'nullable|string',
-            'workshop_id' => 'required|exists:workshops,id',
-            'about' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'video' => 'nullable|file|mimes:mp4,avi,mov,wmv|max:51200',
-            'short_description' => 'nullable|string',
-            'language' => 'nullable|array',
-            'language.*' => 'string',
-            'gallery.*' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-        ]);
-    }
-
+ protected function validateRequest(Request $request)
+{
+    return $request->validate([
+        'name' => 'required|string|max:255',
+        'designation' => 'required|string|max:255',
+        'contact_phone' => 'nullable|string|max:20',
+        'contact_email' => 'nullable|email|max:255',
+        'description' => 'nullable|string',
+        'workshop_id' => 'required|exists:workshops,id',
+        'about' => 'nullable|string',
+        'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048', // 2MB
+        'video' => 'nullable|file|mimes:mp4,avi,mov,wmv|max:51200', // 50MB
+        'short_description' => 'nullable|string|max:500', // Added max length
+        'language' => 'nullable|array',
+        'language.*' => 'string|max:50', // Each language item max 50 chars
+        'gallery' => 'nullable|array|max:10', // Max 10 files
+        'gallery.*' => 'image|mimes:jpg,jpeg,png|max:2048', // Each file 2MB max
+    ], [
+        'gallery.max' => 'You can upload maximum 10 images in gallery',
+        'gallery.*.max' => 'Each image must not be larger than 2MB',
+        'video.max' => 'Video must not be larger than 50MB',
+    ]);
+}
     protected function uploadImage($file)
     {
         return $file->store('facilitators', 'public');

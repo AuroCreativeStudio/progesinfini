@@ -21,11 +21,17 @@
         .nav-tabs .nav-link {
             cursor: pointer;
         }
+        .file-upload-info {
+            font-size: 0.875rem;
+            color: #6c757d;
+            margin-top: 0.25rem;
+        }
     </style>
 </head>
 <body>
     <div class="container-fluid" style="margin-left: 250px; margin-top: 56px; padding: 20px; max-width: calc(100% - 250px); overflow-x: hidden;">
-        <form method="POST" action="{{ isset($blog) ? route('blogs.update', $blog->id) : route('blogs.store') }}" enctype="multipart/form-data">
+        <!-- Added client-side validation for file size -->
+        <form method="POST" action="{{ isset($blog) ? route('blogs.update', $blog->id) : route('blogs.store') }}" enctype="multipart/form-data" id="blogForm">
             @csrf
             @if(isset($blog))
                 @method('PUT')
@@ -37,6 +43,16 @@
                     {{ isset($blog) ? 'Update' : 'Save' }}
                 </button>
             </div>
+
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
             <div class="mb-4">
                 <input type="text" name="title" value="{{ old('title', $blog->title ?? '') }}" class="form-control" required />
@@ -66,9 +82,11 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Image 1</label>
-                            <input type="file" name="img_1" class="form-control" />
+                            <input type="file" name="img_1" class="form-control" accept="image/*" data-max-size="2048" />
+                            <div class="file-upload-info">Max file size: 2MB</div>
                             @if(!empty($blog->img_1))
                                 <img src="{{ asset('storage/' . $blog->img_1) }}" class="img-thumbnail mt-2" style="max-width: 150px;" />
+                                <input type="hidden" name="existing_img_1" value="{{ $blog->img_1 }}">
                             @endif
                         </div>
                     </div>
@@ -83,9 +101,11 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Image 2</label>
-                            <input type="file" name="img_2" class="form-control" />
+                            <input type="file" name="img_2" class="form-control" accept="image/*" data-max-size="2048" />
+                            <div class="file-upload-info">Max file size: 2MB</div>
                             @if(!empty($blog->img_2))
                                 <img src="{{ asset('storage/' . $blog->img_2) }}" class="img-thumbnail mt-2" style="max-width: 150px;" />
+                                <input type="hidden" name="existing_img_2" value="{{ $blog->img_2 }}">
                             @endif
                         </div>
                     </div>
@@ -106,9 +126,11 @@
                     <div class="card-body">
                         <h5 class="card-title">Featured Image</h5>
                         <div class="mb-3">
-                            <input type="file" name="feature_img" class="form-control" />
+                            <input type="file" name="feature_img" class="form-control" accept="image/*" data-max-size="2048" />
+                            <div class="file-upload-info">Max file size: 2MB</div>
                             @if(!empty($blog->feature_img))
                                 <img src="{{ asset('storage/' . $blog->feature_img) }}" class="img-thumbnail mt-2" style="max-width: 150px;" />
+                                <input type="hidden" name="existing_feature_img" value="{{ $blog->feature_img }}">
                             @endif
                         </div>
                         <div class="mb-3">
@@ -183,9 +205,11 @@
                         <!-- Author Image -->
                         <div class="mb-4">
                             <label class="form-label">Author Image</label>
-                            <input type="file" name="author_img" class="form-control" />
+                            <input type="file" name="author_img" class="form-control" accept="image/*" data-max-size="2048" />
+                            <div class="file-upload-info">Max file size: 2MB</div>
                             @if(!empty($blog->author_img))
                                 <img src="{{ asset('storage/' . $blog->author_img) }}" class="img-thumbnail mt-2" style="max-width: 150px;" />
+                                <input type="hidden" name="existing_author_img" value="{{ $blog->author_img }}">
                             @endif
                         </div>
                     </div>
@@ -245,6 +269,49 @@
                     slugInput.value = slug;
                 });
             }
+
+            // Client-side file size validation
+            const form = document.getElementById('blogForm');
+            const fileInputs = document.querySelectorAll('input[type="file"]');
+
+            form.addEventListener('submit', function(e) {
+                let valid = true;
+                
+                fileInputs.forEach(input => {
+                    if (input.files.length > 0) {
+                        const maxSize = input.dataset.maxSize * 1024; // Convert KB to bytes
+                        if (input.files[0].size > maxSize) {
+                            alert(`File "${input.name}" is too large. Maximum size is ${input.dataset.maxSize}KB.`);
+                            valid = false;
+                        }
+                    }
+                });
+
+                if (!valid) {
+                    e.preventDefault();
+                }
+            });
+
+            // Show file size when selected
+            fileInputs.forEach(input => {
+                input.addEventListener('change', function() {
+                    if (this.files.length > 0) {
+                        const fileSize = (this.files[0].size / 1024).toFixed(2); // KB
+                        const maxSize = this.dataset.maxSize;
+                        const infoDiv = this.nextElementSibling;
+                        
+                        if (infoDiv && infoDiv.classList.contains('file-upload-info')) {
+                            infoDiv.textContent = `Selected file: ${fileSize}KB (Max: ${maxSize}KB)`;
+                            
+                            if (fileSize > maxSize) {
+                                infoDiv.style.color = 'red';
+                            } else {
+                                infoDiv.style.color = '#6c757d';
+                            }
+                        }
+                    }
+                });
+            });
         });
     </script>
 </body>
