@@ -21,5 +21,6 @@ class Workshop extends Model
         'time',
         'skill_gained',
         'target_audience',
+        'no_of_attendance',
     ];
 }

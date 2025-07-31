@@ -56,26 +56,24 @@
                     </tr>
 
                     <!-- Modal -->
-                    <div class="modal fade" id="contactModal{{ $contact->id }}" tabindex="-1" aria-labelledby="contactModalLabel{{ $contact->id }}" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="contactModalLabel{{ $contact->id }}">Contact Details</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <p><strong>Name:</strong> {{ $contact->name }}</p>
-                                    <p><strong>Email:</strong> {{ $contact->email }}</p>
-                                    <p><strong>Phone No:</strong> {{ $contact->phoneno }}</p>
-                                    <p><strong>Message:</strong> {{ $contact->message }}</p>
-                                    <p><strong>Submitted At:</strong> {{ $contact->created_at->format('d-m-Y H:i') }}</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                   <div class="modal fade" id="contactModal{{ $contact->id }}" tabindex="-1" aria-labelledby="contactModalLabel{{ $contact->id }}" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered"> <!-- added modal-dialog-centered -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="contactModalLabel{{ $contact->id }}">Contact Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Name:</strong> {{ $contact->name }}</p>
+                <p><strong>Email:</strong> {{ $contact->email }}</p>
+                <p><strong>Phone No:</strong> {{ $contact->phoneno }}</p>
+                <p><strong>Message:</strong> {{ $contact->message }}</p>
+                <p><strong>Submitted At:</strong> {{ $contact->created_at->format('d-m-Y H:i') }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
                 @endforeach
             </tbody>
         </table>

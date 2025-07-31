@@ -60,9 +60,25 @@
                     </tr>
 
                     <!-- Modal -->
-                    <div class="modal fade" id="enquiryModal{{ $enquire->id }}" tabindex="-1" aria-labelledby="enquiryModalLabel{{ $enquire->id }}" aria-hidden="true">
-                        <!-- Modal content remains the same -->
-                    </div>
+                 <div class="modal fade" id="enquiryModal{{ $enquire->id }}" tabindex="-1" aria-labelledby="enquiryModalLabel{{ $enquire->id }}" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered"> <!-- Vertically centered -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="enquiryModalLabel{{ $enquire->id }}">Enquiry Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Name:</strong> {{ $enquire->name }}</p>
+                <p><strong>Email:</strong> {{ $enquire->email }}</p>
+                <p><strong>Phone No:</strong> {{ $enquire->phoneno }}</p>
+                <p><strong>Workshop:</strong> {{ $enquire->workshop->workshop_title ?? 'N/A' }}</p>
+                <p><strong>Message:</strong><br>{{ $enquire->message }}</p>
+                <p><strong>Submitted At:</strong> {{ $enquire->created_at->format('d-m-Y H:i') }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
                 @endforeach
             </tbody>
         </table>

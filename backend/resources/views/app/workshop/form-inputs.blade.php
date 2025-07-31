@@ -65,6 +65,13 @@
                                         value="{{ old('duration_weeks', $workshop->duration_weeks ?? '') }}" required>
                                 </div>
                             </div>
+                             <div class="col-md-6">
+                                 <div class="mb-3">
+                                    <label for="no_of_attendance" class="form-label">No.of.attedence</label>
+                                    <input type="number" id="no_of_attendance" name="no_of_attendance" class="form-control"
+                                        value="{{ old('no_of_attendance', $workshop->no_of_attendance ?? '') }}" required>
+                                </div>
+                             </div>  
                         </div>
                         
                         <div class="mb-3">
