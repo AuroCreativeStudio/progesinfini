@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
@@ -135,25 +134,25 @@ class BlogController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(Blog $blog)
-    {
-        try {
-            // Delete associated images
-            foreach (['author_img', 'feature_img', 'img_1', 'img_2'] as $field) {
-                if ($blog->$field) {
-                    Storage::disk('public')->delete($blog->$field);
-                }
+{
+    try {
+        // Delete associated images
+        foreach (['author_img', 'feature_img', 'img_1', 'img_2'] as $field) {
+            if ($blog->$field) {
+                Storage::disk('public')->delete($blog->$field);
             }
-
-            $blog->delete();
-
-            return redirect()->route('admin.blogs.index')
-                ->with('success', 'Blog deleted successfully.');
-                
-        } catch (\Exception $e) {
-            return back()
-                ->with('error', 'Error deleting blog: ' . $e->getMessage());
         }
+
+        $blog->delete();
+
+        return redirect()->route('admin.blogs.index')
+            ->with('success', 'Blog deleted successfully.');
+            
+    } catch (\Exception $e) {
+        return back()
+            ->with('error', 'Error deleting blog: ' . $e->getMessage());
     }
+}
 
     /**
      * Define validation rules for blog

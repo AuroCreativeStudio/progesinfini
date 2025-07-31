@@ -3,7 +3,6 @@ import gifImage from '../../assets/spinner.gif';
 import EnquireForm from './EnquireForm';
 import about from '../../assets/aboutbg.png';
 import circle2 from '../../assets/circle2.png';
-import circle3 from '../../assets/circle3.png';
 import ring from '../../assets/ring.png';
 import home from '../../assets/test.png';
 import sample from '../../assets/sample.png';
@@ -49,8 +48,8 @@ function Aboutus() {
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
       const scrolled = scrollTop / docHeight;
 
-      // Offset: Start at 5%, grow to 100%
-      const adjusted = 5 + scrolled * 95; // 5% base + 95% scroll
+      
+      const adjusted = 5 + scrolled * 95; 
       setScrollWidth(adjusted);
     };
 
@@ -329,8 +328,6 @@ function Aboutus() {
     </p>
   </div>
 </div>
-
-
 </section>
 
                           {/*---------- Section ONLY visible on mobile and tablet ----------*/}

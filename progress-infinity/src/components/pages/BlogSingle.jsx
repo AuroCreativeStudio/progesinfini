@@ -73,7 +73,7 @@ function BlogSingle() {
             alt={blog.title}
             className="w-full max-w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] xl:h-[700px] object-cover shadow-lg"
           />
-          <p className="absolute bottom-2 right-4 text-xs sm:text-sm text-black">Photo Credit: Conversa</p>
+          {/* <p className="absolute bottom-2 right-4 text-xs sm:text-sm text-black">Photo Credit: Conversa</p> */}
         </div>
       </div>
 
