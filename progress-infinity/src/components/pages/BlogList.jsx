@@ -74,7 +74,7 @@ function BlogList() {
                   <h1 className="text-8xl font-normal text-white">Experiences.</h1>
                 </div>
               </div>
-            </div>
+            </div>                    
 
             <div className="lg:w-1/4 w-full px-4 mt-24 py-12 flex justify-start">
               <ul className="text-lg font-medium text-black list-disc list-inside space-y-2 mx-12 text-left">
@@ -121,15 +121,17 @@ function BlogList() {
                   <h3 className="font-bold text-base sm:text-lg mt-3 sm:mt-4">
                     {post.title.charAt(0).toUpperCase() + post.title.slice(1)}
                   </h3>
-                  <p className="text-sm sm:text-md mt-1 overflow-hidden text-ellipsis"
-                    style={{
-                      display: "-webkit-box",
-                      WebkitLineClamp: 2,
-                      WebkitBoxOrient: "vertical",
-                      overflow: "hidden"
-                    }}>
-                    {post.short_description}
-                  </p>
+                  <div
+                      className="text-sm sm:text-md mt-1 overflow-hidden text-ellipsis"
+                      style={{
+                        display: "-webkit-box",
+                        WebkitLineClamp: 2,
+                        WebkitBoxOrient: "vertical",
+                        overflow: "hidden"
+                      }}
+                      dangerouslySetInnerHTML={{ __html: post.short_description }}
+                    ></div>
+
                   <p className="text-sm sm:text-md mt-2">
                     Author: <span className="font-medium"> {post.author}</span>
                   </p>

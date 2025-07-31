@@ -85,11 +85,7 @@ function BlogSingle() {
       <div className="mt-8 md:mt-12 lg:mt-16 mx-4 sm:mx-8 md:mx-12 lg:mx-24 xl:mx-44 text-black space-y-8 md:space-y-12">
         {blog.description1 && (
           <div>
-            {blog.section1_title && (
-              <h3 className="text-lg md:text-xl lg:text-2xl font-semibold mb-2">
-                {blog.section1_title}
-              </h3>
-            )}
+           
             <div 
               className="rich-text-content "
               dangerouslySetInnerHTML={createMarkup(blog.description1)}
@@ -107,11 +103,7 @@ function BlogSingle() {
 
         {blog.description2 && (
           <div>
-            {blog.section2_title && (
-              <h3 className="text-lg md:text-xl lg:text-2xl font-semibold mb-2">
-                {blog.section2_title}
-              </h3>
-            )}
+           
             <div 
               className="rich-text-content text-sm md:text-base"
               dangerouslySetInnerHTML={createMarkup(blog.description2)}
@@ -129,11 +121,7 @@ function BlogSingle() {
 
         {blog.description3 && (
           <div>
-            {blog.section3_title && (
-              <h3 className="text-lg md:text-xl lg:text-2xl font-semibold mb-2">
-                {blog.section3_title}
-              </h3>
-            )}
+          
             <div 
               className="rich-text-content text-sm md:text-base"
               dangerouslySetInnerHTML={createMarkup(blog.description3)}
