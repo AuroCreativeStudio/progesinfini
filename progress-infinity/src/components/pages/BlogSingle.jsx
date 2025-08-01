@@ -6,11 +6,33 @@ import DOMPurify from 'dompurify';
 
 const BASE_URL = 'http://127.0.0.1:8000';
 
+// Configure DOMPurify to allow all necessary HTML elements and attributes
+const sanitizeConfig = {
+  ALLOWED_TAGS: [
+    'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+    'p', 'div', 'span', 'br',
+    'ol', 'ul', 'li',
+    'strong', 'em', 'b', 'i', 'u',
+    'a', 'img',
+    'table', 'thead', 'tbody', 'tr', 'th', 'td',
+    'blockquote', 'code', 'pre',
+    'hr'
+  ],
+  ALLOWED_ATTR: [
+    'style', 'class', 'id',
+    'href', 'target', 'rel',
+    'src', 'alt', 'title', 'width', 'height'
+  ],
+  ALLOW_DATA_ATTR: true
+};
+
 function BlogSingle() {
   const { slug } = useParams();
   const [blog, setBlog] = useState(null);
   const [currentPage, setCurrentPage] = useState(0);
   const [allBlogs, setAllBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   const cardsPerPage = 3;
@@ -18,39 +40,61 @@ function BlogSingle() {
   const startIndex = currentPage * cardsPerPage;
   const currentCards = allBlogs.slice(startIndex, startIndex + cardsPerPage);
 
-  // Sanitize HTML function
+  // Enhanced HTML sanitizer
   const createMarkup = (html) => {
     if (!html) return { __html: '' };
     return {
-      __html: DOMPurify.sanitize(html)
+      __html: DOMPurify.sanitize(html, sanitizeConfig)
     };
   };
 
   useEffect(() => {
     const getBlog = async () => {
       try {
+        setLoading(true);
         const result = await fetchBlog();
         const found = result.data.find((b) => b.slug === slug);
+        
+        if (!found) {
+          throw new Error('Blog post not found');
+        }
+        
         setBlog(found);
-        setAllBlogs(result.data);
-      } catch (error) {
-        console.error('Error loading blog:', error);
+        setAllBlogs(result.data.filter(b => b.slug !== slug)); // Exclude current post
+        setError(null);
+      } catch (err) {
+        console.error('Error loading blog:', err);
+        setError(err.message);
+        navigate('/404', { replace: true });
+      } finally {
+        setLoading(false);
       }
     };
+    
     getBlog();
-  }, [slug]);
+  }, [slug, navigate]);
 
-  if (!blog) {
-    return <div className="p-12 text-center">Loading blog...</div>;
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#fefcc6]">
+        <div className="text-2xl">Loading blog post...</div>
+      </div>
+    );
+  }
+
+  if (error || !blog) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#fefcc6]">
+        <div className="text-2xl text-red-600">{error || 'Blog post not found'}</div>
+      </div>
+    );
   }
 
   return (
     <div className="min-h-screen font-rem w-full bg-[#fefcc6] pt-16 pb-20 px-4 md:px-8 lg:px-16 text-black text-left">
-
-      {/* Intro and Image - Adjusted for medium screens */}
+      {/* Main Content */}
       <div className="max-w-8xl mx-auto grid grid-cols-1 lg:grid-cols-6 gap-6 md:gap-8 lg:gap-12 items-start bg-[#fefcc6] p-4 md:p-8 lg:p-16">
-
-        {/* Left Column - Adjusted for medium screens */}
+        {/* Title Section */}
         <div className="lg:col-span-2 flex flex-col justify-center space-y-4 md:space-y-6 h-full">
           {blog.title && (() => {
             const words = blog.title.trim().split(" ");
@@ -58,22 +102,21 @@ function BlogSingle() {
             const rest = words.slice(0, -2).join(" ");
 
             return (
-              <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-semibold text-left leading-tight">
+              <h1 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-semibold text-left leading-tight">
                 {rest}{" "}
                 <span className="text-[#f04e23] font-semibold">{lastTwo}</span>
-              </h2>
+              </h1>
             );
           })()}
         </div>
 
-        {/* Right Column - Adjusted image height for medium screens */}
+        {/* Featured Image */}
         <div className="lg:col-span-4 relative">
           <img
             src={blog.feature_img ? `${BASE_URL}/storage/${blog.feature_img}` : placeholderImage}
             alt={blog.title}
             className="w-full max-w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] xl:h-[700px] object-cover shadow-lg"
           />
-          {/* <p className="absolute bottom-2 right-4 text-xs sm:text-sm text-black">Photo Credit: Conversa</p> */}
         </div>
       </div>
 
@@ -81,16 +124,16 @@ function BlogSingle() {
         Photo Credit: {blog.photo_credit || 'Converso'}
       </div>
 
-      {/* Descriptions - Adjusted margins for medium screens */}
+      {/* Blog Content Sections */}
       <div className="mt-8 md:mt-12 lg:mt-16 mx-4 sm:mx-8 md:mx-12 lg:mx-24 xl:mx-44 text-black space-y-8 md:space-y-12">
+        {/* Section 1 */}
         {blog.description1 && (
-          <div>
-           
+          <section className="rich-text-section">
             <div 
-              className="rich-text-content "
+              className="rich-text-content"
               dangerouslySetInnerHTML={createMarkup(blog.description1)}
             />
-          </div>
+          </section>
         )}
 
         {blog.img_1 && (
@@ -101,14 +144,14 @@ function BlogSingle() {
           />
         )}
 
+        {/* Section 2 */}
         {blog.description2 && (
-          <div>
-           
+          <section className="rich-text-section">
             <div 
-              className="rich-text-content text-sm md:text-base"
+              className="rich-text-content"
               dangerouslySetInnerHTML={createMarkup(blog.description2)}
             />
-          </div>
+          </section>
         )}
 
         {blog.img_2 && (
@@ -119,18 +162,18 @@ function BlogSingle() {
           />
         )}
 
+        {/* Section 3 */}
         {blog.description3 && (
-          <div>
-          
+          <section className="rich-text-section">
             <div 
-              className="rich-text-content text-sm md:text-base"
+              className="rich-text-content"
               dangerouslySetInnerHTML={createMarkup(blog.description3)}
             />
-          </div>
+          </section>
         )}
       </div>
 
-      {/* Author Section - Adjusted for medium screens */}
+      {/* Author Section */}
       <div className="mt-12 md:mt-20 mx-4 sm:mx-8 md:mx-12 lg:mx-24 xl:mx-44 flex flex-col md:flex-row items-start justify-between gap-6 md:gap-8">
         <div className="md:w-2/3 italic text-sm md:text-base text-gray-800">
           <div 
@@ -152,7 +195,7 @@ function BlogSingle() {
         </div>
       </div>
 
-      {/* More Posts Header */}
+      {/* More Posts Section */}
       <div className="mt-16 md:mt-24 mb-8 md:mb-10 text-start max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
         <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold">
           Explore more posts <br className="hidden sm:block"/>
@@ -164,10 +207,10 @@ function BlogSingle() {
       <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 md:px-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {currentCards.length === 0 ? (
-            <p className="text-gray-600">No blogs available yet.</p>
+            <p className="text-gray-600">No other blog posts available.</p>
           ) : (
             currentCards.map((post) => (
-              <div key={post.id} className="flex flex-col text-start">
+              <article key={post.id} className="flex flex-col text-start">
                 <img
                   src={post.feature_img ? `${BASE_URL}/storage/${post.feature_img}` : placeholderImage}
                   alt={post.title}
@@ -183,24 +226,25 @@ function BlogSingle() {
                   Author: <span className="font-medium">{post.author}</span>
                 </p>
                 <p className="text-xs md:text-sm lg:text-base">Date: {post.date}</p>
-                <p
-                  className="text-red-600 text-xs md:text-sm lg:text-base font-semibold mt-2 cursor-pointer hover:underline"
+                <button
+                  className="text-red-600 text-xs md:text-sm lg:text-base font-semibold mt-2 cursor-pointer hover:underline text-left"
                   onClick={() => navigate(`/blogs/${post.slug}`)}
                 >
                   Read More
-                </p>
-              </div>
+                </button>
+              </article>
             ))
           )}
         </div>
 
-        {/* Pagination Buttons */}
+        {/* Pagination */}
         {totalPages > 1 && (
           <div className="flex justify-center items-center mt-8 md:mt-12 space-x-4 md:space-x-6">
             <button
               onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
               disabled={currentPage === 0}
               className={`text-xl md:text-2xl font-bold ${currentPage === 0 ? 'text-gray-400 cursor-not-allowed' : 'text-black'}`}
+              aria-label="Previous page"
             >
               ←
             </button>
@@ -213,12 +257,99 @@ function BlogSingle() {
               onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1))}
               disabled={currentPage === totalPages - 1}
               className={`text-xl md:text-2xl font-bold ${currentPage === totalPages - 1 ? 'text-gray-400 cursor-not-allowed' : 'text-black'}`}
+              aria-label="Next page"
             >
               →
             </button>
           </div>
         )}
       </div>
+
+      {/* Global Styles for Rich Text Content */}
+      <style jsx global>{`
+        .rich-text-content {
+          line-height: 1.6;
+          color: #333;
+        }
+        .rich-text-content h1,
+        .rich-text-content h2,
+        .rich-text-content h3,
+        .rich-text-content h4,
+        .rich-text-content h5,
+        .rich-text-content h6 {
+          margin: 1.5em 0 0.75em;
+          font-weight: bold;
+          line-height: 1.3;
+        }
+        .rich-text-content h1 { font-size: 2em; }
+        .rich-text-content h2 { font-size: 1.5em; }
+        .rich-text-content h3 { font-size: 1.25em; }
+        .rich-text-content h4 { font-size: 1em; }
+        .rich-text-content h5 { font-size: 0.875em; }
+        .rich-text-content h6 { font-size: 0.75em; }
+        .rich-text-content p {
+          margin: 1em 0;
+        }
+        .rich-text-content ul,
+        .rich-text-content ol {
+          margin: 1em 0;
+          padding-left: 2em;
+        }
+        .rich-text-content ul {
+          list-style-type: disc;
+        }
+        .rich-text-content ol {
+          list-style-type: decimal;
+        }
+        .rich-text-content li {
+          margin-bottom: 0.5em;
+        }
+        .rich-text-content a {
+          color: #f04e23;
+          text-decoration: underline;
+        }
+        .rich-text-content a:hover {
+          text-decoration: none;
+        }
+        .rich-text-content img {
+          max-width: 100%;
+          height: auto;
+          margin: 1em 0;
+        }
+        .rich-text-content blockquote {
+          border-left: 4px solid #f04e23;
+          padding-left: 1em;
+          margin: 1.5em 0;
+          font-style: italic;
+          color: #555;
+        }
+        .rich-text-content code {
+          font-family: monospace;
+          background-color: #f5f5f5;
+          padding: 0.2em 0.4em;
+          border-radius: 3px;
+        }
+        .rich-text-content pre {
+          background-color: #f5f5f5;
+          padding: 1em;
+          border-radius: 4px;
+          overflow-x: auto;
+        }
+        .rich-text-content table {
+          width: 100%;
+          border-collapse: collapse;
+          margin: 1em 0;
+        }
+        .rich-text-content th,
+        .rich-text-content td {
+          border: 1px solid #ddd;
+          padding: 0.5em;
+        }
+        .rich-text-content th {
+          background-color: #f5f5f5;
+          text-align: left;
+        }
+      `}</style>
     </div>
   );
 }
