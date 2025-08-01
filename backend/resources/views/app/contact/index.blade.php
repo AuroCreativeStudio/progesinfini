@@ -42,38 +42,62 @@
                                 </button>
 
                                 <!-- Delete Button (Icon only) -->
-                                <form action="{{ route('admin.contacts.destroy', $contact->id) }}" 
-                                      method="POST" 
-                                      onsubmit="return confirm('Are you sure you want to delete this contact?');">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="icon-btn delete-btn" title="Delete">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </button>
-                                </form>
+                                <button class="icon-btn delete-btn" 
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#confirmModal{{ $contact->id }}"
+                                        title="Delete">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
                             </div>
                         </td>
                     </tr>
 
-                    <!-- Modal -->
-                   <div class="modal fade" id="contactModal{{ $contact->id }}" tabindex="-1" aria-labelledby="contactModalLabel{{ $contact->id }}" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered"> <!-- added modal-dialog-centered -->
+                    <!-- View Modal -->
+                    <div class="modal fade" id="contactModal{{ $contact->id }}" tabindex="-1" aria-labelledby="contactModalLabel{{ $contact->id }}" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="contactModalLabel{{ $contact->id }}">Contact Details</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p><strong>Name:</strong> {{ $contact->name }}</p>
+                                    <p><strong>Email:</strong> {{ $contact->email }}</p>
+                                    <p><strong>Phone No:</strong> {{ $contact->phoneno }}</p>
+                                    <p><strong>Message:</strong> {{ $contact->message }}</p>
+                                    <p><strong>Submitted At:</strong> {{ $contact->created_at->format('d-m-Y H:i') }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Delete Confirmation Modal -->
+<div class="modal fade" id="confirmModal{{ $contact->id }}" tabindex="-1" aria-labelledby="confirmModalLabel{{ $contact->id }}" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="contactModalLabel{{ $contact->id }}">Contact Details</h5>
+            {{-- <div class="modal-header">
+                <h5 class="modal-title" id="confirmModalLabel{{ $contact->id }}">Confirm Deletion</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div> --}}
+            <div class="modal-body text-center">
+                <i class="fas fa-exclamation-triangle text-warning" style="font-size: 3rem;"></i>
+                <p class="mb-0 mt-3">Are you sure you want to delete <strong>{{ $contact->name }}</strong>?<br>This action cannot be undone.</p>
             </div>
-            <div class="modal-body">
-                <p><strong>Name:</strong> {{ $contact->name }}</p>
-                <p><strong>Email:</strong> {{ $contact->email }}</p>
-                <p><strong>Phone No:</strong> {{ $contact->phoneno }}</p>
-                <p><strong>Message:</strong> {{ $contact->message }}</p>
-                <p><strong>Submitted At:</strong> {{ $contact->created_at->format('d-m-Y H:i') }}</p>
+            <div class="modal-footer justify-content-center"> <!-- Added justify-content-center here -->
+                <form action="{{ route('admin.contacts.destroy', $contact->id) }}" method="POST" style="display: inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="button" class="btn btn-secondary me-3" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-2"></i>Cancel
+                    </button>
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash-alt me-2"></i>Delete
+                    </button>
+                </form>
             </div>
         </div>
     </div>
 </div>
-
                 @endforeach
             </tbody>
         </table>
@@ -197,6 +221,11 @@
         pointer-events: none;
         background-color: #fff;
         border-color: #dee2e6;
+    }
+    
+    /* Warning icon in delete modal */
+    .fa-exclamation-triangle {
+        color: #ffc107;
     }
 </style>
 

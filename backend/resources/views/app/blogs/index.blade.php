@@ -50,19 +50,43 @@
                                 </a>
                                 
                                 <!-- Delete Button -->
-                                <form action="{{ route('admin.blogs.destroy', $blog->id) }}" 
-                                      method="POST" 
-                                      class="d-inline"
-                                      onsubmit="return confirm('Delete this blog?');">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="action-btn delete-btn" title="Delete">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </button>
-                                </form>
+                                <button class="action-btn delete-btn" 
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#confirmModal{{ $blog->id }}"
+                                        title="Delete">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
                             </div>
                         </td>
                     </tr>
+
+                    <!-- Delete Confirmation Modal -->
+                    <div class="modal fade" id="confirmModal{{ $blog->id }}" tabindex="-1" aria-labelledby="confirmModalLabel{{ $blog->id }}" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                {{-- <div class="modal-header">
+                                    <h5 class="modal-title" id="confirmModalLabel{{ $blog->id }}">Confirm Deletion</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div> --}}
+                                <div class="modal-body text-center">
+                                    <i class="fas fa-exclamation-triangle text-warning" style="font-size: 3rem;"></i>
+                                    <p class="mb-0 mt-3">Are you sure you want to delete <strong>"{{ $blog->title }}"</strong>?<br>This action cannot be undone.</p>
+                                </div>
+                                <div class="modal-footer justify-content-center">
+                                    <button type="button" class="btn btn-secondary me-3" data-bs-dismiss="modal">
+                                        <i class="fas fa-times me-2"></i>Cancel
+                                    </button>
+                                    <form action="{{ route('admin.blogs.destroy', $blog->id) }}" method="POST" style="display: inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger">
+                                            <i class="fas fa-trash-alt me-2"></i>Delete
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 @endforeach
             </tbody>
         </table>
