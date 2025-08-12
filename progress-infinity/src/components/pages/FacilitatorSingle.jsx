@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-const BASE_URL = import.meta.env.VITE_API_URL;
+const BASE_URL = 'http://192.168.0.102:8000';
 
 
 function FacilitatorSingle({ speaker, onClose, onNavigate, prevSpeaker, nextSpeaker }) {
