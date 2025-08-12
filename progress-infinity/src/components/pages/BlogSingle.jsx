@@ -4,7 +4,7 @@ import { fetchBlog } from '../../services/blogService';
 import placeholderImage from '../../assets/workshop.jpg';
 import DOMPurify from 'dompurify';
 
-const BASE_URL = 'http://127.0.0.1:8000';
+const BASE_URL = 'http://192.168.0.102:8000';
 
 // Configure DOMPurify to allow all necessary HTML elements and attributes
 const sanitizeConfig = {
