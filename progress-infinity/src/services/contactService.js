@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_URL } from "../config";
+export const API_URL = "http://192.168.0.102:8000";
 
 export const postContactForm = async (data) => {
     try {
